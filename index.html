@@ -9,14 +9,17 @@
 <meta name="apple-mobile-web-app-title" content="Crimson Guide">
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>Crimson Guide 3.2</title>
+<title>Crimson Guide 3.3</title>
 <style>
-:root{--bg:#101116;--panel:#1c1e26;--panel2:#282b35;--line:#373943;--text:#f6f2ec;--muted:#aaaab5;--gold:#e0b979;--red:#af424c;--green:#78c9a2}
+:root{
+--bg:#101116;--panel:#1c1e26;--panel2:#282b35;
+--line:#373943;--text:#f6f2ec;--muted:#aaaab5;
+--gold:#e0b979;--red:#af424c;--green:#78c9a2
+}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif}
 button,input,select{font:inherit}
 button{cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 a{color:var(--gold)}
 .layout{display:flex;min-height:100dvh}
 aside{width:220px;flex-shrink:0;background:#171920;border-right:1px solid var(--line);padding:20px 12px}
@@ -95,7 +98,7 @@ main{padding:15px 13px 105px}
 </aside>
 <main>
 <header>
-<span class="eyebrow">CRIMSON GUIDE • 3.2</span>
+<span class="eyebrow">CRIMSON GUIDE • 3.3</span>
 <select id="lang" aria-label="Language">
 <option value="de">🇩🇪 Deutsch</option>
 <option value="en">🇬🇧 English</option>
@@ -126,7 +129,7 @@ realMap:"Vollständige Pywel-Karte öffnen",mapTitle:"Meine Abenteuerkarte",
 mapNote:"Eigene Planungsfläche. Noch keine echte Pywel-Karte.",
 mapWarning:"Die Positionen entsprechen keinen echten Spielkoordinaten.",
 questSearch:"Quest suchen...",allChapters:"Alle Kapitel",allStatus:"Alle Status",
-open:"Offen",done:"Erledigt",chap0:"Prolog",chap1:"Kapitel 1",
+open:"Offen",done:"Erledigt",chap0:"Prolog",chap1:"Kapitel 1",chap2:"Kapitel 2 – Golden Greed",
 steps:"Lösungsschritte",showSolution:"🔒 Lösung anzeigen (Spoiler)",hideSolution:"🔓 Lösung verbergen",
 noSteps:"Für diese Quest ist noch keine geprüfte Komplettlösung eingetragen.",
 guide:"Externen Quest-Guide öffnen",finished:"Quest abgeschlossen",back:"Zurück",
@@ -150,7 +153,7 @@ realMap:"Open complete Pywel map",mapTitle:"My Adventure Map",
 mapNote:"Personal planning canvas. Not a real Pywel map yet.",
 mapWarning:"Positions do not represent actual game coordinates.",
 questSearch:"Search quests...",allChapters:"All chapters",allStatus:"All statuses",
-open:"Open",done:"Completed",chap0:"Prologue",chap1:"Chapter 1",
+open:"Open",done:"Completed",chap0:"Prologue",chap1:"Chapter 1",chap2:"Chapter 2 – Golden Greed",
 steps:"Walkthrough steps",showSolution:"🔒 Show solution (spoilers)",hideSolution:"🔓 Hide solution",
 noSteps:"No verified complete walkthrough has been added for this quest.",
 guide:"Open external quest guide",finished:"Quest completed",back:"Back",
@@ -174,6 +177,7 @@ const quests=[
 {id:"in-ashes",name:"In Ashes",chapter:0},
 {id:"realm-of-uncertainty",name:"Realm of Uncertainty",chapter:0},
 {id:"new-journey",name:"New Journey",chapter:0},
+
 {id:"where-rumors-gather",name:"Where Rumors Gather",chapter:1,steps:[
 {de:"Begib dich nach Hernand und suche die Taverne auf.",en:"Travel to Hernand and visit the tavern."},
 {de:"Sprich mit den Soldaten und nimm die Herausforderung zum Armdrücken an.",en:"Talk to the soldiers and accept the arm-wrestling challenge."},
@@ -190,7 +194,28 @@ const quests=[
 {id:"mystical-key",name:"Mystical Key",chapter:1},
 {id:"polar-opposites",name:"Polar Opposites",chapter:1},
 {id:"abyss-without-balance",name:"Abyss Without Balance",chapter:1},
-{id:"woman-in-white",name:"Woman in White",chapter:1}
+{id:"woman-in-white",name:"Woman in White",chapter:1},
+
+{id:"where-the-light-leads",name:"Where the Light Leads",chapter:2,steps:[
+{de:"Folge dem Licht des Shai-Anhängers zum Lioncrest-Wachturm außerhalb von Hernand.",en:"Follow the light from the Shai pendant to Lioncrest Watchtower outside Hernand."},
+{de:"Besiege die Banditen am Wachturm und sichere den Zugang.",en:"Defeat the bandits at the watchtower and secure the entrance."},
+{de:"Steige den Wachturm hinauf und untersuche den auffälligen Helm.",en:"Climb the watchtower and inspect the unusual helmet."}
+]},
+{id:"memory-fragment",name:"Memory Fragment",chapter:2,steps:[
+{de:"Nimm den Helm aus dem Wachturm auf und rüste ihn aus.",en:"Collect the helmet from the watchtower and equip it."},
+{de:"Verwende die Erinnerungsfunktion des Helms, um die gespeicherte Erinnerung anzusehen.",en:"Use the helmet's memory-viewing ability to inspect the stored memory."},
+{de:"Sieh dir die Erinnerung an, bis das Missionsziel abgeschlossen wird.",en:"Watch the memory until the objective is completed."}
+]},
+{id:"reunion",name:"Reunion",chapter:2,steps:[
+{de:"Folge dem Questziel zum Kind und sprich mit ihm.",en:"Follow the quest objective to the child and speak with them."},
+{de:"Beobachte die vorgeführten Fähigkeiten, um Nature's Grasp und Focus zu erlernen.",en:"Observe the demonstrated abilities to learn Nature's Grasp and Focus."},
+{de:"Nähere dich anschließend dem Kind, um die Quest fortzusetzen.",en:"Approach the child afterward to continue the quest."}
+]},
+{id:"for-honor",name:"For Honor",chapter:2,steps:[
+{de:"Begib dich in Hernand zu der Gruppe, die über die Greymanes spricht.",en:"Go to the group discussing the Greymanes in Hernand."},
+{de:"Nähere dich der Gruppe, um die Auseinandersetzung auszulösen.",en:"Approach the group to trigger the confrontation."},
+{de:"Besiege Matthias im anschließenden Kampf.",en:"Defeat Matthias in the ensuing fight."}
+]}
 ];
 
 const sections=[
@@ -352,7 +377,7 @@ return `
 placeholder="${t("questSearch")}" value="${esc(questQuery)}">
 <select id="questChapter">
 <option value="all">${t("allChapters")}</option>
-${[0,1].map(c=>`<option value="${c}" ${questChapter===String(c)?"selected":""}>
+${[0,1,2].map(c=>`<option value="${c}" ${questChapter===String(c)?"selected":""}>
 ${t("chap"+c)}</option>`).join("")}
 </select>
 <select id="questStatus">
@@ -455,7 +480,7 @@ return `
 <span>${doneCount()} / ${quests.length}</span></div>
 <div style="margin-top:12px">${meter(doneCount(),quests.length)}</div>
 </div>
-${[0,1].map(c=>{
+${[0,1,2].map(c=>{
 const qs=quests.filter(q=>q.chapter===c);
 const n=qs.filter(q=>questDone(q.id)).length;
 return `<div class="card">
@@ -481,8 +506,8 @@ return `
 <input type="file" id="backupFile" accept=".json,application/json" hidden>
 </div>
 <div class="card">
-<strong>Crimson Guide 3.2</strong>
-<p class="small">PS5 Companion · DE / EN</p>
+<strong>Crimson Guide 3.3</strong>
+<p class="small">PS5 Companion · DE / EN · 17 Quests</p>
 </div>`;
 }
 
