@@ -1,20 +1,495 @@
 
-{
-  "name": "Crimson Guide - Pywel Companion",
-  "short_name": "Crimson Guide",
-  "description": "Unofficial bilingual Crimson Desert companion",
-  "start_url": "./index.html",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#0d0f13",
-  "theme_color": "#111318",
-  "lang": "de",
-  "icons": [
-    {
-      "src": "./icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111318">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Crimson Guide">
+  <meta name="description" content="Crimson Guide – bilingual Crimson Desert companion">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <title>Crimson Guide</title>
+  <style>
+    :root {
+      --bg:#0d0f13; --panel:#181b22; --panel2:#222630;
+      --line:#343943; --text:#f3f0e9; --muted:#a6a9b2;
+      --red:#b83d43; --gold:#d5ad70;
     }
-  ]
+    * {box-sizing:border-box}
+    body {
+      margin:0; background:var(--bg); color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    button,input,select {font:inherit}
+    button {cursor:pointer}
+    .layout {display:flex;min-height:100dvh}
+    aside {
+      width:235px;background:#13161c;border-right:1px solid var(--line);
+      padding:25px 14px;flex-shrink:0
+    }
+    .brand {font-size:23px;font-weight:900;color:var(--gold);padding:8px}
+    .brand small {display:block;color:var(--muted);font-size:11px;letter-spacing:3px}
+    nav {display:grid;gap:5px;margin-top:30px}
+    nav button {
+      background:none;color:var(--muted);border:0;text-align:left;
+      padding:13px;border-radius:9px
+    }
+    nav button.active,nav button:hover {
+      background:#42252a;color:white
+    }
+    main {flex:1;min-width:0;padding:25px;max-width:1400px;margin:auto}
+    header {display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .eyebrow {color:var(--gold);letter-spacing:3px;font-size:11px}
+    h1 {font-size:clamp(27px,4vw,43px);margin:10px 0}
+    h2 {font-size:21px;margin:0 0 14px}
+    p {color:var(--muted);line-height:1.6}
+    .hero {
+      background:linear-gradient(115deg,#422326,#171a21 75%);
+      border:1px solid #6c3c3d;border-radius:18px;
+      padding:35px;margin:25px 0
+    }
+    .hero h1 {color:#fff1df}
+    .grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .card {
+      background:var(--panel);border:1px solid var(--line);
+      border-radius:14px;padding:20px
+    }
+    .card h3 {margin:0 0 8px;font-size:17px}
+    .card p {font-size:13px;margin:6px 0}
+    .click {cursor:pointer}
+    .click:hover {border-color:var(--gold)}
+    .symbol {font-size:27px;margin-bottom:15px}
+    .toolbar {display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+    input,select {
+      background:var(--panel2);border:1px solid var(--line);
+      color:white;border-radius:9px;padding:12px;min-width:0
+    }
+    input {flex:1}
+    .btn {
+      background:var(--red);border:0;color:white;
+      border-radius:9px;padding:11px 16px;font-weight:600
+    }
+    .btn.secondary {background:#30343d}
+    .btn:disabled {opacity:.5}
+    .tag {display:inline-block;color:var(--gold);font-size:11px;margin:8px 0}
+    .empty {
+      padding:35px;text-align:center;border:1px dashed var(--line);
+      border-radius:14px;color:var(--muted)
+    }
+    .row {display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .progress {
+      height:9px;background:#343943;border-radius:20px;overflow:hidden
+    }
+    .progress div {height:100%;background:var(--red);transition:width .2s}
+    .map {
+      position:relative;overflow:hidden;touch-action:none;
+      height:390px;background:
+        radial-gradient(ellipse at 28% 35%,#4b5143 0%,transparent 42%),
+        radial-gradient(ellipse at 70% 60%,#454b55 0%,transparent 43%),
+        #252d32;
+      border:1px solid var(--line);border-radius:15px
+    }
+    .map::after {
+      content:"DEMO MAP / DEMOKARTE";position:absolute;
+      left:14px;bottom:12px;color:#ffffff90;font-size:11px;
+      pointer-events:none
+    }
+    .map-inner {
+      position:absolute;inset:0;transform-origin:center;
+      display:grid;place-items:center;user-select:none;
+      font-size:24px;color:#c8bb9a
+    }
+    .map-label {text-align:center;pointer-events:none}
+    .map-controls {display:flex;gap:8px;margin-top:10px}
+    .notice {border-left:3px solid var(--gold);padding:12px;background:#25231f;margin:15px 0;color:#e2d0b3;font-size:13px}
+    .hidden {display:none!important}
+    footer {color:var(--muted);font-size:11px;margin:40px 0 10px}
+    @media(max-width:750px) {
+      .layout {display:block}
+      aside {
+        width:100%;padding:12px;border-right:0;
+        border-bottom:1px solid var(--line)
+      }
+      .brand {font-size:19px}
+      nav {display:flex;overflow-x:auto;margin-top:12px;gap:4px}
+      nav button {white-space:nowrap;padding:11px}
+      main {padding:16px 14px 35px}
+      .grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+      .card {padding:14px}
+      .hero {padding:22px;margin:15px 0}
+      .map {height:320px}
+    }
+    @media(max-width:390px) {
+      .grid {grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <div class="brand">⚔ CRIMSON GUIDE<small>PYWEL COMPANION</small></div>
+    <nav id="nav"></nav>
+  </aside>
+  <main>
+    <header>
+      <span class="eyebrow">CRIMSON GUIDE • V1.0</span>
+      <select id="lang" aria-label="Language">
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="en">🇬🇧 English</option>
+      </select>
+    </header>
+    <div id="app"></div>
+    <footer>Unofficial fan-made companion. Not affiliated with Pearl Abyss.</footer>
+  </main>
+</div>
+<script>
+"use strict";
+
+const translations = {
+  de:{
+    home:"Startseite",map:"Weltkarte",quests:"Quests",
+    items:"Gegenstände",bosses:"Bosse",npcs:"NPCs",
+    progress:"Mein Fortschritt",settings:"Einstellungen",ai:"KI-Assistent",
+    welcome:"Willkommen in Pywel",
+    subtitle:"Dein persönlicher Begleiter für Crimson Desert.",
+    explore:"Entdecke die Welt",search:"Suchen...",
+    noData:"Noch keine verifizierten Spieldaten vorhanden.",
+    coming:"Diese Funktion wird in einer späteren Version erweitert.",
+    demo:"Dies ist eine Demo-Karte, keine echte Karte von Pywel.",
+    complete:"Abgeschlossen",open:"Offen",all:"Alle",
+    saved:"Lokal gespeichert",export:"Fortschritt exportieren",
+    import:"Fortschritt importieren",reset:"Fortschritt zurücksetzen",
+    resetConfirm:"Möchtest du deinen Fortschritt wirklich löschen?",
+    importError:"Ungültige Fortschrittsdatei.",
+    emptyProgress:"Noch keine verifizierten Einträge zum Abhaken.",
+    mapHelp:"Ziehen zum Verschieben, + und − zum Zoomen.",
+    entries:"Einträge",done:"Erledigt",language:"Sprache",
+    welcomeBack:"Dein Abenteuer beginnt hier.",
+    searchResults:"Suchergebnisse",noResults:"Keine Ergebnisse gefunden.",
+    source:"Quelle",unverified:"Nicht verifiziert",
+    aiText:"Ein KI-Assistent wird später mit unserer geprüften Datenbank verbunden.",
+    localNote:"Dein Fortschritt bleibt nur in diesem Browser gespeichert. Nutze den Export als Sicherung.",
+    mapReset:"Karte zurücksetzen"
+  },
+  en:{
+    home:"Dashboard",map:"World Map",quests:"Quests",
+    items:"Items",bosses:"Bosses",npcs:"NPCs",
+    progress:"My Progress",settings:"Settings",ai:"AI Assistant",
+    welcome:"Welcome to Pywel",
+    subtitle:"Your personal companion for Crimson Desert.",
+    explore:"Explore the world",search:"Search...",
+    noData:"No verified game data available yet.",
+    coming:"This feature will be expanded in a future version.",
+    demo:"This is a demo map, not an actual map of Pywel.",
+    complete:"Completed",open:"Open",all:"All",
+    saved:"Saved locally",export:"Export progress",
+    import:"Import progress",reset:"Reset progress",
+    resetConfirm:"Do you really want to delete your progress?",
+    importError:"Invalid progress file.",
+    emptyProgress:"No verified entries to track yet.",
+    mapHelp:"Drag to pan, use + and − to zoom.",
+    entries:"Entries",done:"Completed",language:"Language",
+    welcomeBack:"Your adventure begins here.",
+    searchResults:"Search results",noResults:"No results found.",
+    source:"Source",unverified:"Unverified",
+    aiText:"An AI assistant will be connected to our verified database later.",
+    localNote:"Progress is stored only in this browser. Export a backup.",
+    mapReset:"Reset map"
+  }
+};
+
+const sections = [
+  ["home","⌂"],["map","🗺"],["quests","📜"],
+  ["items","⚔"],["bosses","🐉"],["npcs","♟"],
+  ["progress","✓"],["settings","⚙"],["ai","✦"]
+];
+
+// Verified content can be added here in future updates.
+// Do not add fictional records as if they were official.
+const database = {
+  quests:[],items:[],bosses:[],npcs:[],markers:[]
+};
+
+const storageKey="crimson-guide-progress-v1";
+const langKey="crimson-guide-language";
+let language=localStorage.getItem(langKey)==="en"?"en":"de";
+let page="home";
+let searchText="";
+let filter="all";
+let mapScale=1,mapX=0,mapY=0;
+
+function readProgress(){
+  try {
+    const data=JSON.parse(localStorage.getItem(storageKey)||"{}");
+    return data && typeof data==="object" && !Array.isArray(data)?data:{};
+  } catch {return {}}
 }
+let progress=readProgress();
+const t=(key)=>translations[language][key]||key;
+
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#39;"
+  }[c]));
+}
+function textValue(record,key){
+  const value=record[key];
+  if(value && typeof value==="object")
+    return value[language]||value.en||value.de||"";
+  return value||"";
+}
+function allRecords(){
+  return ["quests","items","bosses","npcs"].flatMap(type=>
+    database[type].map(record=>({...record,type}))
+  );
+}
+function verified(records){
+  return records.filter(r=>r.verified===true);
+}
+function completedCount(){
+  return allRecords().filter(r=>progress[r.type+":"+r.id]).length;
+}
+function saveProgress(){
+  localStorage.setItem(storageKey,JSON.stringify(progress));
+}
+function navigate(next){
+  page=next;searchText="";filter="all";render();
+  window.scrollTo(0,0);
+}
+function renderNav(){
+  document.getElementById("nav").innerHTML=sections.map(([id,icon])=>
+    `<button type="button" data-page="${id}" class="${page===id?"active":""}">${icon} ${t(id)}</button>`
+  ).join("");
+  document.querySelectorAll("[data-page]").forEach(btn=>
+    btn.addEventListener("click",()=>navigate(btn.dataset.page))
+  );
+}
+function card(record){
+  const name=escapeHTML(textValue(record,"name"));
+  const description=escapeHTML(textValue(record,"description"));
+  const key=record.type+":"+record.id;
+  const checked=!!progress[key];
+  return `<article class="card">
+    <span class="tag">${escapeHTML(t(record.type))}</span>
+    <h3>${name}</h3>
+    <p>${description}</p>
+    ${record.sourceUrl?`<p><a href="${escapeHTML(record.sourceUrl)}" target="_blank" rel="noopener noreferrer" style="color:var(--gold)">${t("source")}</a></p>`:""}
+    <label><input type="checkbox" data-check="${escapeHTML(key)}" ${checked?"checked":""}> ${t("complete")}</label>
+  </article>`;
+}
+function attachChecks(){
+  document.querySelectorAll("[data-check]").forEach(input=>{
+    input.addEventListener("change",()=>{
+      progress[input.dataset.check]=input.checked;
+      saveProgress();
+      render();
+    });
+  });
+}
+function home(){
+  const total=allRecords().length;
+  return `<section class="hero">
+    <div class="eyebrow">THE WORLD OF PYWEL</div>
+    <h1>${t("welcome")}</h1>
+    <p>${t("subtitle")}</p>
+    <button class="btn" id="explore">${t("explore")} →</button>
+  </section>
+  <h2>${t("welcomeBack")}</h2>
+  <div class="grid">
+    ${sections.filter(s=>!["home","settings"].includes(s[0])).map(([id,icon])=>
+      `<article class="card click" data-go="${id}">
+        <div class="symbol">${icon}</div><h3>${t(id)}</h3>
+        <p>${id==="ai"?t("coming"):t("explore")}</p>
+      </article>`
+    ).join("")}
+  </div>
+  <div class="card" style="margin-top:18px">
+    <div class="row"><strong>${t("progress")}</strong>
+    <span>${completedCount()} / ${total}</span></div>
+    <div class="progress" style="margin-top:14px">
+      <div style="width:${total?100*completedCount()/total:0}%"></div>
+    </div>
+  </div>`;
+}
+function catalogue(type){
+  const records=verified(database[type]);
+  const query=searchText.toLocaleLowerCase();
+  const matches=records.filter(r=>
+    [textValue(r,"name"),textValue(r,"description"),r.category||""]
+    .join(" ").toLocaleLowerCase().includes(query)
+    &&(filter==="all"||r.category===filter)
+  );
+  const categories=[...new Set(records.map(r=>r.category).filter(Boolean))];
+  return `<h1>${t(type)}</h1>
+    <div class="toolbar">
+      <input id="search" placeholder="${t("search")}" value="${escapeHTML(searchText)}">
+      <select id="filter">
+        <option value="all">${t("all")}</option>
+        ${categories.map(c=>`<option value="${escapeHTML(c)}" ${filter===c?"selected":""}>${escapeHTML(c)}</option>`).join("")}
+      </select>
+    </div>
+    <p>${matches.length} ${t("entries")}</p>
+    ${matches.length?`<div class="grid">${matches.map(card).join("")}</div>`:
+    `<div class="empty">${records.length?t("noResults"):t("noData")}</div>`}`;
+}
+function mapPage(){
+  return `<h1>${t("map")}</h1>
+    <div class="notice">${t("demo")}</div>
+    <div class="map" id="map">
+      <div class="map-inner" id="mapInner">
+        <div class="map-label">✦<br>PYWEL<br><small>CONCEPT MAP</small></div>
+      </div>
+    </div>
+    <div class="map-controls">
+      <button class="btn secondary" id="zoomIn">+</button>
+      <button class="btn secondary" id="zoomOut">−</button>
+      <button class="btn secondary" id="mapReset">${t("mapReset")}</button>
+    </div>
+    <p>${t("mapHelp")}</p>
+    <div class="empty">${t("noData")}</div>`;
+}
+function progressPage(){
+  const records=allRecords();
+  const total=records.length;
+  return `<h1>${t("progress")}</h1>
+    <div class="card">
+      <div class="row"><strong>${t("done")}</strong>
+      <span>${completedCount()} / ${total}</span></div>
+      <div class="progress" style="margin-top:15px">
+        <div style="width:${total?completedCount()/total*100:0}%"></div>
+      </div>
+    </div>
+    <div style="margin-top:20px" class="grid">
+      ${sections.filter(s=>["quests","items","bosses","npcs"].includes(s[0]))
+      .map(([id,icon])=>`<div class="card"><div class="symbol">${icon}</div>
+      <h3>${t(id)}</h3><p>${database[id].filter(r=>progress[id+":"+r.id]).length} / ${database[id].length}</p></div>`).join("")}
+    </div>
+    <p>${t("localNote")}</p>
+    <div class="empty">${t("emptyProgress")}</div>`;
+}
+function settingsPage(){
+  return `<h1>${t("settings")}</h1>
+    <div class="card">
+      <h2>${t("progress")}</h2>
+      <p>${t("localNote")}</p>
+      <div class="toolbar">
+        <button class="btn" id="export">${t("export")}</button>
+        <button class="btn secondary" id="import">${t("import")}</button>
+        <button class="btn secondary" id="reset">${t("reset")}</button>
+      </div>
+      <input type="file" id="file" accept=".json,application/json" class="hidden">
+    </div>`;
+}
+function render(){
+  document.documentElement.lang=language;
+  document.getElementById("lang").value=language;
+  renderNav();
+  const app=document.getElementById("app");
+  if(page==="home") app.innerHTML=home();
+  else if(page==="map") app.innerHTML=mapPage();
+  else if(["quests","items","bosses","npcs"].includes(page)) app.innerHTML=catalogue(page);
+  else if(page==="progress") app.innerHTML=progressPage();
+  else if(page==="settings") app.innerHTML=settingsPage();
+  else app.innerHTML=`<h1>${t("ai")}</h1><div class="empty">${t("aiText")}</div>`;
+
+  document.querySelectorAll("[data-go]").forEach(el=>
+    el.addEventListener("click",()=>navigate(el.dataset.go))
+  );
+  document.getElementById("explore")?.addEventListener("click",()=>navigate("map"));
+  document.getElementById("search")?.addEventListener("input",e=>{
+    searchText=e.target.value;
+    const position=e.target.selectionStart;
+    render();
+    const input=document.getElementById("search");
+    input.focus();
+    input.setSelectionRange(position,position);
+  });
+  document.getElementById("filter")?.addEventListener("change",e=>{
+    filter=e.target.value;render();
+  });
+  attachChecks();
+  if(page==="map")setupMap();
+  if(page==="settings")setupSettings();
+}
+function setupMap(){
+  const inner=document.getElementById("mapInner");
+  const map=document.getElementById("map");
+  function update(){
+    inner.style.transform=`translate(${mapX}px,${mapY}px) scale(${mapScale})`;
+  }
+  document.getElementById("zoomIn").onclick=()=>{
+    mapScale=Math.min(3,mapScale+.25);update();
+  };
+  document.getElementById("zoomOut").onclick=()=>{
+    mapScale=Math.max(.7,mapScale-.25);update();
+  };
+  document.getElementById("mapReset").onclick=()=>{
+    mapScale=1;mapX=0;mapY=0;update();
+  };
+  let dragging=false,lastX=0,lastY=0;
+  map.addEventListener("pointerdown",e=>{
+    dragging=true;lastX=e.clientX;lastY=e.clientY;
+    map.setPointerCapture(e.pointerId);
+  });
+  map.addEventListener("pointermove",e=>{
+    if(!dragging)return;
+    mapX+=e.clientX-lastX;mapY+=e.clientY-lastY;
+    lastX=e.clientX;lastY=e.clientY;update();
+  });
+  map.addEventListener("pointerup",()=>dragging=false);
+  map.addEventListener("pointercancel",()=>dragging=false);
+  update();
+}
+function setupSettings(){
+  document.getElementById("export").onclick=()=>{
+    const blob=new Blob([JSON.stringify({
+      version:1,progress,exportedAt:new Date().toISOString()
+    },null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;a.download="crimson-guide-progress.json";a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
+  document.getElementById("import").onclick=()=>
+    document.getElementById("file").click();
+  document.getElementById("file").onchange=async e=>{
+    const file=e.target.files[0];
+    if(!file)return;
+    try{
+      if(file.size>1000000)throw Error("File too large");
+      const data=JSON.parse(await file.text());
+      if(data.version!==1||!data.progress||
+        typeof data.progress!=="object"||Array.isArray(data.progress))
+        throw Error("Invalid");
+      const clean={};
+      for(const [key,value] of Object.entries(data.progress)){
+        if(key.length<150 && typeof value==="boolean")clean[key]=value;
+      }
+      progress=clean;saveProgress();render();
+    }catch{alert(t("importError"))}
+  };
+  document.getElementById("reset").onclick=()=>{
+    if(confirm(t("resetConfirm"))){
+      progress={};saveProgress();render();
+    }
+  };
+}
+document.getElementById("lang").addEventListener("change",e=>{
+  language=e.target.value;
+  localStorage.setItem(langKey,language);
+  render();
+});
+render();
+
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>
+    navigator.serviceWorker.register("./sw.js").catch(console.warn)
+  );
+}
+</script>
+</body>
+</html>
