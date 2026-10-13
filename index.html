@@ -3,272 +3,577 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#101116">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111218">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Crimson Guide">
-<meta name="description" content="Crimson Guide - Pywel Companion">
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>Crimson Guide 3.0</title>
+<title>Crimson Guide 3.1</title>
+
 <style>
 :root{
---bg:#101116;--panel:#1b1d25;--panel2:#262933;
---line:#343640;--text:#f4f1eb;--muted:#a6a8b2;
---gold:#d9b47b;--red:#ad4148;--green:#79b99b;
+--bg:#101116;
+--panel:#1c1e26;
+--panel2:#282b35;
+--line:#373943;
+--text:#f6f2ec;
+--muted:#aaaab5;
+--gold:#e0b979;
+--red:#af424c;
+--green:#78c9a2;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-margin:0;background:var(--bg);color:var(--text);
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:system-ui,-apple-system,sans-serif;
 }
 button,input,select{font:inherit}
 button{cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible{
-outline:2px solid var(--gold);outline-offset:2px
+button:focus-visible,
+input:focus-visible,
+select:focus-visible{
+outline:2px solid var(--gold);
+outline-offset:2px;
 }
-button:disabled{opacity:.5}
 a{color:var(--gold)}
 .layout{display:flex;min-height:100dvh}
 aside{
-width:225px;flex-shrink:0;background:#16181f;
-border-right:1px solid var(--line);padding:22px 12px;
+width:220px;
+flex-shrink:0;
+background:#171920;
+border-right:1px solid var(--line);
+padding:20px 12px;
 }
-.brand{padding:12px;color:var(--gold);font-size:21px;font-weight:900}
-.brand small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:5px}
-nav{display:grid;gap:5px;margin-top:22px}
+.brand{
+font-size:21px;
+font-weight:900;
+color:var(--gold);
+padding:12px;
+}
+.brand small{
+display:block;
+font-size:10px;
+letter-spacing:2px;
+color:var(--muted);
+margin-top:5px;
+}
+nav{display:grid;gap:5px;margin-top:20px}
 nav button{
-width:100%;text-align:left;border:0;background:transparent;
-color:var(--muted);padding:13px;border-radius:10px
+border:0;
+background:none;
+color:var(--muted);
+padding:13px;
+border-radius:10px;
+text-align:left;
 }
-nav button.active{background:#45272c;color:white}
-nav button:hover{background:#30282e}
-main{flex:1;min-width:0;max-width:1250px;margin:0 auto;padding:25px}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:25px}
-.eyebrow{font-size:11px;color:var(--gold);letter-spacing:2px}
-h1{font-size:clamp(27px,4vw,40px);margin:8px 0 12px}
-h2{font-size:21px;margin:0 0 15px}
-h3{margin:0 0 8px;font-size:16px}
+nav button.active{
+background:#4a292e;
+color:white;
+}
+main{
+width:100%;
+max-width:1250px;
+min-width:0;
+margin:auto;
+padding:22px;
+align-self:flex-start;
+}
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+margin-bottom:22px;
+}
+.eyebrow{
+font-size:11px;
+letter-spacing:2px;
+color:var(--gold);
+}
+h1{
+font-size:clamp(27px,4vw,39px);
+margin:8px 0 15px;
+}
+h2{font-size:20px}
+h3{font-size:16px}
 p{color:var(--muted);line-height:1.55}
 .small{font-size:13px;color:var(--muted)}
 .card{
-background:var(--panel);border:1px solid var(--line);
-border-radius:14px;padding:18px;margin-bottom:13px;
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:14px;
+padding:17px;
+margin-bottom:12px;
 }
 .hero{
-background:linear-gradient(120deg,#49272c,#1b1d25);
-border:1px solid #6b3a40;border-radius:17px;
-padding:28px;margin-bottom:18px;
+background:linear-gradient(125deg,#542b32,#1c1e26);
+border:1px solid #77444b;
+padding:26px;
+border-radius:16px;
+margin-bottom:15px;
 }
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px;
+}
 .grid .card{margin:0}
-.row{display:flex;align-items:center;gap:12px}
-.between{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .btn{
-border:0;background:var(--red);color:white;
-border-radius:10px;padding:12px 17px;font-weight:650;
-text-decoration:none;display:inline-flex;align-items:center;
-justify-content:center;gap:7px;
+display:inline-flex;
+justify-content:center;
+align-items:center;
+gap:7px;
+background:var(--red);
+color:white;
+border:0;
+border-radius:10px;
+padding:11px 15px;
+font-weight:650;
+text-decoration:none;
 }
 .btn.alt{background:#30343e}
-.btn.gold{background:var(--gold);color:#1a1714}
+.btn.gold{background:var(--gold);color:#171515}
+.btn.active{background:#6c444a}
 .btn.smallbtn{padding:8px 11px;font-size:12px}
-.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 input[type=search],input[type=text],select{
-background:var(--panel2);color:white;border:1px solid var(--line);
-border-radius:10px;padding:12px;min-width:0;
+background:var(--panel2);
+border:1px solid var(--line);
+color:white;
+border-radius:10px;
+padding:11px;
+min-width:0;
 }
-input[type=search]{flex:1;min-width:160px}
-select{max-width:100%}
-label{cursor:pointer}
-input[type=checkbox]{accent-color:var(--red);width:17px;height:17px}
-.tag{color:var(--gold);font-size:11px}
-.empty{
-text-align:center;padding:28px;border:1px dashed var(--line);
-border-radius:13px;color:var(--muted)
+input[type=search]{flex:1;min-width:140px}
+input[type=checkbox]{
+accent-color:var(--red);
+width:17px;
+height:17px;
+}
+.between{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+.meter{
+height:9px;
+background:#373943;
+border-radius:20px;
+overflow:hidden;
+}
+.meter div{
+height:100%;
+background:var(--red);
 }
 .questrow{
-display:flex;align-items:center;gap:12px;
-background:var(--panel);border:1px solid var(--line);
-border-radius:11px;padding:13px;margin-bottom:7px;
+display:flex;
+align-items:center;
+gap:12px;
+padding:13px;
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:11px;
+margin-bottom:8px;
 }
 .questrow button{
-background:none;border:0;color:var(--text);
-text-align:left;flex:1;min-width:0;padding:0;
+flex:1;
+min-width:0;
+background:none;
+border:0;
+color:white;
+text-align:left;
 }
-.questrow button strong{display:block;font-size:14px}
-.questrow button span{display:block;font-size:11px;color:var(--muted);margin-top:4px}
-.questrow.done{opacity:.75}
-.questrow.done strong{text-decoration:line-through}
-.detail{margin:0 0 12px;padding:17px;border:1px solid #654044;border-radius:12px;background:#211c22}
+.questrow button strong{display:block}
+.questrow button small{
+display:block;
+color:var(--muted);
+margin-top:4px;
+}
 .step{
-display:flex;align-items:flex-start;gap:10px;
-padding:12px;background:var(--panel2);border-radius:9px;margin:7px 0;
+display:flex;
+gap:10px;
+align-items:flex-start;
+background:var(--panel2);
+border-radius:10px;
+padding:13px;
+margin-bottom:8px;
 }
-.step span{line-height:1.5;font-size:14px}
-.meter{height:9px;border-radius:20px;background:#353942;overflow:hidden}
-.meter>div{height:100%;background:var(--red)}
+.step span{line-height:1.5}
 .notice{
-background:#29251e;border-left:3px solid var(--gold);
-padding:12px;color:#e2d1b4;font-size:13px;margin:14px 0;
+padding:12px;
+background:#2c281f;
+border-left:3px solid var(--gold);
+color:#e7d5b5;
+font-size:13px;
+margin:12px 0;
 }
-.map{
-height:min(58vh,520px);min-height:300px;position:relative;
-overflow:hidden;touch-action:none;border:1px solid var(--line);
-border-radius:14px;
-background:
-radial-gradient(ellipse at 35% 35%,#455045,transparent 47%),
-radial-gradient(ellipse at 75% 70%,#4b4652,transparent 48%),
-#262c34;
+.empty{
+border:1px dashed var(--line);
+border-radius:12px;
+padding:26px;
+text-align:center;
+color:var(--muted);
 }
-.mapinner{position:absolute;inset:0;transform-origin:center}
-.maplabel{
-position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-color:#ddc59a;text-align:center;font-size:24px;pointer-events:none;
+.chips{
+display:flex;
+gap:7px;
+overflow-x:auto;
+padding:4px 0 12px;
+scrollbar-width:thin;
 }
-.marker{
-position:absolute;transform:translate(-50%,-50%);
-background:#b7444c;color:white;border:2px solid #f1d2a0;
-width:30px;height:30px;border-radius:50%;font-size:15px;
-display:grid;place-items:center;
-}
-.mapnote{font-size:12px;color:var(--muted)}
-.filterchips{display:flex;gap:7px;overflow-x:auto;padding:5px 0 12px}
 .chip{
-border:1px solid var(--line);background:var(--panel);
-color:var(--muted);padding:9px 13px;border-radius:20px;white-space:nowrap;
+white-space:nowrap;
+background:var(--panel);
+border:1px solid var(--line);
+color:var(--muted);
+border-radius:30px;
+padding:9px 13px;
 }
-.chip.active{background:#573036;color:white;border-color:#985159}
-footer{color:var(--muted);font-size:11px;margin:40px 0 15px}
+.chip.active{
+background:#65383f;
+color:white;
+border-color:#9e5860;
+}
+.maptools{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin:12px 0;
+}
+.mapwrap{
+position:relative;
+height:min(65vh,620px);
+min-height:350px;
+border-radius:15px;
+border:1px solid var(--line);
+overflow:hidden;
+background:#242a31;
+touch-action:none;
+cursor:grab;
+}
+.mapwrap:active{cursor:grabbing}
+.mapworld{
+position:absolute;
+inset:0;
+transform-origin:center;
+background:
+radial-gradient(ellipse at 35% 35%,#48574a,transparent 48%),
+radial-gradient(ellipse at 72% 68%,#535063,transparent 49%),
+repeating-linear-gradient(0deg,transparent 0 49px,#ffffff0a 50px),
+repeating-linear-gradient(90deg,transparent 0 49px,#ffffff0a 50px),
+#28323a;
+}
+.mapcenter{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+color:#dbc398;
+pointer-events:none;
+font-size:23px;
+letter-spacing:2px;
+opacity:.8;
+}
+.mapcenter small{
+display:block;
+font-size:10px;
+letter-spacing:1px;
+margin-top:8px;
+}
+.mapmarker{
+position:absolute;
+transform:translate(-50%,-50%);
+width:34px;
+height:34px;
+border-radius:50%;
+border:2px solid #fff3d8;
+background:#a8424b;
+color:white;
+display:grid;
+place-items:center;
+font-size:17px;
+z-index:4;
+}
+.mapmarker.player{
+background:#1b86dc;
+box-shadow:0 0 0 5px #1b86dc33;
+}
+.mapmarker.target{
+background:#c18c2b;
+box-shadow:0 0 0 5px #c18c2b33;
+}
+.mapmarker.completed{opacity:.55}
+.route{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:2;
+}
+.route line{
+stroke:#f4d084;
+stroke-width:.7;
+stroke-dasharray:1.5 1;
+vector-effect:non-scaling-stroke;
+}
+.maplegend{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+font-size:12px;
+color:var(--muted);
+margin:10px 0;
+}
+.maplegend b{color:var(--text)}
+.markerrow{
+display:flex;
+align-items:center;
+gap:10px;
+padding:12px;
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:10px;
+margin-bottom:7px;
+}
+.markerrow .name{flex:1;min-width:0}
+.markerrow strong{display:block}
+.markerrow small{color:var(--muted)}
+.mapfullscreen{
+position:fixed!important;
+inset:0!important;
+z-index:100!important;
+height:100dvh!important;
+border-radius:0!important;
+}
+.fullscreenExit{
+position:absolute;
+right:12px;
+top:12px;
+z-index:20;
+display:none;
+}
+.mapfullscreen .fullscreenExit{display:block}
 .mobileNav{display:none}
+footer{
+font-size:11px;
+color:var(--muted);
+margin-top:35px;
+}
 @media(max-width:760px){
 .layout{display:block}
 aside{display:none}
 main{padding:15px 13px 105px}
-header{margin-bottom:14px}
-.hero{padding:21px}
+header{margin-bottom:15px}
+.hero{padding:20px}
 .grid{gap:9px}
-.grid .card{padding:14px}
-.map{height:50vh;min-height:290px}
+.grid .card{padding:13px}
+.mapwrap{height:53dvh;min-height:320px}
 .mobileNav{
-display:flex;position:fixed;bottom:0;left:0;right:0;
-background:#181a21;border-top:1px solid var(--line);
-padding:7px 5px calc(7px + env(safe-area-inset-bottom));
-z-index:50;justify-content:space-around;
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+z-index:50;
+display:flex;
+justify-content:space-around;
+background:#191b22;
+border-top:1px solid var(--line);
+padding:7px 3px calc(7px + env(safe-area-inset-bottom));
 }
 .mobileNav button{
-flex:1;background:none;border:0;color:var(--muted);
-display:flex;flex-direction:column;align-items:center;
-gap:4px;padding:8px 2px;font-size:10px;
+flex:1;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:4px;
+border:0;
+background:none;
+color:var(--muted);
+padding:7px 2px;
+font-size:10px;
 }
 .mobileNav button.active{color:var(--gold)}
-.mobileNav .ico{font-size:21px}
+.mobileNav .ico{font-size:22px}
 }
 </style>
 </head>
+
 <body>
 <div class="layout">
 <aside>
-<div class="brand">⚔ CRIMSON GUIDE
-<small>PYWEL COMPANION</small></div>
+<div class="brand">
+⚔ CRIMSON GUIDE
+<small>PYWEL COMPANION</small>
+</div>
 <nav id="nav"></nav>
 </aside>
+
 <main>
 <header>
-<span class="eyebrow">CRIMSON GUIDE • 3.0</span>
+<span class="eyebrow">CRIMSON GUIDE • 3.1A</span>
 <select id="lang" aria-label="Language">
 <option value="de">🇩🇪 Deutsch</option>
 <option value="en">🇬🇧 English</option>
 </select>
 </header>
+
 <div id="app"></div>
-<footer>Unofficial fan-made guide. Not affiliated with Pearl Abyss.</footer>
+
+<footer>
+Unofficial fan project. Not affiliated with Pearl Abyss.
+</footer>
 </main>
 </div>
+
 <div id="mobileNav" class="mobileNav"></div>
 
 <script>
 "use strict";
 
-const MAP_URL="https://crimsondesert.th.gl/maps/Continent%20of%20Pywel";
-const GUIDE_URL="https://www.powerpyx.com/crimson-desert-walkthrough-all-main-quests/";
-const STORE="crimson-guide-progress-v2";
-const MARKERS="crimson-guide-markers-v3";
+const MAP_URL =
+"https://crimsondesert.th.gl/maps/Continent%20of%20Pywel";
 
-const I={
+const GUIDE_URL =
+"https://www.powerpyx.com/crimson-desert-walkthrough-all-main-quests/";
+
+const PROGRESS_KEY="crimson-guide-progress-v2";
+const MARKERS_KEY="crimson-guide-markers-v3";
+const POSITION_KEY="crimson-guide-player-v31";
+const TARGET_KEY="crimson-guide-target-v31";
+
+const TXT={
 de:{
-home:"Start",map:"Karte",quests:"Quests",collection:"Sammlung",
-progress:"Fortschritt",settings:"Einstellungen",ai:"KI-Assistent",
+home:"Start",map:"Karte",quests:"Quests",
+collection:"Sammlung",progress:"Fortschritt",
+settings:"Einstellungen",
 welcome:"Dein Abenteuer in Pywel",
-subtitle:"Karte, Quests und Fortschritt an einem Ort.",
-realMap:"Echte interaktive Karte öffnen",
-ownMap:"Meine Karte",mapInfo:"Eigene Karte in Entwicklung. Hier kannst du bereits persönliche Markierungen setzen.",
-mapHint:"Tippe auf die Karte, um eine eigene Markierung zu setzen.",
-mapName:"Name der Markierung:",mapType:"Kategorie:",
-mapRemove:"Markierung löschen?",mapEmpty:"Noch keine eigenen Markierungen.",
-all:"Alle",quest:"Quest",boss:"Boss",treasure:"Schatz",npc:"NPC",
+intro:"Deine Karte, deine Quests, dein Fortschritt.",
+realMap:"Vollständige Pywel-Karte öffnen",
+mapTitle:"Meine Abenteuerkarte",
+mapNote:"Eigene Planungsfläche. Noch keine echte Pywel-Karte.",
+mapWarning:"Die Positionen auf dieser Planungsfläche entsprechen noch keinen echten Spielkoordinaten.",
+search:"Markierungen suchen...",
+all:"Alle",quest:"Quest",boss:"Boss",
+treasure:"Schatz",npc:"NPC",
 material:"Material",other:"Sonstiges",
-search:"Quest suchen...",chapter:"Alle Kapitel",status:"Alle Status",
-open:"Offen",done:"Erledigt",steps:"Lösungsschritte",
-noSteps:"Für diese Quest fehlen noch geprüfte Lösungsschritte.",
-externalGuide:"Komplettlösung öffnen",
-finish:"Quest abgeschlossen",back:"Zurück",
-colInfo:"Hier sammeln wir später Waffen, Rüstungen, Bosse, NPCs und Materialien.",
-items:"Gegenstände",bosses:"Bosse",npcs:"NPCs",materials:"Materialien",
-notReady:"Noch keine geprüften Einträge vorhanden.",
-saved:"Lokal gespeichert",export:"Fortschritt exportieren",
-import:"Fortschritt importieren",reset:"Fortschritt löschen",
-confirm:"Wirklich den Fortschritt und alle eigenen Markierungen löschen?",
-badFile:"Ungültige Datei.",imported:"Fortschritt importiert.",
-local:"Deine Daten werden auf diesem Gerät gespeichert. Exportiere regelmäßig eine Sicherung.",
-complete:"Abgeschlossen",total:"Gesamt",resetMap:"Ansicht zurücksetzen",
+setPlayer:"Spielerposition setzen",
+setTarget:"Ziel setzen",
+addMarker:"Marker hinzufügen",
+cancel:"Abbrechen",
+fullscreen:"Vollbild",
+exitFullscreen:"Vollbild schließen",
+resetView:"Ansicht zurücksetzen",
+position:"Spielerposition",
+target:"Zielpunkt",
+route:"Ziellinie",
+noTarget:"Noch kein Ziel gewählt",
+tapMap:"Tippe jetzt auf die Karte.",
+markerName:"Name des Fundorts:",
+markerType:"Kategorie eingeben (quest, boss, treasure, npc, material, other):",
+markerSaved:"Markierung gespeichert.",
+markerList:"Meine Fundorte",
+noMarkers:"Noch keine Markierungen vorhanden.",
+chooseTarget:"Als Ziel",
+markDone:"Erledigt",
+delete:"Löschen",
+removeTarget:"Ziel entfernen",
+removePlayer:"Position entfernen",
 chap0:"Prolog",chap1:"Kapitel 1",
-aiInfo:"Der KI-Assistent folgt später.",
-mapFilter:"Marker filtern",mapCustom:"Eigene Markierungen",
-addMarker:"Markierung hinzufügen",cancel:"Abbrechen",
-mapTap:"Tippe auf die gewünschte Stelle der Karte.",
-mapDisclaimer:"Die Hintergrundgrafik ist nur eine Demo und zeigt keine echten Spielkoordinaten.",
-progressInfo:"Dein Questfortschritt wird automatisch gespeichert.",
-source:"Quelle",newMarker:"Neue Markierung",
-mapPosition:"Position",delete:"Löschen"
+allChapters:"Alle Kapitel",
+allStatus:"Alle Status",
+open:"Offen",done:"Erledigt",
+questSearch:"Quest suchen...",
+steps:"Lösungsschritte",
+noSteps:"Noch keine geprüfte Schritt-für-Schritt-Lösung vorhanden.",
+guide:"Externen Quest-Guide öffnen",
+finished:"Quest abgeschlossen",
+back:"Zurück",
+collectionInfo:"Hier entstehen später die vollständigen Datenbanken.",
+items:"Gegenstände",bosses:"Bosse",
+npcs:"NPCs",materials:"Materialien",
+notReady:"Noch keine geprüften Inhalte vorhanden.",
+local:"Deine Daten bleiben lokal auf diesem Gerät. Erstelle regelmäßig ein Backup.",
+export:"Backup exportieren",
+import:"Backup importieren",
+reset:"Alle Daten löschen",
+confirmReset:"Wirklich Fortschritt und Markierungen löschen?",
+invalid:"Ungültige Backup-Datei.",
+imported:"Backup importiert.",
+total:"Gesamt",
+markerCount:"Markierungen",
+distance:"Abstand auf Planungsfläche",
+navigationHint:"Die Linie zeigt nur die direkte Richtung auf der Planungsfläche, keinen begehbaren Spielweg.",
+clear:"Zurücksetzen"
 },
 en:{
-home:"Home",map:"Map",quests:"Quests",collection:"Collection",
-progress:"Progress",settings:"Settings",ai:"AI Assistant",
+home:"Home",map:"Map",quests:"Quests",
+collection:"Collection",progress:"Progress",
+settings:"Settings",
 welcome:"Your adventure in Pywel",
-subtitle:"Map, quests and progress in one place.",
-realMap:"Open real interactive map",
-ownMap:"My Map",mapInfo:"Our own map is in development. You can already add personal markers.",
-mapHint:"Tap the map to add your own marker.",
-mapName:"Marker name:",mapType:"Category:",
-mapRemove:"Delete marker?",mapEmpty:"No personal markers yet.",
-all:"All",quest:"Quest",boss:"Boss",treasure:"Treasure",npc:"NPC",
+intro:"Your map, quests and progress.",
+realMap:"Open complete Pywel map",
+mapTitle:"My Adventure Map",
+mapNote:"Personal planning canvas. Not a real Pywel map yet.",
+mapWarning:"Positions on this planning canvas do not represent actual game coordinates.",
+search:"Search markers...",
+all:"All",quest:"Quest",boss:"Boss",
+treasure:"Treasure",npc:"NPC",
 material:"Material",other:"Other",
-search:"Search quests...",chapter:"All chapters",status:"All statuses",
-open:"Open",done:"Completed",steps:"Walkthrough steps",
-noSteps:"Verified walkthrough steps are not yet available.",
-externalGuide:"Open walkthrough",
-finish:"Quest completed",back:"Back",
-colInfo:"Weapons, armor, bosses, NPCs and materials will appear here.",
-items:"Items",bosses:"Bosses",npcs:"NPCs",materials:"Materials",
-notReady:"No verified entries available yet.",
-saved:"Saved locally",export:"Export progress",
-import:"Import progress",reset:"Reset progress",
-confirm:"Delete progress and all personal markers?",
-badFile:"Invalid file.",imported:"Progress imported.",
-local:"Data is stored on this device. Export backups regularly.",
-complete:"Completed",total:"Total",resetMap:"Reset view",
+setPlayer:"Set player position",
+setTarget:"Set destination",
+addMarker:"Add marker",
+cancel:"Cancel",
+fullscreen:"Fullscreen",
+exitFullscreen:"Exit fullscreen",
+resetView:"Reset view",
+position:"Player position",
+target:"Destination",
+route:"Destination line",
+noTarget:"No destination selected",
+tapMap:"Tap the map now.",
+markerName:"Location name:",
+markerType:"Enter category (quest, boss, treasure, npc, material, other):",
+markerSaved:"Marker saved.",
+markerList:"My locations",
+noMarkers:"No markers yet.",
+chooseTarget:"Set target",
+markDone:"Completed",
+delete:"Delete",
+removeTarget:"Clear destination",
+removePlayer:"Clear position",
 chap0:"Prologue",chap1:"Chapter 1",
-aiInfo:"AI assistant coming later.",
-mapFilter:"Filter markers",mapCustom:"Personal markers",
-addMarker:"Add marker",cancel:"Cancel",
-mapTap:"Tap the desired position on the map.",
-mapDisclaimer:"The background is only a demo, not real game coordinates.",
-progressInfo:"Your quest progress is saved automatically.",
-source:"Source",newMarker:"New marker",
-mapPosition:"Position",delete:"Delete"
+allChapters:"All chapters",
+allStatus:"All statuses",
+open:"Open",done:"Completed",
+questSearch:"Search quests...",
+steps:"Walkthrough steps",
+noSteps:"No verified step-by-step walkthrough yet.",
+guide:"Open external quest guide",
+finished:"Quest completed",
+back:"Back",
+collectionInfo:"Complete databases will be added later.",
+items:"Items",bosses:"Bosses",
+npcs:"NPCs",materials:"Materials",
+notReady:"No verified content available yet.",
+local:"Data stays on this device. Export backups regularly.",
+export:"Export backup",
+import:"Import backup",
+reset:"Delete all data",
+confirmReset:"Delete progress and markers?",
+invalid:"Invalid backup file.",
+imported:"Backup imported.",
+total:"Total",
+markerCount:"Markers",
+distance:"Planning canvas distance",
+navigationHint:"The line only shows direction on the planning canvas, not a traversable game route.",
+clear:"Reset"
 }
 };
 
@@ -279,15 +584,21 @@ const quests=[
 {id:"new-journey",name:"New Journey",chapter:0},
 {id:"where-rumors-gather",name:"Where Rumors Gather",chapter:1,
 steps:[
-{de:"Begib dich nach Hernand und suche die Taverne auf.",en:"Travel to Hernand and visit the tavern."},
-{de:"Sprich mit den Soldaten und nimm die Herausforderung zum Armdrücken an.",en:"Talk to the soldiers and accept the arm-wrestling challenge."},
-{de:"Folge den eingeblendeten Tastenhinweisen.",en:"Follow the on-screen button prompts."}
+{de:"Begib dich nach Hernand und suche die Taverne auf.",
+en:"Travel to Hernand and visit the tavern."},
+{de:"Sprich mit den Soldaten und nimm die Herausforderung zum Armdrücken an.",
+en:"Talk to the soldiers and accept the arm-wrestling challenge."},
+{de:"Folge den eingeblendeten Tastenhinweisen.",
+en:"Follow the on-screen prompts."}
 ]},
 {id:"mysterious-man",name:"Mysterious Man",chapter:1,
 steps:[
-{de:"Verlasse die Taverne und suche den älteren Bettler.",en:"Leave the tavern and find the elderly beggar."},
-{de:"Sprich mit ihm und gib ihm eine Münze.",en:"Speak with him and give him a coin."},
-{de:"Nimm den hölzernen Schlüssel entgegen.",en:"Receive the wooden key."}
+{de:"Verlasse die Taverne und suche den älteren Bettler.",
+en:"Leave the tavern and find the elderly beggar."},
+{de:"Sprich mit ihm und gib ihm eine Münze.",
+en:"Talk to him and give him a coin."},
+{de:"Nimm den hölzernen Schlüssel entgegen.",
+en:"Receive the wooden key."}
 ]},
 {id:"true-wisdom",name:"True Wisdom in Kindness",chapter:1},
 {id:"actions-speak",name:"Actions Speak Louder than Words",chapter:1},
@@ -298,180 +609,401 @@ steps:[
 {id:"woman-in-white",name:"Woman in White",chapter:1}
 ];
 
-const navItems=[
-["home","⌂"],["map","🗺"],["quests","📜"],
-["collection","⚔"],["progress","✓"],["settings","⚙"]
+const sections=[
+["home","⌂"],
+["map","🗺"],
+["quests","📜"],
+["collection","⚔"],
+["progress","✓"],
+["settings","⚙"]
 ];
-const mobileItems=navItems.slice(0,5);
 
-function read(key){
+function readObject(key){
 try{
-const v=JSON.parse(localStorage.getItem(key)||"{}");
-return v&&typeof v==="object"&&!Array.isArray(v)?v:{};
+const x=JSON.parse(localStorage.getItem(key)||"{}");
+return x&&typeof x==="object"&&!Array.isArray(x)?x:{};
 }catch{return {}}
 }
-
-let progress=read(STORE);
-let oldProgress=read("crimson-guide-progress-v1");
-let markerData;
+function readArray(key){
 try{
-markerData=JSON.parse(localStorage.getItem(MARKERS)||"[]");
-if(!Array.isArray(markerData))markerData=[];
-}catch{markerData=[]}
-let markers=markerData.filter(m=>
-m&&typeof m==="object"&&typeof m.name==="string"&&
-typeof m.x==="number"&&typeof m.y==="number"&&
-Number.isFinite(m.x)&&Number.isFinite(m.y)&&
-m.x>=0&&m.x<=100&&m.y>=0&&m.y<=100
-).slice(0,500);
+const x=JSON.parse(localStorage.getItem(key)||"[]");
+return Array.isArray(x)?x:[];
+}catch{return []}
+}
+function validPoint(p){
+return p&&
+Number.isFinite(p.x)&&
+Number.isFinite(p.y)&&
+p.x>=0&&p.x<=100&&
+p.y>=0&&p.y<=100;
+}
+function readPoint(key){
+const x=readObject(key);
+return validPoint(x)?{x:x.x,y:x.y}:null;
+}
+
+let progress=readObject(PROGRESS_KEY);
+const legacy=readObject("crimson-guide-progress-v1");
 
 for(const q of quests){
-if(oldProgress["quests:"+q.id]===true&&
+if(legacy["quests:"+q.id]===true &&
 progress["quest:"+q.id]===undefined){
 progress["quest:"+q.id]=true;
 }
 }
-localStorage.setItem(STORE,JSON.stringify(progress));
+localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
 
-let language=localStorage.getItem("crimson-guide-language")==="en"?"en":"de";
-let page="home",query="",chapter="all",status="all";
-let selectedQuest=null,collectionTab="items";
-let markerFilter="all",addingMarker=false;
-let scale=1,mx=0,my=0;
+const types=["quest","boss","treasure","npc","material","other"];
 
-const t=k=>I[language][k]||k;
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+let markers=readArray(MARKERS_KEY)
+.filter(m=>validPoint(m)&&typeof m.name==="string")
+.slice(0,500)
+.map(m=>({
+id:String(m.id||crypto.randomUUID()),
+name:m.name.slice(0,100),
+type:types.includes(m.type)?m.type:"other",
+x:m.x,y:m.y,
+completed:m.completed===true
+}));
+
+let player=readPoint(POSITION_KEY);
+let target=readPoint(TARGET_KEY);
+
+let language=localStorage.getItem("crimson-guide-language")==="en"
+?"en":"de";
+
+let page="map";
+let questQuery="";
+let questChapter="all";
+let questStatus="all";
+let selectedQuest=null;
+let collectionTab="items";
+
+let mapQuery="";
+let markerFilter="all";
+let hideCompleted=false;
+let mapMode="pan";
+let fullscreen=false;
+
+let zoom=1;
+let offsetX=0;
+let offsetY=0;
+
+const t=k=>TXT[language][k]||k;
+
+function esc(v){
+return String(v??"").replace(/[&<>"']/g,c=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
 }[c]));
-const done=id=>progress["quest:"+id]===true;
-const stepDone=(id,i)=>progress["step:"+id+":"+i]===true;
+}
 
 function save(){
-localStorage.setItem(STORE,JSON.stringify(progress));
+localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
+localStorage.setItem(MARKERS_KEY,JSON.stringify(markers));
+if(player)localStorage.setItem(POSITION_KEY,JSON.stringify(player));
+else localStorage.removeItem(POSITION_KEY);
+if(target)localStorage.setItem(TARGET_KEY,JSON.stringify(target));
+else localStorage.removeItem(TARGET_KEY);
 }
-function saveMarkers(){
-localStorage.setItem(MARKERS,JSON.stringify(markers));
+
+function questDone(id){
+return progress["quest:"+id]===true;
 }
-function countDone(){
-return quests.filter(q=>done(q.id)).length;
+function stepDone(id,i){
+return progress["step:"+id+":"+i]===true;
+}
+function doneCount(){
+return quests.filter(q=>questDone(q.id)).length;
 }
 function meter(n,total){
-return `<div class="meter"><div style="width:${total?n/total*100:0}%"></div></div>`;
+return `<div class="meter"><div style="width:${total?100*n/total:0}%"></div></div>`;
 }
+
 function navigate(p){
-page=p;selectedQuest=null;addingMarker=false;
-query="";chapter="all";status="all";
-render();window.scrollTo(0,0);
+page=p;
+selectedQuest=null;
+fullscreen=false;
+mapMode="pan";
+render();
+window.scrollTo(0,0);
 }
+
 function renderNav(){
-document.getElementById("nav").innerHTML=navItems.map(([p,icon])=>
-`<button data-go="${p}" class="${page===p?"active":""}">${icon} ${t(p)}</button>`
-).join("");
-document.getElementById("mobileNav").innerHTML=mobileItems.map(([p,icon])=>
-`<button data-go="${p}" class="${page===p?"active":""}">
-<span class="ico">${icon}</span><span>${t(p)}</span></button>`
-).join("");
+document.getElementById("nav").innerHTML=
+sections.map(([id,icon])=>`
+<button data-go="${id}" class="${page===id?"active":""}">
+${icon} ${t(id)}
+</button>`).join("");
+
+document.getElementById("mobileNav").innerHTML=
+sections.slice(0,5).map(([id,icon])=>`
+<button data-go="${id}" class="${page===id?"active":""}">
+<span class="ico">${icon}</span>
+<span>${t(id)}</span>
+</button>`).join("");
 }
-function home(){
+
+function homePage(){
 return `
 <div class="hero">
 <div class="eyebrow">CRIMSON DESERT COMPANION</div>
 <h1>${t("welcome")}</h1>
-<p>${t("subtitle")}</p>
-<button class="btn gold" data-go="map">🗺 ${t("map")} →</button>
+<p>${t("intro")}</p>
+<button class="btn gold" data-go="map">🗺 ${t("map")}</button>
 </div>
 <div class="card">
-<div class="between"><strong>${t("progress")}</strong>
-<span>${countDone()} / ${quests.length}</span></div>
-<div style="margin-top:13px">${meter(countDone(),quests.length)}</div>
+<div class="between">
+<strong>${t("progress")}</strong>
+<span>${doneCount()} / ${quests.length}</span>
+</div>
+<div style="margin-top:12px">${meter(doneCount(),quests.length)}</div>
 </div>
 <div class="grid">
-${[
-["map","🗺"],["quests","📜"],
-["collection","⚔"],["progress","✓"]
-].map(([p,icon])=>
-`<div class="card" data-go="${p}" style="cursor:pointer">
-<h3>${icon} ${t(p)}</h3>
-<p class="small">${p==="quests"?quests.length+" Quests":t("welcome")}</p>
-</div>`
-).join("")}
-</div>
-<div class="card" style="margin-top:15px">
-<h3>${t("realMap")}</h3>
-<p class="small">The Hidden Gaming Lair</p>
-<a class="btn" href="${MAP_URL}" target="_blank" rel="noopener noreferrer">
-${t("realMap")} ↗</a>
+${sections.slice(1,5).map(([id,icon])=>`
+<div class="card" data-go="${id}" style="cursor:pointer">
+<h3>${icon} ${t(id)}</h3>
+<p class="small">${id==="map"?markers.length+" "+t("markerCount"):"→"}</p>
+</div>`).join("")}
 </div>`;
 }
-function questList(){
-const found=quests.filter(q=>
-(chapter==="all"||String(q.chapter)===chapter)&&
-(status==="all"||(status==="done")===done(q.id))&&
-q.name.toLowerCase().includes(query.toLowerCase())
-);
-return `
-<h1>📜 ${t("quests")}</h1>
-<div class="toolbar">
-<input id="questSearch" type="search" placeholder="${t("search")}" value="${esc(query)}">
-<select id="chapterFilter">
-<option value="all">${t("chapter")}</option>
-<option value="0" ${chapter==="0"?"selected":""}>${t("chap0")}</option>
-<option value="1" ${chapter==="1"?"selected":""}>${t("chap1")}</option>
-</select>
-<select id="statusFilter">
-<option value="all">${t("status")}</option>
-<option value="open" ${status==="open"?"selected":""}>${t("open")}</option>
-<option value="done" ${status==="done"?"selected":""}>${t("done")}</option>
-</select>
-</div>
-<p class="small">${found.length} / ${quests.length} Quests</p>
-${found.length?found.map(q=>`
-<div class="questrow ${done(q.id)?"done":""}">
-<input type="checkbox" data-quest="${q.id}" aria-label="${esc(q.name)}" ${done(q.id)?"checked":""}>
-<button data-open="${q.id}">
-<strong>${esc(q.name)}</strong>
-<span>${t("chap"+q.chapter)} · ${q.steps?.length||0} ${t("steps")}</span>
-</button>
-<span style="color:var(--gold)">›</span>
-</div>`).join(""):`<div class="empty">${t("notReady")}</div>`}`;
+
+function iconFor(type){
+return ({
+quest:"📜",boss:"🐉",treasure:"💰",
+npc:"♟",material:"💎",other:"📍"
+})[type]||"📍";
 }
-function questDetail(){
-const q=quests.find(q=>q.id===selectedQuest);
-if(!q){selectedQuest=null;return questList()}
+
+function filteredMarkers(){
+return markers.filter(m=>
+(markerFilter==="all"||m.type===markerFilter)&&
+(!hideCompleted||!m.completed)&&
+m.name.toLowerCase().includes(mapQuery.toLowerCase())
+);
+}
+
+function routeSVG(){
+if(!player||!target)return "";
 return `
-<button class="btn alt smallbtn" id="backQuest">← ${t("back")}</button>
-<h1>${esc(q.name)}</h1>
-<p class="tag">${t("chap"+q.chapter)}</p>
+<svg class="route" viewBox="0 0 100 100" preserveAspectRatio="none">
+<line x1="${player.x}" y1="${player.y}"
+x2="${target.x}" y2="${target.y}"></line>
+</svg>`;
+}
+
+function mapPage(){
+const shown=filteredMarkers();
+const cats=["all",...types];
+
+const dist=player&&target
+?Math.hypot(target.x-player.x,target.y-player.y).toFixed(1)
+:null;
+
+return `
+<div class="between">
+<h1 style="margin-bottom:8px">🗺 ${t("map")}</h1>
+<a class="btn alt smallbtn" href="${MAP_URL}"
+target="_blank" rel="noopener noreferrer">↗ ${t("realMap")}</a>
+</div>
+
+<div class="toolbar">
+<input id="mapSearch" type="search"
+placeholder="${t("search")}" value="${esc(mapQuery)}">
+</div>
+
+<div class="chips">
+${cats.map(type=>`
+<button class="chip ${markerFilter===type?"active":""}"
+data-filter="${type}">
+${type==="all"?"🌍":iconFor(type)} ${t(type)}
+</button>`).join("")}
+</div>
+
+<div class="maptools">
+<button class="btn ${mapMode==="player"?"active":"alt"}"
+data-mode="player">🔵 ${t("setPlayer")}</button>
+<button class="btn ${mapMode==="target"?"active":"alt"}"
+data-mode="target">🎯 ${t("setTarget")}</button>
+<button class="btn ${mapMode==="marker"?"active":"alt"}"
+data-mode="marker">＋ ${t("addMarker")}</button>
+<button class="btn alt" id="fullBtn">⛶ ${t("fullscreen")}</button>
+</div>
+
+${mapMode!=="pan"
+?`<div class="notice">${t("tapMap")}</div>`
+:`<p class="small">${t("mapNote")}</p>`}
+
+<div class="mapwrap ${fullscreen?"mapfullscreen":""}" id="mapwrap">
+<button class="btn alt fullscreenExit" id="exitFull">
+✕ ${t("exitFullscreen")}
+</button>
+<div class="mapworld" id="mapworld">
+<div class="mapcenter">
+✦<br>PYWEL
+<small>PLANNING CANVAS</small>
+</div>
+${routeSVG()}
+${shown.map(m=>`
+<button class="mapmarker ${m.completed?"completed":""}"
+style="left:${m.x}%;top:${m.y}%"
+data-marker="${esc(m.id)}"
+title="${esc(m.name)}">
+${iconFor(m.type)}
+</button>`).join("")}
+${player?`
+<button class="mapmarker player"
+style="left:${player.x}%;top:${player.y}%"
+title="${t("position")}">●</button>`:""}
+${target?`
+<button class="mapmarker target"
+style="left:${target.x}%;top:${target.y}%"
+title="${t("target")}">★</button>`:""}
+</div>
+</div>
+
+<div class="maptools">
+<button class="btn alt" id="zoomIn">＋</button>
+<button class="btn alt" id="zoomOut">－</button>
+<button class="btn alt" id="resetView">${t("resetView")}</button>
+</div>
+
+<div class="maplegend">
+<span>🔵 <b>${t("position")}:</b> ${player?"✓":"–"}</span>
+<span>🎯 <b>${t("target")}:</b> ${target?"✓":"–"}</span>
+</div>
+
+${dist!==null?`
 <div class="card">
-<label class="row">
-<input type="checkbox" data-quest="${q.id}" ${done(q.id)?"checked":""}>
-<strong>${t("finish")}</strong>
+<strong>🧭 ${t("route")}</strong>
+<p>${t("distance")}: ${dist}%</p>
+<p class="small">${t("navigationHint")}</p>
+</div>`:""}
+
+<div class="toolbar">
+${player?`<button class="btn alt smallbtn" id="clearPlayer">
+${t("removePlayer")}</button>`:""}
+${target?`<button class="btn alt smallbtn" id="clearTarget">
+${t("removeTarget")}</button>`:""}
+</div>
+
+<div class="notice">${t("mapWarning")}</div>
+
+<div class="between">
+<h2>${t("markerList")} (${shown.length})</h2>
+<label class="small">
+<input type="checkbox" id="hideCompleted"
+${hideCompleted?"checked":""}>
+${t("done")} ausblenden
+</label>
+</div>
+
+${shown.length?shown.map(m=>`
+<div class="markerrow">
+<span>${iconFor(m.type)}</span>
+<div class="name">
+<strong>${esc(m.name)}</strong>
+<small>${t(m.type)} ${m.completed?"· ✓":""}</small>
+</div>
+<button class="btn alt smallbtn"
+data-targetmarker="${esc(m.id)}">🎯</button>
+<button class="btn alt smallbtn"
+data-donemarker="${esc(m.id)}">
+${m.completed?"↩":"✓"}
+</button>
+<button class="btn alt smallbtn"
+data-deletemarker="${esc(m.id)}">✕</button>
+</div>`).join("")
+:`<div class="empty">${t("noMarkers")}</div>`}
+
+<p class="small">
+${t("realMap")}:
+<a href="${MAP_URL}" target="_blank"
+rel="noopener noreferrer">The Hidden Gaming Lair ↗</a>
+</p>`;
+}
+
+function questPage(){
+if(selectedQuest){
+const q=quests.find(x=>x.id===selectedQuest);
+if(!q){selectedQuest=null;return questPage()}
+return `
+<button class="btn alt" id="backQuest">← ${t("back")}</button>
+<h1>${esc(q.name)}</h1>
+<p class="small">${t("chap"+q.chapter)}</p>
+<div class="card">
+<label>
+<input type="checkbox" data-quest="${q.id}"
+${questDone(q.id)?"checked":""}>
+${t("finished")}
 </label>
 </div>
 <h2>${t("steps")}</h2>
 ${q.steps?.length?q.steps.map((s,i)=>`
 <label class="step">
-<input type="checkbox" data-step="${q.id}:${i}" ${stepDone(q.id,i)?"checked":""}>
+<input type="checkbox" data-step="${q.id}:${i}"
+${stepDone(q.id,i)?"checked":""}>
 <span>${esc(s[language]||s.en)}</span>
-</label>`).join(""):`<div class="empty">${t("noSteps")}</div>`}
-<div class="card">
-<a class="btn" href="${GUIDE_URL}" target="_blank" rel="noopener noreferrer">
-${t("externalGuide")} ↗</a>
-</div>`;
+</label>`).join("")
+:`<div class="empty">${t("noSteps")}</div>`}
+<p><a class="btn" href="${GUIDE_URL}"
+target="_blank" rel="noopener noreferrer">
+${t("guide")} ↗</a></p>`;
 }
+
+const found=quests.filter(q=>
+(questChapter==="all"||String(q.chapter)===questChapter)&&
+(questStatus==="all"||
+(questStatus==="done")===questDone(q.id))&&
+q.name.toLowerCase().includes(questQuery.toLowerCase())
+);
+
+return `
+<h1>📜 ${t("quests")}</h1>
+<div class="toolbar">
+<input id="questSearch" type="search"
+placeholder="${t("questSearch")}"
+value="${esc(questQuery)}">
+<select id="questChapter">
+<option value="all">${t("allChapters")}</option>
+<option value="0" ${questChapter==="0"?"selected":""}>${t("chap0")}</option>
+<option value="1" ${questChapter==="1"?"selected":""}>${t("chap1")}</option>
+</select>
+<select id="questStatus">
+<option value="all">${t("allStatus")}</option>
+<option value="open" ${questStatus==="open"?"selected":""}>${t("open")}</option>
+<option value="done" ${questStatus==="done"?"selected":""}>${t("done")}</option>
+</select>
+</div>
+<p class="small">${found.length} / ${quests.length}</p>
+${found.map(q=>`
+<div class="questrow">
+<input type="checkbox" data-quest="${q.id}"
+${questDone(q.id)?"checked":""}>
+<button data-openquest="${q.id}">
+<strong>${esc(q.name)}</strong>
+<small>${t("chap"+q.chapter)}</small>
+</button>
+<span>›</span>
+</div>`).join("")}`;
+}
+
 function collectionPage(){
-const categories=[
+const cats=[
 ["items","⚔"],["bosses","🐉"],
 ["npcs","♟"],["materials","💎"]
 ];
 return `
 <h1>⚔ ${t("collection")}</h1>
-<p>${t("colInfo")}</p>
+<p>${t("collectionInfo")}</p>
 <div class="grid">
-${categories.map(([id,icon])=>
-`<button class="card" data-collection="${id}" style="color:var(--text);text-align:left;cursor:pointer">
+${cats.map(([id,icon])=>`
+<button class="card" data-collection="${id}"
+style="text-align:left;color:white">
 <h3>${icon} ${t(id)}</h3>
-<p class="small">${t("notReady")}</p>
 </button>`).join("")}
 </div>
 <div class="card" style="margin-top:15px">
@@ -479,300 +1011,424 @@ ${categories.map(([id,icon])=>
 <div class="empty">${t("notReady")}</div>
 </div>`;
 }
+
 function progressPage(){
 return `
 <h1>✓ ${t("progress")}</h1>
 <div class="card">
-<div class="between"><strong>${t("quests")}</strong>
-<span>${countDone()} / ${quests.length}</span></div>
-<div style="margin-top:13px">${meter(countDone(),quests.length)}</div>
+<div class="between">
+<strong>${t("quests")}</strong>
+<span>${doneCount()} / ${quests.length}</span>
+</div>
+<div style="margin-top:12px">
+${meter(doneCount(),quests.length)}
+</div>
 </div>
 ${[0,1].map(c=>{
 const qs=quests.filter(q=>q.chapter===c);
-const n=qs.filter(q=>done(q.id)).length;
-return `<div class="card">
-<div class="between"><strong>${t("chap"+c)}</strong>
-<span>${n} / ${qs.length}</span></div>
+const n=qs.filter(q=>questDone(q.id)).length;
+return `
+<div class="card">
+<div class="between">
+<strong>${t("chap"+c)}</strong>
+<span>${n} / ${qs.length}</span>
+</div>
 <div style="margin-top:12px">${meter(n,qs.length)}</div>
 </div>`;
 }).join("")}
 <div class="card">
-<h3>📍 ${t("mapCustom")}</h3>
+<strong>📍 ${t("markerCount")}</strong>
 <p>${markers.length} ${t("total")}</p>
-</div>
-<p class="small">${t("progressInfo")}</p>`;
+</div>`;
 }
-function mapPage(){
-const cats=[
-["all","🌍"],["quest","📜"],["boss","🐉"],
-["treasure","💰"],["npc","♟"],
-["material","💎"],["other","📍"]
-];
-const visible=markers.filter(m=>markerFilter==="all"||m.type===markerFilter);
-return `
-<h1>🗺 ${t("map")}</h1>
-<div class="card">
-<h3>${t("realMap")}</h3>
-<p class="small">The Hidden Gaming Lair · Continent of Pywel</p>
-<a class="btn gold" href="${MAP_URL}" target="_blank" rel="noopener noreferrer">
-${t("realMap")} ↗</a>
-</div>
-<h2>${t("ownMap")}</h2>
-<p class="small">${t("mapInfo")}</p>
-<div class="filterchips">
-${cats.map(([id,icon])=>`
-<button class="chip ${markerFilter===id?"active":""}" data-filter="${id}">
-${icon} ${t(id)}</button>`).join("")}
-</div>
-<div class="notice">${t("mapDisclaimer")}</div>
-<div class="map" id="map">
-<div class="mapinner" id="mapinner">
-<div class="maplabel">✦<br>PYWEL<br><small>CONCEPT MAP</small></div>
-${visible.map(m=>`
-<button class="marker" style="left:${m.x}%;top:${m.y}%"
-data-marker="${esc(m.id)}" title="${esc(m.name)}">📍</button>`).join("")}
-</div>
-</div>
-<div class="toolbar">
-<button class="btn alt" id="zoomIn">+</button>
-<button class="btn alt" id="zoomOut">−</button>
-<button class="btn alt" id="resetMap">${t("resetMap")}</button>
-<button class="btn" id="addMarker">${addingMarker?"✓ "+t("mapTap"):"＋ "+t("addMarker")}</button>
-</div>
-<p class="mapnote">${addingMarker?t("mapTap"):t("mapHint")}</p>
-<h2>${t("mapCustom")} (${visible.length})</h2>
-${visible.length?visible.map(m=>`
-<div class="questrow">
-<span>📍</span>
-<div style="flex:1;min-width:0">
-<strong>${esc(m.name)}</strong>
-<div class="small">${t(m.type)||t("other")}</div>
-</div>
-<button class="btn alt smallbtn" data-delete="${esc(m.id)}">${t("delete")}</button>
-</div>`).join(""):`<div class="empty">${t("mapEmpty")}</div>`}`;
-}
+
 function settingsPage(){
 return `
 <h1>⚙ ${t("settings")}</h1>
 <div class="card">
 <p>${t("local")}</p>
 <div class="toolbar">
-<button class="btn" id="export">${t("export")}</button>
-<button class="btn alt" id="import">${t("import")}</button>
-<button class="btn alt" id="reset">${t("reset")}</button>
+<button class="btn" id="exportBtn">${t("export")}</button>
+<button class="btn alt" id="importBtn">${t("import")}</button>
+<button class="btn alt" id="resetBtn">${t("reset")}</button>
 </div>
-<input id="file" type="file" accept=".json,application/json" hidden>
+<input type="file" id="backupFile"
+accept=".json,application/json" hidden>
 </div>
 <div class="card">
-<h3>Crimson Guide 3.0</h3>
-<p class="small">GitHub Pages · PWA · DE / EN</p>
+<strong>Crimson Guide 3.1A</strong>
+<p class="small">PS5 Map Edition · DE / EN</p>
 </div>`;
 }
+
 function render(){
 document.documentElement.lang=language;
 document.getElementById("lang").value=language;
 renderNav();
-const app=document.getElementById("app");
-app.innerHTML=
-page==="home"?home():
-page==="quests"?(selectedQuest?questDetail():questList()):
+
+document.getElementById("app").innerHTML=
+page==="home"?homePage():
 page==="map"?mapPage():
+page==="quests"?questPage():
 page==="collection"?collectionPage():
 page==="progress"?progressPage():
-page==="settings"?settingsPage():
-`<h1>${t("ai")}</h1><div class="empty">${t("aiInfo")}</div>`;
+settingsPage();
 
-document.querySelectorAll("[data-go]").forEach(el=>
-el.onclick=()=>navigate(el.dataset.go)
+document.querySelectorAll("[data-go]").forEach(b=>
+b.onclick=()=>navigate(b.dataset.go)
 );
-document.querySelectorAll("[data-open]").forEach(el=>
-el.onclick=()=>{
-selectedQuest=el.dataset.open;
-render();window.scrollTo(0,0);
+
+document.querySelectorAll("[data-quest]").forEach(b=>
+b.onchange=()=>{
+progress["quest:"+b.dataset.quest]=b.checked;
+save();
+render();
 }
 );
+
+document.querySelectorAll("[data-openquest]").forEach(b=>
+b.onclick=()=>{
+selectedQuest=b.dataset.openquest;
+render();
+window.scrollTo(0,0);
+}
+);
+
 document.getElementById("backQuest")?.addEventListener("click",()=>{
-selectedQuest=null;render();
+selectedQuest=null;
+render();
 });
-document.querySelectorAll("[data-quest]").forEach(el=>
-el.onchange=()=>{
-progress["quest:"+el.dataset.quest]=el.checked;
-save();render();
-}
-);
-document.querySelectorAll("[data-step]").forEach(el=>
-el.onchange=()=>{
-const [id,index]=el.dataset.step.split(":");
-progress["step:"+id+":"+index]=el.checked;
-const q=quests.find(q=>q.id===id);
+
+document.querySelectorAll("[data-step]").forEach(b=>
+b.onchange=()=>{
+const [id,index]=b.dataset.step.split(":");
+progress["step:"+id+":"+index]=b.checked;
+const q=quests.find(x=>x.id===id);
 if(q?.steps?.every((_,i)=>stepDone(id,i))){
 progress["quest:"+id]=true;
 }
-save();render();
+save();
+render();
 }
 );
-document.querySelectorAll("[data-collection]").forEach(el=>
-el.onclick=()=>{collectionTab=el.dataset.collection;render();}
-);
-const s=document.getElementById("questSearch");
-if(s)s.oninput=e=>{
-query=e.target.value;
+
+const search=document.getElementById("questSearch");
+if(search)search.oninput=e=>{
+questQuery=e.target.value;
 const pos=e.target.selectionStart;
 render();
 const next=document.getElementById("questSearch");
-next.focus();next.setSelectionRange(pos,pos);
+next.focus();
+next.setSelectionRange(pos,pos);
 };
-document.getElementById("chapterFilter")?.addEventListener("change",e=>{
-chapter=e.target.value;render();
+
+document.getElementById("questChapter")?.addEventListener("change",e=>{
+questChapter=e.target.value;render();
 });
-document.getElementById("statusFilter")?.addEventListener("change",e=>{
-status=e.target.value;render();
+document.getElementById("questStatus")?.addEventListener("change",e=>{
+questStatus=e.target.value;render();
 });
+
+document.querySelectorAll("[data-collection]").forEach(b=>
+b.onclick=()=>{
+collectionTab=b.dataset.collection;
+render();
+}
+);
+
 if(page==="map")setupMap();
 if(page==="settings")setupSettings();
 }
+
 function setupMap(){
-const el=document.getElementById("map");
-const inner=document.getElementById("mapinner");
-function update(){
-inner.style.transform=`translate(${mx}px,${my}px) scale(${scale})`;
+const wrap=document.getElementById("mapwrap");
+const world=document.getElementById("mapworld");
+
+function transform(){
+world.style.transform=
+`translate(${offsetX}px,${offsetY}px) scale(${zoom})`;
 }
+
 document.getElementById("zoomIn").onclick=()=>{
-scale=Math.min(3,scale+.25);update();
+zoom=Math.min(4,zoom+.25);
+transform();
 };
 document.getElementById("zoomOut").onclick=()=>{
-scale=Math.max(.7,scale-.25);update();
+zoom=Math.max(.6,zoom-.25);
+transform();
 };
-document.getElementById("resetMap").onclick=()=>{
-scale=1;mx=0;my=0;update();
+document.getElementById("resetView").onclick=()=>{
+zoom=1;offsetX=0;offsetY=0;
+transform();
 };
-document.getElementById("addMarker").onclick=()=>{
-addingMarker=!addingMarker;render();
-};
-document.querySelectorAll("[data-filter]").forEach(b=>
-b.onclick=()=>{markerFilter=b.dataset.filter;render();}
-);
-document.querySelectorAll("[data-delete]").forEach(b=>
+
+document.querySelectorAll("[data-mode]").forEach(b=>
 b.onclick=()=>{
-markers=markers.filter(m=>m.id!==b.dataset.delete);
-saveMarkers();render();
+mapMode=mapMode===b.dataset.mode?"pan":b.dataset.mode;
+render();
 }
 );
+
+document.querySelectorAll("[data-filter]").forEach(b=>
+b.onclick=()=>{
+markerFilter=b.dataset.filter;
+render();
+}
+);
+
+const search=document.getElementById("mapSearch");
+search.oninput=e=>{
+mapQuery=e.target.value;
+const pos=e.target.selectionStart;
+render();
+const next=document.getElementById("mapSearch");
+next.focus();
+next.setSelectionRange(pos,pos);
+};
+
+document.getElementById("hideCompleted").onchange=e=>{
+hideCompleted=e.target.checked;
+render();
+};
+
+document.getElementById("fullBtn").onclick=()=>{
+fullscreen=!fullscreen;
+render();
+};
+document.getElementById("exitFull").onclick=()=>{
+fullscreen=false;
+render();
+};
+
+document.getElementById("clearPlayer")?.addEventListener("click",()=>{
+player=null;save();render();
+});
+document.getElementById("clearTarget")?.addEventListener("click",()=>{
+target=null;save();render();
+});
+
+document.querySelectorAll("[data-targetmarker]").forEach(b=>
+b.onclick=()=>{
+const m=markers.find(x=>x.id===b.dataset.targetmarker);
+if(m){
+target={x:m.x,y:m.y};
+save();render();
+}
+}
+);
+
+document.querySelectorAll("[data-donemarker]").forEach(b=>
+b.onclick=()=>{
+const m=markers.find(x=>x.id===b.dataset.donemarker);
+if(m){
+m.completed=!m.completed;
+save();render();
+}
+}
+);
+
+document.querySelectorAll("[data-deletemarker]").forEach(b=>
+b.onclick=()=>{
+const id=b.dataset.deletemarker;
+markers=markers.filter(m=>m.id!==id);
+save();render();
+}
+);
+
 document.querySelectorAll("[data-marker]").forEach(b=>
 b.onclick=e=>{
 e.stopPropagation();
-const m=markers.find(m=>m.id===b.dataset.marker);
-if(m)alert(m.name);
+const m=markers.find(x=>x.id===b.dataset.marker);
+if(m)alert(m.name+" · "+t(m.type));
 }
 );
-let drag=false,x=0,y=0,moved=false;
-el.addEventListener("pointerdown",e=>{
-if(e.target.closest(".marker"))return;
-drag=true;moved=false;x=e.clientX;y=e.clientY;
-el.setPointerCapture(e.pointerId);
+
+let dragging=false;
+let moved=false;
+let lastX=0,lastY=0;
+let startX=0,startY=0;
+
+wrap.addEventListener("pointerdown",e=>{
+if(e.target.closest("button"))return;
+dragging=true;
+moved=false;
+startX=lastX=e.clientX;
+startY=lastY=e.clientY;
+wrap.setPointerCapture(e.pointerId);
 });
-el.addEventListener("pointermove",e=>{
-if(!drag)return;
-const dx=e.clientX-x,dy=e.clientY-y;
-if(Math.abs(dx)+Math.abs(dy)>2)moved=true;
-if(!addingMarker){
-mx+=dx;my+=dy;update();
+
+wrap.addEventListener("pointermove",e=>{
+if(!dragging)return;
+if(Math.hypot(e.clientX-startX,e.clientY-startY)>7)
+moved=true;
+
+if(mapMode==="pan"){
+offsetX+=e.clientX-lastX;
+offsetY+=e.clientY-lastY;
+transform();
 }
-x=e.clientX;y=e.clientY;
+lastX=e.clientX;
+lastY=e.clientY;
 });
-el.addEventListener("pointerup",e=>{
-if(!drag)return;
-drag=false;
-if(!addingMarker||moved)return;
-const rect=el.getBoundingClientRect();
-const centerX=rect.width/2,centerY=rect.height/2;
-const px=(e.clientX-rect.left-centerX-mx)/scale+centerX;
-const py=(e.clientY-rect.top-centerY-my)/scale+centerY;
-const xx=px/rect.width*100;
-const yy=py/rect.height*100;
-if(xx<0||xx>100||yy<0||yy>100)return;
-const name=prompt(t("mapName"));
+
+wrap.addEventListener("pointerup",e=>{
+if(!dragging)return;
+dragging=false;
+if(moved||mapMode==="pan")return;
+
+const rect=wrap.getBoundingClientRect();
+const cx=rect.width/2;
+const cy=rect.height/2;
+
+const px=(e.clientX-rect.left-cx-offsetX)/zoom+cx;
+const py=(e.clientY-rect.top-cy-offsetY)/zoom+cy;
+
+const x=px/rect.width*100;
+const y=py/rect.height*100;
+
+if(x<0||x>100||y<0||y>100)return;
+
+if(mapMode==="player"){
+player={x,y};
+mapMode="pan";
+save();render();
+return;
+}
+
+if(mapMode==="target"){
+target={x,y};
+mapMode="pan";
+save();render();
+return;
+}
+
+if(mapMode==="marker"){
+const name=prompt(t("markerName"));
 if(!name?.trim())return;
-const type=prompt(
-t("mapType")+" quest, boss, treasure, npc, material, other",
-"other"
-);
-const allowed=["quest","boss","treasure","npc","material","other"];
+
+const raw=prompt(t("markerType"),"other");
+if(raw===null)return;
+
+const type=types.includes(raw.trim().toLowerCase())
+?raw.trim().toLowerCase():"other";
+
 markers.push({
-id:"m"+Date.now()+"-"+Math.random().toString(36).slice(2,7),
+id:"m"+Date.now()+"-"+Math.random().toString(36).slice(2,8),
 name:name.trim().slice(0,100),
-type:allowed.includes(type)?type:"other",
-x:xx,y:yy
+type,x,y,completed:false
 });
-saveMarkers();addingMarker=false;render();
-});
-el.addEventListener("pointercancel",()=>drag=false);
-update();
+mapMode="pan";
+save();render();
 }
+});
+
+wrap.addEventListener("pointercancel",()=>{
+dragging=false;
+});
+
+transform();
+}
+
 function setupSettings(){
-document.getElementById("export").onclick=()=>{
-const data={
-version:3,progress,markers,
+document.getElementById("exportBtn").onclick=()=>{
+const backup={
+version:31,
+progress,
+markers,
+player,
+target,
 exportedAt:new Date().toISOString()
 };
-const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+const blob=new Blob(
+[JSON.stringify(backup,null,2)],
+{type:"application/json"}
+);
 const url=URL.createObjectURL(blob);
 const a=document.createElement("a");
-a.href=url;a.download="crimson-guide-backup.json";a.click();
+a.href=url;
+a.download="crimson-guide-backup.json";
+a.click();
 setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
-document.getElementById("import").onclick=()=>
-document.getElementById("file").click();
-document.getElementById("file").onchange=async e=>{
+
+document.getElementById("importBtn").onclick=()=>{
+document.getElementById("backupFile").click();
+};
+
+document.getElementById("backupFile").onchange=async e=>{
 try{
 const file=e.target.files[0];
 if(!file)return;
 if(file.size>1000000)throw Error("size");
+
 const data=JSON.parse(await file.text());
-if(![1,2,3].includes(data.version)||
-!data.progress||typeof data.progress!=="object"||
-Array.isArray(data.progress))throw Error("format");
+if(![1,2,3,31].includes(data.version)||
+!data.progress||
+typeof data.progress!=="object"||
+Array.isArray(data.progress)){
+throw Error("format");
+}
+
 const clean={};
 for(let [key,value] of Object.entries(data.progress)){
 if(key.length>160||typeof value!=="boolean")continue;
-if(data.version===1&&key.startsWith("quests:"))
+if(data.version===1&&key.startsWith("quests:")){
 key="quest:"+key.slice(7);
+}
 clean[key]=value;
 }
 progress=clean;
-if(data.version===3&&Array.isArray(data.markers)){
-markers=data.markers.filter(m=>
-m&&typeof m.name==="string"&&
-typeof m.x==="number"&&typeof m.y==="number"&&
-Number.isFinite(m.x)&&Number.isFinite(m.y)&&
-m.x>=0&&m.x<=100&&m.y>=0&&m.y<=100
-).slice(0,500).map(m=>({
+
+if(Array.isArray(data.markers)){
+markers=data.markers
+.filter(m=>validPoint(m)&&typeof m.name==="string")
+.slice(0,500)
+.map(m=>({
 id:String(m.id||"m"+Math.random()).slice(0,100),
 name:m.name.slice(0,100),
-type:["quest","boss","treasure","npc","material","other"].includes(m.type)?m.type:"other",
-x:m.x,y:m.y
+type:types.includes(m.type)?m.type:"other",
+x:m.x,y:m.y,
+completed:m.completed===true
 }));
-saveMarkers();
 }
-save();alert(t("imported"));render();
-}catch{alert(t("badFile"))}
+
+if(data.version===31){
+player=validPoint(data.player)?data.player:null;
+target=validPoint(data.target)?data.target:null;
+}
+
+save();
+alert(t("imported"));
+render();
+}catch{
+alert(t("invalid"));
+}
 };
-document.getElementById("reset").onclick=()=>{
-if(confirm(t("confirm"))){
-progress={};markers=[];save();saveMarkers();render();
+
+document.getElementById("resetBtn").onclick=()=>{
+if(confirm(t("confirmReset"))){
+progress={};
+markers=[];
+player=null;
+target=null;
+save();
+render();
 }
 };
 }
+
 document.getElementById("lang").onchange=e=>{
 language=e.target.value;
 localStorage.setItem("crimson-guide-language",language);
 render();
 };
+
 render();
+
 if("serviceWorker" in navigator){
-window.addEventListener("load",()=>
-navigator.serviceWorker.register("./sw.js").catch(console.warn)
-);
+window.addEventListener("load",()=>{
+navigator.serviceWorker.register("./sw.js").catch(console.warn);
+});
 }
 </script>
 </body>
