@@ -3,13 +3,11 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#111218">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Crimson Guide">
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>Crimson Guide 3.3</title>
+<title>Crimson Guide 4.0</title>
 <style>
 :root{
 --bg:#101116;--panel:#1c1e26;--panel2:#282b35;
@@ -20,9 +18,10 @@
 body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif}
 button,input,select{font:inherit}
 button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 a{color:var(--gold)}
 .layout{display:flex;min-height:100dvh}
-aside{width:220px;flex-shrink:0;background:#171920;border-right:1px solid var(--line);padding:20px 12px}
+aside{width:225px;flex-shrink:0;background:#171920;border-right:1px solid var(--line);padding:20px 12px}
 .brand{font-size:21px;font-weight:900;color:var(--gold);padding:12px}
 .brand small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:5px}
 nav{display:grid;gap:5px;margin-top:20px}
@@ -98,7 +97,7 @@ main{padding:15px 13px 105px}
 </aside>
 <main>
 <header>
-<span class="eyebrow">CRIMSON GUIDE • 3.3</span>
+<span class="eyebrow">CRIMSON GUIDE • 4.0</span>
 <select id="lang" aria-label="Language">
 <option value="de">🇩🇪 Deutsch</option>
 <option value="en">🇬🇧 English</option>
@@ -115,7 +114,6 @@ main{padding:15px 13px 105px}
 
 const MAP_URL="https://crimsondesert.th.gl/maps/Continent%20of%20Pywel";
 const GUIDE_URL="https://www.powerpyx.com/crimson-desert-walkthrough-all-main-quests/";
-
 const PROGRESS_KEY="crimson-guide-progress-v2";
 const MARKERS_KEY="crimson-guide-markers-v3";
 const POSITION_KEY="crimson-guide-player-v31";
@@ -124,99 +122,188 @@ const TARGET_KEY="crimson-guide-target-v31";
 const TXT={
 de:{
 home:"Start",map:"Karte",quests:"Quests",collection:"Sammlung",progress:"Fortschritt",settings:"Einstellungen",
-welcome:"Dein Abenteuer in Pywel",intro:"Deine Karte, deine Quests, dein Fortschritt.",
-realMap:"Vollständige Pywel-Karte öffnen",mapTitle:"Meine Abenteuerkarte",
-mapNote:"Eigene Planungsfläche. Noch keine echte Pywel-Karte.",
+welcome:"Dein Abenteuer in Pywel",intro:"218 Quest-Einträge, 14 Kapitelbereiche und dein persönlicher Fortschritt.",
+realMap:"Pywel-Karte öffnen",mapNote:"Eigene Planungsfläche. Noch keine echte Pywel-Karte.",
 mapWarning:"Die Positionen entsprechen keinen echten Spielkoordinaten.",
-questSearch:"Quest suchen...",allChapters:"Alle Kapitel",allStatus:"Alle Status",
-open:"Offen",done:"Erledigt",chap0:"Prolog",chap1:"Kapitel 1",chap2:"Kapitel 2 – Golden Greed",
-steps:"Lösungsschritte",showSolution:"🔒 Lösung anzeigen (Spoiler)",hideSolution:"🔓 Lösung verbergen",
+questSearch:"Quest suchen...",allChapters:"Alle Kapitel und Regionen",allStatus:"Alle Status",
+allTypes:"Alle Questtypen",main:"Hauptquests",side:"Nebenquests",
+open:"Offen",done:"Erledigt",steps:"Lösungsschritte",
+showSolution:"🔒 Lösung anzeigen (Spoiler)",hideSolution:"🔓 Lösung verbergen",
 noSteps:"Für diese Quest ist noch keine geprüfte Komplettlösung eingetragen.",
-guide:"Externen Quest-Guide öffnen",finished:"Quest abgeschlossen",back:"Zurück",
-solutionStatus:"Lösungsstatus",partial:"Kurze Anleitung vorhanden",pending:"Lösung noch nicht eingetragen",
+guide:"Externen Hauptquest-Guide öffnen",finished:"Quest abgeschlossen",back:"Zurück",
+solutionStatus:"Lösungsstatus",partial:"Kurze Anleitung vorhanden",pending:"Lösung noch ausstehend",
 collectionInfo:"Die vollständigen Sammlungsdaten werden später ergänzt.",
 items:"Gegenstände",bosses:"Bosse",npcs:"NPCs",materials:"Materialien",
 notReady:"Noch keine geprüften Inhalte vorhanden.",
 local:"Deine Daten bleiben lokal auf diesem Gerät. Erstelle regelmäßig ein Backup.",
 export:"Backup exportieren",import:"Backup importieren",reset:"Alle Daten löschen",
-confirmReset:"Wirklich Fortschritt und Markierungen löschen?",invalid:"Ungültige Backup-Datei.",imported:"Backup importiert.",
-total:"Gesamt",markerCount:"Markierungen",search:"Markierungen suchen...",
+confirmReset:"Wirklich Fortschritt und Markierungen löschen?",
+invalid:"Ungültige Backup-Datei.",imported:"Backup importiert.",
+total:"Gesamt",markerCount:"Markierungen",
 setPlayer:"Spielerposition setzen",setTarget:"Ziel setzen",addMarker:"Marker hinzufügen",
-resetView:"Ansicht zurücksetzen",markerList:"Meine Fundorte",noMarkers:"Noch keine Markierungen vorhanden.",
-position:"Spielerposition",target:"Zielpunkt",removeTarget:"Ziel entfernen",removePlayer:"Position entfernen",
-navigationHint:"Die Linie zeigt nur die direkte Richtung, keinen begehbaren Spielweg."
+resetView:"Ansicht zurücksetzen",markerList:"Meine Fundorte",
+noMarkers:"Noch keine Markierungen vorhanden.",
+target:"Zielpunkt",removeTarget:"Ziel entfernen",removePlayer:"Position entfernen",
+navigationHint:"Die Linie zeigt nur die direkte Richtung, keinen begehbaren Spielweg.",
+chapter:"Kapitel",prologue:"Prolog",epilogue:"Epilog",region:"Region",
+allQuests:"Alle Quests",questDatabase:"Quest-Datenbank"
 },
 en:{
 home:"Home",map:"Map",quests:"Quests",collection:"Collection",progress:"Progress",settings:"Settings",
-welcome:"Your adventure in Pywel",intro:"Your map, quests and progress.",
-realMap:"Open complete Pywel map",mapTitle:"My Adventure Map",
-mapNote:"Personal planning canvas. Not a real Pywel map yet.",
+welcome:"Your adventure in Pywel",intro:"218 quest entries, 14 chapter sections and your personal progress.",
+realMap:"Open Pywel map",mapNote:"Personal planning canvas. Not a real Pywel map yet.",
 mapWarning:"Positions do not represent actual game coordinates.",
-questSearch:"Search quests...",allChapters:"All chapters",allStatus:"All statuses",
-open:"Open",done:"Completed",chap0:"Prologue",chap1:"Chapter 1",chap2:"Chapter 2 – Golden Greed",
-steps:"Walkthrough steps",showSolution:"🔒 Show solution (spoilers)",hideSolution:"🔓 Hide solution",
+questSearch:"Search quests...",allChapters:"All chapters and regions",allStatus:"All statuses",
+allTypes:"All quest types",main:"Main quests",side:"Side quests",
+open:"Open",done:"Completed",steps:"Walkthrough steps",
+showSolution:"🔒 Show solution (spoilers)",hideSolution:"🔓 Hide solution",
 noSteps:"No verified complete walkthrough has been added for this quest.",
-guide:"Open external quest guide",finished:"Quest completed",back:"Back",
-solutionStatus:"Solution status",partial:"Short guide available",pending:"Solution not yet added",
+guide:"Open external main quest guide",finished:"Quest completed",back:"Back",
+solutionStatus:"Solution status",partial:"Short guide available",pending:"Solution pending",
 collectionInfo:"Complete collection data will be added later.",
 items:"Items",bosses:"Bosses",npcs:"NPCs",materials:"Materials",
 notReady:"No verified content available yet.",
 local:"Your data stays on this device. Export backups regularly.",
 export:"Export backup",import:"Import backup",reset:"Delete all data",
-confirmReset:"Delete progress and markers?",invalid:"Invalid backup file.",imported:"Backup imported.",
-total:"Total",markerCount:"Markers",search:"Search markers...",
+confirmReset:"Delete progress and markers?",
+invalid:"Invalid backup file.",imported:"Backup imported.",
+total:"Total",markerCount:"Markers",
 setPlayer:"Set player position",setTarget:"Set destination",addMarker:"Add marker",
-resetView:"Reset view",markerList:"My locations",noMarkers:"No markers yet.",
-position:"Player position",target:"Destination",removeTarget:"Clear destination",removePlayer:"Clear position",
-navigationHint:"The line shows direct direction only, not a traversable game route."
+resetView:"Reset view",markerList:"My locations",
+noMarkers:"No markers yet.",
+target:"Destination",removeTarget:"Clear destination",removePlayer:"Clear position",
+navigationHint:"The line shows direct direction only, not a traversable game route.",
+chapter:"Chapter",prologue:"Prologue",epilogue:"Epilogue",region:"Region",
+allQuests:"All quests",questDatabase:"Quest database"
 }
 };
 
-const quests=[
-{id:"unfamiliar-lands",name:"Unfamiliar Lands",chapter:0},
-{id:"in-ashes",name:"In Ashes",chapter:0},
-{id:"realm-of-uncertainty",name:"Realm of Uncertainty",chapter:0},
-{id:"new-journey",name:"New Journey",chapter:0},
-
-{id:"where-rumors-gather",name:"Where Rumors Gather",chapter:1,steps:[
-{de:"Begib dich nach Hernand und suche die Taverne auf.",en:"Travel to Hernand and visit the tavern."},
-{de:"Sprich mit den Soldaten und nimm die Herausforderung zum Armdrücken an.",en:"Talk to the soldiers and accept the arm-wrestling challenge."},
-{de:"Folge den eingeblendeten Tastenhinweisen.",en:"Follow the on-screen prompts."}
-]},
-{id:"mysterious-man",name:"Mysterious Man",chapter:1,steps:[
-{de:"Verlasse die Taverne und suche den älteren Bettler.",en:"Leave the tavern and find the elderly beggar."},
-{de:"Sprich mit ihm und gib ihm eine Münze.",en:"Talk to him and give him a coin."},
-{de:"Nimm den hölzernen Schlüssel entgegen.",en:"Receive the wooden key."}
-]},
-{id:"true-wisdom",name:"True Wisdom in Kindness",chapter:1},
-{id:"actions-speak",name:"Actions Speak Louder than Words",chapter:1},
-{id:"heart-beyond",name:"Heart Beyond Borders",chapter:1},
-{id:"mystical-key",name:"Mystical Key",chapter:1},
-{id:"polar-opposites",name:"Polar Opposites",chapter:1},
-{id:"abyss-without-balance",name:"Abyss Without Balance",chapter:1},
-{id:"woman-in-white",name:"Woman in White",chapter:1},
-
-{id:"where-the-light-leads",name:"Where the Light Leads",chapter:2,steps:[
-{de:"Folge dem Licht des Shai-Anhängers zum Lioncrest-Wachturm außerhalb von Hernand.",en:"Follow the light from the Shai pendant to Lioncrest Watchtower outside Hernand."},
-{de:"Besiege die Banditen am Wachturm und sichere den Zugang.",en:"Defeat the bandits at the watchtower and secure the entrance."},
-{de:"Steige den Wachturm hinauf und untersuche den auffälligen Helm.",en:"Climb the watchtower and inspect the unusual helmet."}
-]},
-{id:"memory-fragment",name:"Memory Fragment",chapter:2,steps:[
-{de:"Nimm den Helm aus dem Wachturm auf und rüste ihn aus.",en:"Collect the helmet from the watchtower and equip it."},
-{de:"Verwende die Erinnerungsfunktion des Helms, um die gespeicherte Erinnerung anzusehen.",en:"Use the helmet's memory-viewing ability to inspect the stored memory."},
-{de:"Sieh dir die Erinnerung an, bis das Missionsziel abgeschlossen wird.",en:"Watch the memory until the objective is completed."}
-]},
-{id:"reunion",name:"Reunion",chapter:2,steps:[
-{de:"Folge dem Questziel zum Kind und sprich mit ihm.",en:"Follow the quest objective to the child and speak with them."},
-{de:"Beobachte die vorgeführten Fähigkeiten, um Nature's Grasp und Focus zu erlernen.",en:"Observe the demonstrated abilities to learn Nature's Grasp and Focus."},
-{de:"Nähere dich anschließend dem Kind, um die Quest fortzusetzen.",en:"Approach the child afterward to continue the quest."}
-]},
-{id:"for-honor",name:"For Honor",chapter:2,steps:[
-{de:"Begib dich in Hernand zu der Gruppe, die über die Greymanes spricht.",en:"Go to the group discussing the Greymanes in Hernand."},
-{de:"Nähere dich der Gruppe, um die Auseinandersetzung auszulösen.",en:"Approach the group to trigger the confrontation."},
-{de:"Besiege Matthias im anschließenden Kampf.",en:"Defeat Matthias in the ensuing fight."}
-]}
+const chapterNames=[
+"Prolog / Prologue",
+"Kapitel 1 / Chapter 1",
+"Kapitel 2 – Golden Greed",
+"Kapitel 3 / Chapter 3",
+"Kapitel 4 / Chapter 4",
+"Kapitel 5 / Chapter 5",
+"Kapitel 6 / Chapter 6",
+"Kapitel 7 / Chapter 7",
+"Kapitel 8 / Chapter 8",
+"Kapitel 9 / Chapter 9",
+"Kapitel 10 / Chapter 10",
+"Kapitel 11 / Chapter 11",
+"Kapitel 12 / Chapter 12",
+"Epilog / Epilogue"
 ];
+
+/*
+ Questdatenbank:
+ Hauptquest-Namen sind nach Kapitel gruppiert.
+ Nebenquests sind derzeit für Hernand und Pailune erfasst.
+ Fehlende Lösungen werden ausdrücklich als ausstehend angezeigt.
+*/
+
+const mainQuestNames=[
+`Unfamiliar Lands|In Ashes|Realm of Uncertainty|New Journey`,
+`Where Rumors Gather|Mysterious Man|True Wisdom in Kindness|Actions Speak Louder than Words|Heart Beyond Borders|Mystical Key|Polar Opposites|Abyss Without Balance|Woman in White`,
+`Where the Light Leads|Memory Fragment|Reunion|For Honor|Awestruck|Shadow Cast Over the River|Where Misery Gathers|Trial After Trial|The Man Trapped in the Mire|Missing Companion|Secrets Hidden in the Dark|The Dark Veil|The Flames of Greed|Kidnapped Healer|Rebellion or Revolution|Cheers Echoing From the Edge`,
+`Old Friend|First Step to Rebuilding|A Fresh Start|Reward for Their Sweat|Return of the Comrade|Familiar Curses|Return|Traces in the Manor|Nonhuman|Seed of Unease|Dance with the Devil|Hope After the Draught|Scattered Comrades|Rumors from the Sawmill|A Gentle Touch|Bustling Hill|Greymanes Reunited`,
+`Kilnden Workshop|Kiln Repair at the Kilnden Workshop|The Mysterious Pot|The Iron Pot’s Usage|Disturbance at the Arena|Skilled in Archery|The Words of Alustin|Scholastone|On the Right Path|Gate to the Otherworld|Spire of the Stars|Obsession and Madness|Casted Shadow`,
+`Double-sided Invitation|Unwelcomed Guests|Demenissian Delegation|Exposed Plot|The Missing Seal|Crowcaller|The Crow’s Warning|Bloodwind|Secret at the Church|Toward the Nest (Spire of Soaring)`,
+`News|To the Battlefield|The Counterattack|Cradle of Defense|The Touch of Deliverance|Fire on the Frontlines|Fire Support|In Ashes|Hidden Fangs|Reclamation|A Thousand Troops|Traitor|All Quiet on the Front|News of Victory|Return Home`,
+`Ashes of Treachery|Trust Lost|Bared Fang|Rekindled Hope|Podium of Resolve|Shadows Over Pailune|Driving out the Shadows|Lurking Wolves|Reclamation|Lonely Jackals|Resolution|The Counterattack|Unleashed Fury|The Final Bridge|Broken Claws|Battle at Silverwolf Mountain|Incomplete Victory|Ludvig’s Whereabouts|Time to Face Justice`,
+`Healing Pailune|A Bond|Ritual Preparations|Where the Wind Guides You|Chasing a Shadow|Blazing Fire|Whispering Shadows|Bloodied Invitation|Resolve Amidst a Storm|Preparations for Advance|Rebel Suppression|The Cursed Knight|The Blood Coronation|Clue|A Fleeting Dream`,
+`An Unknown Voice|Cloister of Enlightenment|Mark of the Scar|Shackles of Fate|Crossing Point|Unwavering Steps|Morning Fog|Jijeong Temple in Chaos|Path to Enlightenment|Path of the Disciple|True Strength|Face the Inner Self|Fragments of Darkness|Pursuit Beyond the Veil|Black Witch|The Cloister of Enlightenment|The Sage of the Desert|New Perspectives|Lust for Power`,
+`Untouchable|The Gate of War|Master of the Ironworks|Hidden Ace|Clockwork Insect Clash|Beating Heart|Invaders from the East|Frozen Hearted Predator|Lingering Shadow`,
+`The City of Steel|Crossroads|Strange Manor|Fortress Keys|Truth and Lies|Master of a Forgotten Land|Whispers in the Wind|Cloud Fortress Orbian`,
+`Precise Execution|Deferred Advance|Departure of the Brave|Forbidden Gate|A Shadow in the Void|Blinding Darkness`,
+`A New Beginning|Peace in Hernand|The Unyielding Shields|The Heart of Pywel|The Enduring Flame|Evolving City|The Desert’s Edge|New Horizons`
+];
+
+const sideQuestNames={
+Hernand:`A Rumor Fueled by Greed|Alden's Request|Ambition in the Ruins|Annabella's Request|Berto's Request|Bran's Request|Breaking in the Grindstone|Bruna's Request|Contradiction|Dahlia's Request|Deduction and Revelation of the Culprit|Delkin's Request|Empty Donation Box|Extinguishing the Last Flames|For a Stronger Shield|For Whom the Bell Tolls|Goddess of Abundance|Grania's Request|Gratitude Not Forgotten|Homeward|Invention of the Workshop|Legendary Wolf|Lunchbox of Love|Material of Light|Nork's Request|Path that Connects to House of Healing|Prox's Request|Refined Power|Renee's Request|Rhett's Request|Safety First (Hernandian Residents)|Savior of the Battlefield|Scent That Soothes the Night|Search for Leads|Seed of Truth|Serge's Request|Sigil of Solidarity (Mount-System)|Steps of the Waves|Stolen Supplies|Sturdy Horse|Tales of the Calphadean Merchants|The Bandits' Trap|The Cause of the Stench|The Hidden Space of the Heart|The Price of Coin`,
+Pailune:`White Bear|Snowwhite Deer|Harry's Request|Lola's Request|Gunter's Request`
+};
+
+function slug(s){
+return s.toLowerCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.replace(/[^a-z0-9]+/g,"-")
+.replace(/^-|-$/g,"");
+}
+
+const originalIds=[
+"unfamiliar-lands","in-ashes","realm-of-uncertainty","new-journey",
+"where-rumors-gather","mysterious-man","true-wisdom","actions-speak",
+"heart-beyond","mystical-key","polar-opposites","abyss-without-balance",
+"woman-in-white"
+];
+
+const quests=[];
+
+mainQuestNames.forEach((chapterText,chapter)=>{
+chapterText.split("|").forEach((name,index)=>{
+let id;
+if(chapter===0||chapter===1){
+id=originalIds[chapter===0?index:index+4];
+}else if(chapter===2&&index<4){
+id=slug(name);
+}else{
+id="c"+chapter+"-"+slug(name);
+}
+quests.push({id,name,chapter,type:"main"});
+});
+});
+
+Object.entries(sideQuestNames).forEach(([region,names])=>{
+names.split("|").forEach((name,index)=>{
+quests.push({
+id:"side-"+region.toLowerCase()+"-"+(index+1),
+name,chapter:region,type:"side"
+});
+});
+});
+
+/*
+ Vorhandene Kurzlösungen aus den bisherigen Versionen.
+ Sie sind noch keine vollständigen Komplettlösungen.
+*/
+
+const solutions={
+"where-rumors-gather":[
+["Begib dich nach Hernand und suche die Taverne auf.","Travel to Hernand and visit the tavern."],
+["Sprich mit den Soldaten und nimm die Herausforderung zum Armdrücken an.","Talk to the soldiers and accept the arm-wrestling challenge."],
+["Folge den eingeblendeten Tastenhinweisen.","Follow the on-screen prompts."]
+],
+"mysterious-man":[
+["Verlasse die Taverne und suche den älteren Bettler.","Leave the tavern and find the elderly beggar."],
+["Sprich mit ihm und gib ihm eine Münze.","Talk to him and give him a coin."],
+["Nimm den hölzernen Schlüssel entgegen.","Receive the wooden key."]
+],
+"where-the-light-leads":[
+["Folge dem Licht des Shai-Anhängers zum Lioncrest-Wachturm außerhalb von Hernand.","Follow the light from the Shai pendant to Lioncrest Watchtower outside Hernand."],
+["Besiege die Banditen und steige auf den Wachturm.","Defeat the bandits and climb the watchtower."],
+["Untersuche den auffälligen Helm.","Inspect the unusual helmet."]
+],
+"memory-fragment":[
+["Nimm den Helm aus dem Wachturm auf und rüste ihn aus.","Collect and equip the helmet from the watchtower."],
+["Nutze die Erinnerungsfunktion und sieh die gespeicherte Erinnerung an.","Use the memory ability to view the stored memory."]
+],
+"reunion":[
+["Folge dem Questziel zum Kind.","Follow the quest objective to the child."],
+["Lerne die vorgeführten Fähigkeiten Nature’s Grasp und Focus.","Learn the demonstrated abilities Nature’s Grasp and Focus."]
+],
+"for-honor":[
+["Suche in Hernand die Gruppe auf, die über die Greymanes spricht.","Find the group discussing the Greymanes in Hernand."],
+["Stelle dich Matthias im Kampf.","Fight Matthias."]
+]
+};
+
+quests.forEach(q=>{
+if(solutions[q.id]){
+q.steps=solutions[q.id].map(([de,en])=>({de,en}));
+}
+});
 
 const sections=[
 ["home","⌂"],["map","🗺"],["quests","📜"],
@@ -225,14 +312,14 @@ const sections=[
 
 function readObject(key){
 try{
-const value=JSON.parse(localStorage.getItem(key)||"{}");
-return value&&typeof value==="object"&&!Array.isArray(value)?value:{};
+const v=JSON.parse(localStorage.getItem(key)||"{}");
+return v&&typeof v==="object"&&!Array.isArray(v)?v:{};
 }catch{return {}}
 }
 function readArray(key){
 try{
-const value=JSON.parse(localStorage.getItem(key)||"[]");
-return Array.isArray(value)?value:[];
+const v=JSON.parse(localStorage.getItem(key)||"[]");
+return Array.isArray(v)?v:[];
 }catch{return []}
 }
 function validPoint(p){
@@ -251,12 +338,12 @@ return String(value??"").replace(/[&<>"']/g,c=>({
 
 let progress=readObject(PROGRESS_KEY);
 const legacy=readObject("crimson-guide-progress-v1");
+
 for(const q of quests){
 if(legacy["quests:"+q.id]===true&&progress["quest:"+q.id]===undefined){
 progress["quest:"+q.id]=true;
 }
 }
-localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
 
 const types=["quest","boss","treasure","npc","material","other"];
 let markers=readArray(MARKERS_KEY)
@@ -268,6 +355,7 @@ name:m.name.slice(0,100),
 type:types.includes(m.type)?m.type:"other",
 x:m.x,y:m.y,completed:m.completed===true
 }));
+
 let player=readPoint(POSITION_KEY);
 let target=readPoint(TARGET_KEY);
 let language=localStorage.getItem("crimson-guide-language")==="en"?"en":"de";
@@ -277,11 +365,22 @@ let solutionVisible=false;
 let questQuery="";
 let questChapter="all";
 let questStatus="all";
+let questType="all";
 let collectionTab="items";
 let mapMode="pan";
 let zoom=1,offsetX=0,offsetY=0;
 
 const t=k=>TXT[language][k]||k;
+const mainCount=quests.filter(q=>q.type==="main").length;
+const sideCount=quests.filter(q=>q.type==="side").length;
+
+function chapterLabel(chapter){
+if(typeof chapter==="string")return chapter;
+if(chapter===0)return t("prologue");
+if(chapter===13)return t("epilogue");
+if(chapter===2)return language==="de"?"Kapitel 2 – Golden Greed":"Chapter 2 – Golden Greed";
+return t("chapter")+" "+chapter;
+}
 
 function save(){
 localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
@@ -314,12 +413,18 @@ document.getElementById("mobileNav").innerHTML=sections.slice(0,5).map(([id,icon
 function homePage(){
 return `
 <div class="hero">
-<div class="eyebrow">CRIMSON DESERT COMPANION</div>
+<div class="eyebrow">CRIMSON DESERT COMPANION • VERSION 4.0</div>
 <h1>${t("welcome")}</h1>
 <p>${t("intro")}</p>
-<button class="btn gold" data-go="quests">📜 ${t("quests")}</button>
+<button class="btn gold" data-go="quests">📜 ${t("questDatabase")}</button>
 </div>
-<div class="card">
+<div class="grid">
+<div class="card"><span class="small">${t("main")}</span>
+<h1>${mainCount}</h1></div>
+<div class="card"><span class="small">${t("side")}</span>
+<h1>${sideCount}</h1></div>
+</div>
+<div class="card" style="margin-top:12px">
 <div class="between"><strong>${t("progress")}</strong>
 <span>${doneCount()} / ${quests.length}</span></div>
 <div style="margin-top:12px">${meter(doneCount(),quests.length)}</div>
@@ -330,6 +435,11 @@ ${sections.slice(1,5).map(([id,icon])=>`
 <h3>${icon} ${t(id)}</h3>
 <p class="small">→</p>
 </div>`).join("")}
+</div>
+<div class="notice">
+${language==="de"
+?"Hinweis: Die Questdatenbank ist umfangreich, aber die Komplettlösungen sind noch nicht vollständig."
+:"Note: The quest database is extensive, but full walkthroughs are not yet complete."}
 </div>`;
 }
 
@@ -341,7 +451,7 @@ const steps=q.steps||[];
 return `
 <button class="btn alt" id="backQuest">← ${t("back")}</button>
 <h1>${esc(q.name)}</h1>
-<p class="small">${t("chap"+q.chapter)}</p>
+<p class="small">${esc(chapterLabel(q.chapter))} · ${t(q.type)}</p>
 <div class="card">
 <label><input type="checkbox" data-quest="${esc(q.id)}"
 ${questDone(q.id)?"checked":""}> ${t("finished")}</label>
@@ -362,23 +472,43 @@ ${stepDone(q.id,i)?"checked":""}>
 <span>${esc(s[language]||s.en)}</span>
 </label>`).join(""):`<div class="empty">${t("noSteps")}</div>`}
 `:`<div class="solutionhidden">🔒 ${t("showSolution")}</div>`}
+${q.type==="main"?`
 <p><a class="btn" href="${GUIDE_URL}" target="_blank"
-rel="noopener noreferrer">${t("guide")} ↗</a></p>`;
+rel="noopener noreferrer">${t("guide")} ↗</a></p>`:""}
+`;
 }
+
 const found=quests.filter(q=>
 (questChapter==="all"||String(q.chapter)===questChapter)&&
+(questType==="all"||q.type===questType)&&
 (questStatus==="all"||(questStatus==="done")===questDone(q.id))&&
 q.name.toLowerCase().includes(questQuery.toLowerCase())
 );
+
+const chapters=[
+...Array.from({length:14},(_,i)=>i),
+"Hernand","Pailune"
+];
+
 return `
-<h1>📜 ${t("quests")}</h1>
+<h1>📜 ${t("questDatabase")}</h1>
+<div class="grid">
+<div class="card"><strong>${mainCount} ${t("main")}</strong></div>
+<div class="card"><strong>${sideCount} ${t("side")}</strong></div>
+</div>
 <div class="toolbar">
 <input id="questSearch" type="search"
 placeholder="${t("questSearch")}" value="${esc(questQuery)}">
+<select id="questType">
+<option value="all">${t("allTypes")}</option>
+<option value="main" ${questType==="main"?"selected":""}>${t("main")}</option>
+<option value="side" ${questType==="side"?"selected":""}>${t("side")}</option>
+</select>
 <select id="questChapter">
 <option value="all">${t("allChapters")}</option>
-${[0,1,2].map(c=>`<option value="${c}" ${questChapter===String(c)?"selected":""}>
-${t("chap"+c)}</option>`).join("")}
+${chapters.map(c=>`
+<option value="${c}" ${questChapter===String(c)?"selected":""}>
+${esc(chapterLabel(c))}</option>`).join("")}
 </select>
 <select id="questStatus">
 <option value="all">${t("allStatus")}</option>
@@ -392,9 +522,11 @@ ${found.length?found.map(q=>`
 <input type="checkbox" data-quest="${esc(q.id)}" ${questDone(q.id)?"checked":""}>
 <button data-openquest="${esc(q.id)}">
 <strong>${esc(q.name)}</strong>
-<small>${t("chap"+q.chapter)} · ${q.steps?.length?t("partial"):t("pending")}</small>
+<small>${esc(chapterLabel(q.chapter))} · ${t(q.type)} · ${q.steps?.length?t("partial"):t("pending")}</small>
 </button><span>›</span>
-</div>`).join(""):`<div class="empty">Keine Quests gefunden / No quests found</div>`}`;
+</div>`).join(""):`<div class="empty">
+${language==="de"?"Keine Quests gefunden":"No quests found"}
+</div>`}`;
 }
 
 function iconFor(type){
@@ -473,18 +605,38 @@ ${[["items","⚔"],["bosses","🐉"],["npcs","♟"],["materials","💎"]]
 }
 
 function progressPage(){
+const main=quests.filter(q=>q.type==="main");
+const side=quests.filter(q=>q.type==="side");
 return `
 <h1>✓ ${t("progress")}</h1>
 <div class="card">
-<div class="between"><strong>${t("quests")}</strong>
+<div class="between"><strong>${t("allQuests")}</strong>
 <span>${doneCount()} / ${quests.length}</span></div>
 <div style="margin-top:12px">${meter(doneCount(),quests.length)}</div>
 </div>
-${[0,1,2].map(c=>{
+${[["main",main],["side",side]].map(([label,qs])=>{
+const n=qs.filter(q=>questDone(q.id)).length;
+return `<div class="card">
+<div class="between"><strong>${t(label)}</strong><span>${n} / ${qs.length}</span></div>
+<div style="margin-top:12px">${meter(n,qs.length)}</div>
+</div>`;
+}).join("")}
+<h2>${t("main")}</h2>
+${Array.from({length:14},(_,c)=>{
 const qs=quests.filter(q=>q.chapter===c);
 const n=qs.filter(q=>questDone(q.id)).length;
 return `<div class="card">
-<div class="between"><strong>${t("chap"+c)}</strong>
+<div class="between"><strong>${chapterLabel(c)}</strong>
+<span>${n} / ${qs.length}</span></div>
+<div style="margin-top:12px">${meter(n,qs.length)}</div>
+</div>`;
+}).join("")}
+<h2>${t("side")}</h2>
+${["Hernand","Pailune"].map(region=>{
+const qs=quests.filter(q=>q.chapter===region);
+const n=qs.filter(q=>questDone(q.id)).length;
+return `<div class="card">
+<div class="between"><strong>${region}</strong>
 <span>${n} / ${qs.length}</span></div>
 <div style="margin-top:12px">${meter(n,qs.length)}</div>
 </div>`;
@@ -506,8 +658,14 @@ return `
 <input type="file" id="backupFile" accept=".json,application/json" hidden>
 </div>
 <div class="card">
-<strong>Crimson Guide 3.3</strong>
-<p class="small">PS5 Companion · DE / EN · 17 Quests</p>
+<strong>Crimson Guide 4.0</strong>
+<p class="small">PS5 Companion · DE / EN</p>
+<p class="small">${mainCount} ${t("main")} · ${sideCount} ${t("side")}</p>
+<p class="small">
+${language==="de"
+?"Die vollständigen Lösungen und weitere Nebenquests werden später ergänzt."
+:"Full walkthroughs and more side quests will be added later."}
+</p>
 </div>`;
 }
 
@@ -515,6 +673,7 @@ function render(){
 document.documentElement.lang=language;
 document.getElementById("lang").value=language;
 renderNav();
+
 document.getElementById("app").innerHTML=
 page==="home"?homePage():
 page==="map"?mapPage():
@@ -536,7 +695,8 @@ document.querySelectorAll("[data-openquest]").forEach(b=>
 b.onclick=()=>{
 selectedQuest=b.dataset.openquest;
 solutionVisible=false;
-render();window.scrollTo(0,0);
+render();
+window.scrollTo(0,0);
 });
 
 document.getElementById("backQuest")?.addEventListener("click",()=>{
@@ -551,10 +711,6 @@ document.querySelectorAll("[data-step]").forEach(b=>
 b.onchange=()=>{
 const [id,index]=b.dataset.step.split(":");
 progress["step:"+id+":"+index]=b.checked;
-const q=quests.find(x=>x.id===id);
-if(q?.steps?.every((_,i)=>progress["step:"+id+":"+i]===true)){
-progress["quest:"+id]=true;
-}
 save();render();
 });
 
@@ -564,15 +720,20 @@ questQuery=e.target.value;
 const pos=e.target.selectionStart;
 render();
 const next=document.getElementById("questSearch");
-next.focus();next.setSelectionRange(pos,pos);
+next.focus();
+next.setSelectionRange(pos,pos);
 };
 
 document.getElementById("questChapter")?.addEventListener("change",e=>{
 questChapter=e.target.value;render();
 });
+document.getElementById("questType")?.addEventListener("change",e=>{
+questType=e.target.value;render();
+});
 document.getElementById("questStatus")?.addEventListener("change",e=>{
 questStatus=e.target.value;render();
 });
+
 document.querySelectorAll("[data-collection]").forEach(b=>
 b.onclick=()=>{collectionTab=b.dataset.collection;render()});
 
@@ -583,9 +744,11 @@ if(page==="settings")setupSettings();
 function setupMap(){
 const wrap=document.getElementById("mapwrap");
 const world=document.getElementById("mapworld");
+
 function transform(){
 world.style.transform=`translate(${offsetX}px,${offsetY}px) scale(${zoom})`;
 }
+
 document.getElementById("zoomIn").onclick=()=>{
 zoom=Math.min(4,zoom+.25);transform();
 };
@@ -595,32 +758,38 @@ zoom=Math.max(.6,zoom-.25);transform();
 document.getElementById("resetView").onclick=()=>{
 zoom=1;offsetX=0;offsetY=0;transform();
 };
+
 document.querySelectorAll("[data-mode]").forEach(b=>
 b.onclick=()=>{
 mapMode=mapMode===b.dataset.mode?"pan":b.dataset.mode;
 render();
 });
+
 document.getElementById("clearPlayer")?.addEventListener("click",()=>{
 player=null;save();render();
 });
 document.getElementById("clearTarget")?.addEventListener("click",()=>{
 target=null;save();render();
 });
+
 document.querySelectorAll("[data-targetmarker]").forEach(b=>
 b.onclick=()=>{
 const m=markers.find(x=>x.id===b.dataset.targetmarker);
 if(m){target={x:m.x,y:m.y};save();render()}
 });
+
 document.querySelectorAll("[data-donemarker]").forEach(b=>
 b.onclick=()=>{
 const m=markers.find(x=>x.id===b.dataset.donemarker);
 if(m){m.completed=!m.completed;save();render()}
 });
+
 document.querySelectorAll("[data-deletemarker]").forEach(b=>
 b.onclick=()=>{
 markers=markers.filter(m=>m.id!==b.dataset.deletemarker);
 save();render();
 });
+
 document.querySelectorAll("[data-marker]").forEach(b=>
 b.onclick=e=>{
 e.stopPropagation();
@@ -629,12 +798,15 @@ if(m)alert(m.name+" · "+m.type);
 });
 
 let dragging=false,moved=false,lastX=0,lastY=0,startX=0,startY=0;
+
 wrap.addEventListener("pointerdown",e=>{
 if(e.target.closest("button"))return;
 dragging=true;moved=false;
-startX=lastX=e.clientX;startY=lastY=e.clientY;
+startX=lastX=e.clientX;
+startY=lastY=e.clientY;
 wrap.setPointerCapture(e.pointerId);
 });
+
 wrap.addEventListener("pointermove",e=>{
 if(!dragging)return;
 if(Math.hypot(e.clientX-startX,e.clientY-startY)>7)moved=true;
@@ -643,18 +815,24 @@ offsetX+=e.clientX-lastX;
 offsetY+=e.clientY-lastY;
 transform();
 }
-lastX=e.clientX;lastY=e.clientY;
+lastX=e.clientX;
+lastY=e.clientY;
 });
+
 wrap.addEventListener("pointerup",e=>{
 if(!dragging)return;
 dragging=false;
 if(moved||mapMode==="pan")return;
+
 const rect=wrap.getBoundingClientRect();
 const cx=rect.width/2,cy=rect.height/2;
 const px=(e.clientX-rect.left-cx-offsetX)/zoom+cx;
 const py=(e.clientY-rect.top-cy-offsetY)/zoom+cy;
-const x=px/rect.width*100,y=py/rect.height*100;
+const x=px/rect.width*100;
+const y=py/rect.height*100;
+
 if(x<0||x>100||y<0||y>100)return;
+
 if(mapMode==="player"){
 player={x,y};mapMode="pan";save();render();return;
 }
@@ -662,18 +840,32 @@ if(mapMode==="target"){
 target={x,y};mapMode="pan";save();render();return;
 }
 if(mapMode==="marker"){
-const name=prompt(language==="de"?"Name des Fundorts:":"Location name:");
+const name=prompt(
+language==="de"?"Name des Fundorts:":"Location name:"
+);
 if(!name?.trim())return;
-const raw=prompt("Category: quest, boss, treasure, npc, material, other","other");
+
+const raw=prompt(
+"Category: quest, boss, treasure, npc, material, other",
+"other"
+);
 if(raw===null)return;
-const type=types.includes(raw.trim().toLowerCase())?raw.trim().toLowerCase():"other";
+
+const type=types.includes(raw.trim().toLowerCase())
+?raw.trim().toLowerCase():"other";
+
 markers.push({
 id:"m"+Date.now()+"-"+Math.random().toString(36).slice(2,8),
-name:name.trim().slice(0,100),type,x,y,completed:false
+name:name.trim().slice(0,100),
+type,x,y,completed:false
 });
-mapMode="pan";save();render();
+
+mapMode="pan";
+save();
+render();
 }
 });
+
 wrap.addEventListener("pointercancel",()=>dragging=false);
 transform();
 }
@@ -681,54 +873,92 @@ transform();
 function setupSettings(){
 document.getElementById("exportBtn").onclick=()=>{
 const backup={
-version:31,progress,markers,player,target,
+version:31,
+progress,
+markers,
+player,
+target,
 exportedAt:new Date().toISOString()
 };
-const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
+const blob=new Blob(
+[JSON.stringify(backup,null,2)],
+{type:"application/json"}
+);
 const url=URL.createObjectURL(blob);
 const a=document.createElement("a");
-a.href=url;a.download="crimson-guide-backup.json";a.click();
+a.href=url;
+a.download="crimson-guide-backup.json";
+a.click();
 setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
+
 document.getElementById("importBtn").onclick=()=>{
 document.getElementById("backupFile").click();
 };
+
 document.getElementById("backupFile").onchange=async e=>{
 try{
 const file=e.target.files[0];
 if(!file)return;
 if(file.size>1000000)throw Error("size");
+
 const data=JSON.parse(await file.text());
+
 if(![1,2,3,31].includes(data.version)||
-!data.progress||typeof data.progress!=="object"||
-Array.isArray(data.progress))throw Error("format");
+!data.progress||
+typeof data.progress!=="object"||
+Array.isArray(data.progress)){
+throw Error("format");
+}
+
 const clean={};
+
 for(let [key,value] of Object.entries(data.progress)){
 if(key.length>160||typeof value!=="boolean")continue;
-if(data.version===1&&key.startsWith("quests:"))key="quest:"+key.slice(7);
+if(data.version===1&&key.startsWith("quests:")){
+key="quest:"+key.slice(7);
+}
 clean[key]=value;
 }
+
 progress=clean;
+
 if(Array.isArray(data.markers)){
-markers=data.markers.filter(m=>validPoint(m)&&typeof m.name==="string")
-.slice(0,500).map(m=>({
+markers=data.markers
+.filter(m=>validPoint(m)&&typeof m.name==="string")
+.slice(0,500)
+.map(m=>({
 id:String(m.id||"m"+Math.random()).slice(0,100),
 name:m.name.slice(0,100),
 type:types.includes(m.type)?m.type:"other",
-x:m.x,y:m.y,completed:m.completed===true
+x:m.x,
+y:m.y,
+completed:m.completed===true
 }));
 }
+
 if(data.version===31){
 player=validPoint(data.player)?data.player:null;
 target=validPoint(data.target)?data.target:null;
 }
-save();alert(t("imported"));render();
-}catch{alert(t("invalid"))}
+
+save();
+alert(t("imported"));
+render();
+
+}catch{
+alert(t("invalid"));
+}
 };
+
 document.getElementById("resetBtn").onclick=()=>{
 if(confirm(t("confirmReset"))){
-progress={};markers=[];player=null;target=null;
-save();render();
+progress={};
+markers=[];
+player=null;
+target=null;
+save();
+render();
 }
 };
 }
@@ -738,12 +968,8 @@ language=e.target.value;
 localStorage.setItem("crimson-guide-language",language);
 render();
 };
+
 render();
-if("serviceWorker" in navigator){
-window.addEventListener("load",()=>{
-navigator.serviceWorker.register("./sw.js").catch(console.warn);
-});
-}
 </script>
 </body>
 </html>
