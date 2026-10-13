@@ -3,87 +3,274 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#111218">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101015">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Crimson Guide">
-<title>Crimson Guide 4.0</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<title>Crimson Guide 4.1</title>
 <style>
 :root{
---bg:#101116;--panel:#1c1e26;--panel2:#282b35;
---line:#373943;--text:#f6f2ec;--muted:#aaaab5;
---gold:#e0b979;--red:#af424c;--green:#78c9a2
+--bg:#101015;
+--panel:#1d1c23;
+--panel2:#292731;
+--line:#40383d;
+--text:#f6f2ec;
+--muted:#aaa5ad;
+--gold:#e2bd7b;
+--red:#9e3e4b;
+--green:#78c9a2;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif}
+html{scroll-behavior:smooth}
+body{
+margin:0;
+background:radial-gradient(ellipse at 85% 0%,#44252b45,transparent 38%),var(--bg);
+color:var(--text);
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
 button,input,select{font:inherit}
 button{cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+button:focus-visible,input:focus-visible,select:focus-visible{
+outline:2px solid var(--gold);outline-offset:2px
+}
 a{color:var(--gold)}
 .layout{display:flex;min-height:100dvh}
-aside{width:225px;flex-shrink:0;background:#171920;border-right:1px solid var(--line);padding:20px 12px}
+aside{
+width:225px;flex-shrink:0;background:#17171e;
+border-right:1px solid var(--line);padding:20px 12px
+}
 .brand{font-size:21px;font-weight:900;color:var(--gold);padding:12px}
-.brand small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:5px}
+.brand small{
+display:block;font-size:10px;letter-spacing:2px;
+color:var(--muted);margin-top:5px
+}
 nav{display:grid;gap:5px;margin-top:20px}
-nav button{border:0;background:none;color:var(--muted);padding:13px;border-radius:10px;text-align:left}
+nav button{
+border:0;background:none;color:var(--muted);
+padding:13px;border-radius:10px;text-align:left
+}
 nav button.active{background:#4a292e;color:white}
-main{width:100%;max-width:1250px;min-width:0;margin:auto;padding:22px;align-self:flex-start}
-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:22px}
+main{
+width:100%;max-width:1250px;min-width:0;
+margin:auto;padding:22px;align-self:flex-start
+}
+header{
+display:flex;justify-content:space-between;
+align-items:center;gap:10px;margin-bottom:22px
+}
 .eyebrow{font-size:11px;letter-spacing:2px;color:var(--gold)}
 h1{font-size:clamp(27px,4vw,39px);margin:8px 0 15px}
-h2{font-size:20px}h3{font-size:16px}
+h2{font-size:20px}
+h3{font-size:16px}
 p{color:var(--muted);line-height:1.55}
 .small{font-size:13px;color:var(--muted)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:17px;margin-bottom:12px}
-.hero{background:linear-gradient(125deg,#542b32,#1c1e26);border:1px solid #77444b;padding:26px;border-radius:16px;margin-bottom:15px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{
+background:var(--panel);border:1px solid var(--line);
+border-radius:14px;padding:17px;margin-bottom:12px
+}
+.hero,.chapterHero{
+background:linear-gradient(135deg,#4a262f 0%,#29222a 46%,#19191f 100%);
+border:1px solid #72515a;border-radius:18px;
+padding:24px;margin-bottom:19px;box-shadow:0 14px 40px #0002
+}
+.hero p,.chapterHero p{color:#d4c5c4}
+.grid{
+display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
+}
 .grid .card{margin:0}
-.btn{display:inline-flex;justify-content:center;align-items:center;gap:7px;background:var(--red);color:white;border:0;border-radius:10px;padding:11px 15px;font-weight:650;text-decoration:none}
+.btn{
+display:inline-flex;justify-content:center;align-items:center;gap:7px;
+background:var(--red);color:white;border:0;border-radius:10px;
+padding:11px 15px;font-weight:650;text-decoration:none
+}
 .btn.alt{background:#30343e}
-.btn.gold{background:var(--gold);color:#171515}
+.btn.gold{
+background:linear-gradient(115deg,#e4c38b,#bd8b55);color:#201b1b
+}
 .btn.smallbtn{padding:8px 11px;font-size:12px}
 .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-input[type=search],input[type=text],select{background:var(--panel2);border:1px solid var(--line);color:white;border-radius:10px;padding:11px;min-width:0}
+input[type=search],input[type=text],select{
+background:var(--panel2);border:1px solid var(--line);
+color:white;border-radius:10px;padding:11px;min-width:0
+}
 input[type=search]{flex:1;min-width:140px}
 input[type=checkbox]{accent-color:var(--red);width:17px;height:17px}
-.between{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.meter{height:9px;background:#373943;border-radius:20px;overflow:hidden}
-.meter div{height:100%;background:var(--red)}
-.questrow{display:flex;align-items:center;gap:12px;padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:11px;margin-bottom:8px}
-.questrow button{flex:1;min-width:0;background:none;border:0;color:white;text-align:left}
-.questrow button strong{display:block}
-.questrow button small{display:block;color:var(--muted);margin-top:4px}
-.step{display:flex;gap:10px;align-items:flex-start;background:var(--panel2);border-radius:10px;padding:13px;margin-bottom:8px;line-height:1.5}
-.notice{padding:12px;background:#2c281f;border-left:3px solid var(--gold);color:#e7d5b5;font-size:13px;margin:12px 0}
-.empty{border:1px dashed var(--line);border-radius:12px;padding:26px;text-align:center;color:var(--muted)}
-.questtag{display:inline-block;background:#343039;color:var(--gold);padding:7px 11px;border-radius:30px;font-size:12px;margin:0 6px 12px 0}
-.solutionhidden{border:1px dashed #74565c;border-radius:12px;padding:24px;text-align:center;color:var(--muted);margin-top:12px}
+.between{
+display:flex;justify-content:space-between;align-items:center;gap:10px
+}
+.meter{
+height:9px;background:#373943;border-radius:20px;overflow:hidden
+}
+.meter div{
+height:100%;background:linear-gradient(90deg,#a74250,#d8b77c)
+}
+.counter{
+font-weight:800;font-variant-numeric:tabular-nums;
+color:var(--gold);white-space:nowrap
+}
+.sectionHeading{margin:27px 0 14px;color:#f1e6d4}
+.chapterGrid{
+display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
+}
+.chapterCard{
+display:flex;align-items:center;gap:13px;min-width:0;width:100%;
+background:linear-gradient(120deg,#25222a,#1a1b22);
+border:1px solid #494047;border-radius:15px;
+padding:17px;color:var(--text);text-align:left;
+transition:transform .15s,border-color .15s
+}
+.chapterCard:hover{transform:translateY(-2px);border-color:var(--gold)}
+.chapterCard:active{transform:scale(.99)}
+.chapterIcon{
+display:grid;place-items:center;flex:0 0 44px;
+width:44px;height:44px;border-radius:12px;
+background:#56333a;color:#e9bd79;font-size:23px
+}
+.chapterContent{flex:1;min-width:0}
+.chapterTop{
+display:flex;justify-content:space-between;align-items:center;gap:8px
+}
+.chapterTop strong{font-size:16px}
+.chapterSubtitle{
+display:block;color:var(--muted);font-size:12px;
+margin:5px 0 12px;white-space:nowrap;
+overflow:hidden;text-overflow:ellipsis
+}
+.chapterProgress{display:block}
+.chapterProgress .meter{height:7px}
+.chapterArrow,.chevron{color:var(--gold);font-size:24px}
+.chapterComplete{border-color:#59735d}
+.chapterComplete .chapterIcon{background:#294638;color:#9de1b0}
+.crumb{
+display:flex;flex-wrap:wrap;align-items:center;gap:9px;
+color:var(--muted);font-size:13px;margin:2px 0 16px
+}
+.textbtn{
+border:0;background:transparent;color:var(--gold);
+padding:6px 0;text-align:left
+}
+.textbtn:hover{text-decoration:underline}
+.questDetailHero{
+padding:22px 24px;border-radius:16px;
+background:linear-gradient(130deg,#462630,#211e27);
+border:1px solid #60414a;margin-bottom:16px
+}
+.questDetailHero h1{margin:8px 0}
+.questrow{
+display:flex;align-items:center;gap:12px;padding:13px;
+background:var(--panel);border:1px solid var(--line);
+border-radius:11px;margin-bottom:8px
+}
+.questrow:hover{border-color:#79606a}
+.questrow.completed{background:#1d2a26}
+.questrow button{
+flex:1;min-width:0;background:none;border:0;
+color:white;text-align:left
+}
+.questrow button strong{display:block;font-size:16px}
+.questrow button small{
+display:block;color:var(--muted);margin-bottom:5px
+}
+.completeLine{display:flex;gap:12px;align-items:center;font-weight:650}
+.step{
+display:flex;gap:10px;align-items:flex-start;
+background:var(--panel2);border-radius:10px;
+padding:13px;margin-bottom:8px;line-height:1.5
+}
+.questmeta{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.questtag{
+border:1px solid var(--line);border-radius:20px;
+padding:6px 10px;color:var(--muted);font-size:12px
+}
+.solutionhidden{
+padding:22px;text-align:center;border:1px dashed var(--line);
+border-radius:12px;margin-top:12px;color:var(--muted)
+}
+.notice{
+padding:12px;background:#2c281f;border-left:3px solid var(--gold);
+color:#e7d5b5;font-size:13px;margin:12px 0
+}
+.empty{
+border:1px dashed var(--line);border-radius:12px;
+padding:26px;text-align:center;color:var(--muted)
+}
 .maptools{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.mapwrap{position:relative;height:min(65vh,620px);min-height:350px;border-radius:15px;border:1px solid var(--line);overflow:hidden;background:#242a31;touch-action:none;cursor:grab}
-.mapworld{position:absolute;inset:0;transform-origin:center;background:radial-gradient(ellipse at 35% 35%,#48574a,transparent 48%),radial-gradient(ellipse at 72% 68%,#535063,transparent 49%),repeating-linear-gradient(0deg,transparent 0 49px,#ffffff0a 50px),repeating-linear-gradient(90deg,transparent 0 49px,#ffffff0a 50px),#28323a}
-.mapcenter{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#dbc398;pointer-events:none;font-size:23px;letter-spacing:2px;opacity:.8}
+.mapwrap{
+position:relative;height:min(65vh,620px);min-height:350px;
+border-radius:15px;border:1px solid var(--line);
+overflow:hidden;background:#242a31;
+touch-action:none;cursor:grab
+}
+.mapworld{
+position:absolute;inset:0;transform-origin:center;
+background:
+radial-gradient(ellipse at 35% 35%,#48574a,transparent 48%),
+radial-gradient(ellipse at 72% 68%,#535063,transparent 49%),
+repeating-linear-gradient(0deg,transparent 0 49px,#ffffff0a 50px),
+repeating-linear-gradient(90deg,transparent 0 49px,#ffffff0a 50px),
+#28323a
+}
+.mapcenter{
+position:absolute;top:50%;left:50%;
+transform:translate(-50%,-50%);
+text-align:center;color:#dbc398;
+pointer-events:none;font-size:23px;letter-spacing:2px;opacity:.8
+}
 .mapcenter small{display:block;font-size:10px;margin-top:8px}
-.mapmarker{position:absolute;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;border:2px solid #fff3d8;background:#a8424b;color:white;display:grid;place-items:center;z-index:4}
+.mapmarker{
+position:absolute;transform:translate(-50%,-50%);
+width:34px;height:34px;border-radius:50%;
+border:2px solid #fff3d8;background:#a8424b;
+color:white;display:grid;place-items:center;z-index:4
+}
 .mapmarker.player{background:#1b86dc}
 .mapmarker.target{background:#c18c2b}
 .mapmarker.completed{opacity:.5}
-.route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
-.route line{stroke:#f4d084;stroke-width:.7;stroke-dasharray:1.5 1;vector-effect:non-scaling-stroke}
-.markerrow{display:flex;align-items:center;gap:10px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:7px}
+.route{
+position:absolute;inset:0;width:100%;height:100%;
+pointer-events:none;z-index:2
+}
+.route line{
+stroke:#f4d084;stroke-width:.7;
+stroke-dasharray:1.5 1;vector-effect:non-scaling-stroke
+}
+.markerrow{
+display:flex;align-items:center;gap:10px;padding:12px;
+background:var(--panel);border:1px solid var(--line);
+border-radius:10px;margin-bottom:7px
+}
 .markerrow .name{flex:1;min-width:0}
 .markerrow strong{display:block}
 .markerrow small{color:var(--muted)}
 .mobileNav{display:none}
 footer{font-size:11px;color:var(--muted);margin-top:35px}
+@media(max-width:800px){
+.chapterGrid{grid-template-columns:1fr}
+.chapterCard{padding:15px}
+.chapterHero{padding:19px}
+.chapterIcon{flex-basis:40px;width:40px;height:40px}
+}
 @media(max-width:760px){
-.layout{display:block}aside{display:none}
+.layout{display:block}
+aside{display:none}
 main{padding:15px 13px 105px}
 .hero{padding:20px}
 .grid{gap:9px}
 .grid .card{padding:13px}
 .mapwrap{height:53dvh;min-height:320px}
-.mobileNav{position:fixed;bottom:0;left:0;right:0;z-index:50;display:flex;justify-content:space-around;background:#191b22;border-top:1px solid var(--line);padding:7px 3px calc(7px + env(safe-area-inset-bottom))}
-.mobileNav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:none;color:var(--muted);padding:7px 2px;font-size:10px}
+.mobileNav{
+position:fixed;bottom:0;left:0;right:0;z-index:50;
+display:flex;justify-content:space-around;background:#191b22;
+border-top:1px solid var(--line);
+padding:7px 3px calc(7px + env(safe-area-inset-bottom))
+}
+.mobileNav button{
+flex:1;display:flex;flex-direction:column;align-items:center;
+gap:4px;border:0;background:none;color:var(--muted);
+padding:7px 2px;font-size:10px
+}
 .mobileNav button.active{color:var(--gold)}
 .mobileNav .ico{font-size:22px}
 }
@@ -92,19 +279,24 @@ main{padding:15px 13px 105px}
 <body>
 <div class="layout">
 <aside>
-<div class="brand">⚔ CRIMSON GUIDE<small>PYWEL COMPANION</small></div>
+<div class="brand">
+⚔ CRIMSON GUIDE
+<small>PYWEL COMPANION</small>
+</div>
 <nav id="nav"></nav>
 </aside>
 <main>
 <header>
-<span class="eyebrow">CRIMSON GUIDE • 4.0</span>
+<span class="eyebrow">CRIMSON GUIDE • 4.1</span>
 <select id="lang" aria-label="Language">
 <option value="de">🇩🇪 Deutsch</option>
 <option value="en">🇬🇧 English</option>
 </select>
 </header>
 <div id="app"></div>
-<footer>Unofficial fan project. Not affiliated with Pearl Abyss.</footer>
+<footer>
+Unofficial fan project. Not affiliated with Pearl Abyss.
+</footer>
 </main>
 </div>
 <div id="mobileNav" class="mobileNav"></div>
@@ -121,86 +313,151 @@ const TARGET_KEY="crimson-guide-target-v31";
 
 const TXT={
 de:{
-home:"Start",map:"Karte",quests:"Quests",collection:"Sammlung",progress:"Fortschritt",settings:"Einstellungen",
-welcome:"Dein Abenteuer in Pywel",intro:"218 Quest-Einträge, 14 Kapitelbereiche und dein persönlicher Fortschritt.",
-realMap:"Pywel-Karte öffnen",mapNote:"Eigene Planungsfläche. Noch keine echte Pywel-Karte.",
+home:"Start",
+map:"Karte",
+quests:"Quests",
+collection:"Sammlung",
+progress:"Fortschritt",
+settings:"Einstellungen",
+welcome:"Dein Abenteuer in Pywel",
+intro:"Deine Quest-Datenbank mit Kapitelübersicht und persönlichem Fortschritt.",
+realMap:"Pywel-Karte öffnen",
+mapNote:"Eigene Planungsfläche. Noch keine echte Pywel-Karte.",
 mapWarning:"Die Positionen entsprechen keinen echten Spielkoordinaten.",
-questSearch:"Quest suchen...",allChapters:"Alle Kapitel und Regionen",allStatus:"Alle Status",
-allTypes:"Alle Questtypen",main:"Hauptquests",side:"Nebenquests",
-open:"Offen",done:"Erledigt",steps:"Lösungsschritte",
-showSolution:"🔒 Lösung anzeigen (Spoiler)",hideSolution:"🔓 Lösung verbergen",
+questSearch:"Quest suchen...",
+allChapters:"Alle Kapitel und Regionen",
+allStatus:"Alle Status",
+allTypes:"Alle Questtypen",
+main:"Hauptquests",
+side:"Nebenquests",
+open:"Offen",
+done:"Erledigt",
+steps:"Lösungsschritte",
+showSolution:"🔒 Lösung anzeigen (Spoiler)",
+hideSolution:"🔓 Lösung verbergen",
 noSteps:"Für diese Quest ist noch keine geprüfte Komplettlösung eingetragen.",
-guide:"Externen Hauptquest-Guide öffnen",finished:"Quest abgeschlossen",back:"Zurück",
-solutionStatus:"Lösungsstatus",partial:"Kurze Anleitung vorhanden",pending:"Lösung noch ausstehend",
+guide:"Externen Quest-Guide öffnen",
+finished:"Quest abgeschlossen",
+back:"Zurück",
+solutionStatus:"Lösungsstatus",
+partial:"Kurze Anleitung vorhanden",
+pending:"Lösung noch ausstehend",
 collectionInfo:"Die vollständigen Sammlungsdaten werden später ergänzt.",
-items:"Gegenstände",bosses:"Bosse",npcs:"NPCs",materials:"Materialien",
+items:"Gegenstände",
+bosses:"Bosse",
+npcs:"NPCs",
+materials:"Materialien",
 notReady:"Noch keine geprüften Inhalte vorhanden.",
 local:"Deine Daten bleiben lokal auf diesem Gerät. Erstelle regelmäßig ein Backup.",
-export:"Backup exportieren",import:"Backup importieren",reset:"Alle Daten löschen",
+export:"Backup exportieren",
+import:"Backup importieren",
+reset:"Alle Daten löschen",
 confirmReset:"Wirklich Fortschritt und Markierungen löschen?",
-invalid:"Ungültige Backup-Datei.",imported:"Backup importiert.",
-total:"Gesamt",markerCount:"Markierungen",
-setPlayer:"Spielerposition setzen",setTarget:"Ziel setzen",addMarker:"Marker hinzufügen",
-resetView:"Ansicht zurücksetzen",markerList:"Meine Fundorte",
+invalid:"Ungültige Backup-Datei.",
+imported:"Backup importiert.",
+total:"Gesamt",
+markerCount:"Markierungen",
+setPlayer:"Spielerposition setzen",
+setTarget:"Ziel setzen",
+addMarker:"Marker hinzufügen",
+resetView:"Ansicht zurücksetzen",
+markerList:"Meine Fundorte",
 noMarkers:"Noch keine Markierungen vorhanden.",
-target:"Zielpunkt",removeTarget:"Ziel entfernen",removePlayer:"Position entfernen",
+target:"Zielpunkt",
+removeTarget:"Ziel entfernen",
+removePlayer:"Position entfernen",
 navigationHint:"Die Linie zeigt nur die direkte Richtung, keinen begehbaren Spielweg.",
-chapter:"Kapitel",prologue:"Prolog",epilogue:"Epilog",region:"Region",
-allQuests:"Alle Quests",questDatabase:"Quest-Datenbank"
+chapter:"Kapitel",
+prologue:"Prolog",
+epilogue:"Epilog",
+region:"Region",
+allQuests:"Alle Quests",
+questDatabase:"Quest-Datenbank",
+verifiedSteps:"Kurze Anleitung vorhanden",
+pendingSteps:"Lösung ausstehend"
 },
 en:{
-home:"Home",map:"Map",quests:"Quests",collection:"Collection",progress:"Progress",settings:"Settings",
-welcome:"Your adventure in Pywel",intro:"218 quest entries, 14 chapter sections and your personal progress.",
-realMap:"Open Pywel map",mapNote:"Personal planning canvas. Not a real Pywel map yet.",
+home:"Home",
+map:"Map",
+quests:"Quests",
+collection:"Collection",
+progress:"Progress",
+settings:"Settings",
+welcome:"Your adventure in Pywel",
+intro:"Your quest database with chapter navigation and personal progress.",
+realMap:"Open Pywel map",
+mapNote:"Personal planning canvas. Not a real Pywel map yet.",
 mapWarning:"Positions do not represent actual game coordinates.",
-questSearch:"Search quests...",allChapters:"All chapters and regions",allStatus:"All statuses",
-allTypes:"All quest types",main:"Main quests",side:"Side quests",
-open:"Open",done:"Completed",steps:"Walkthrough steps",
-showSolution:"🔒 Show solution (spoilers)",hideSolution:"🔓 Hide solution",
+questSearch:"Search quests...",
+allChapters:"All chapters and regions",
+allStatus:"All statuses",
+allTypes:"All quest types",
+main:"Main quests",
+side:"Side quests",
+open:"Open",
+done:"Completed",
+steps:"Walkthrough steps",
+showSolution:"🔒 Show solution (spoilers)",
+hideSolution:"🔓 Hide solution",
 noSteps:"No verified complete walkthrough has been added for this quest.",
-guide:"Open external main quest guide",finished:"Quest completed",back:"Back",
-solutionStatus:"Solution status",partial:"Short guide available",pending:"Solution pending",
+guide:"Open external quest guide",
+finished:"Quest completed",
+back:"Back",
+solutionStatus:"Solution status",
+partial:"Short guide available",
+pending:"Solution pending",
 collectionInfo:"Complete collection data will be added later.",
-items:"Items",bosses:"Bosses",npcs:"NPCs",materials:"Materials",
+items:"Items",
+bosses:"Bosses",
+npcs:"NPCs",
+materials:"Materials",
 notReady:"No verified content available yet.",
 local:"Your data stays on this device. Export backups regularly.",
-export:"Export backup",import:"Import backup",reset:"Delete all data",
+export:"Export backup",
+import:"Import backup",
+reset:"Delete all data",
 confirmReset:"Delete progress and markers?",
-invalid:"Invalid backup file.",imported:"Backup imported.",
-total:"Total",markerCount:"Markers",
-setPlayer:"Set player position",setTarget:"Set destination",addMarker:"Add marker",
-resetView:"Reset view",markerList:"My locations",
+invalid:"Invalid backup file.",
+imported:"Backup imported.",
+total:"Total",
+markerCount:"Markers",
+setPlayer:"Set player position",
+setTarget:"Set destination",
+addMarker:"Add marker",
+resetView:"Reset view",
+markerList:"My locations",
 noMarkers:"No markers yet.",
-target:"Destination",removeTarget:"Clear destination",removePlayer:"Clear position",
+target:"Destination",
+removeTarget:"Clear destination",
+removePlayer:"Clear position",
 navigationHint:"The line shows direct direction only, not a traversable game route.",
-chapter:"Chapter",prologue:"Prologue",epilogue:"Epilogue",region:"Region",
-allQuests:"All quests",questDatabase:"Quest database"
+chapter:"Chapter",
+prologue:"Prologue",
+epilogue:"Epilogue",
+region:"Region",
+allQuests:"All quests",
+questDatabase:"Quest database",
+verifiedSteps:"Short guide available",
+pendingSteps:"Solution pending"
 }
 };
 
 const chapterNames=[
-"Prolog / Prologue",
-"Kapitel 1 / Chapter 1",
-"Kapitel 2 – Golden Greed",
-"Kapitel 3 / Chapter 3",
-"Kapitel 4 / Chapter 4",
-"Kapitel 5 / Chapter 5",
-"Kapitel 6 / Chapter 6",
-"Kapitel 7 / Chapter 7",
-"Kapitel 8 / Chapter 8",
-"Kapitel 9 / Chapter 9",
-"Kapitel 10 / Chapter 10",
-"Kapitel 11 / Chapter 11",
-"Kapitel 12 / Chapter 12",
-"Epilog / Epilogue"
+"Prologue",
+"Chapter 1",
+"Golden Greed",
+"Chapter 3",
+"Chapter 4",
+"Chapter 5",
+"Chapter 6",
+"Chapter 7",
+"Chapter 8",
+"Chapter 9",
+"Chapter 10",
+"Chapter 11",
+"Chapter 12",
+"Epilogue"
 ];
-
-/*
- Questdatenbank:
- Hauptquest-Namen sind nach Kapitel gruppiert.
- Nebenquests sind derzeit für Hernand und Pailune erfasst.
- Fehlende Lösungen werden ausdrücklich als ausstehend angezeigt.
-*/
 
 const mainQuestNames=[
 `Unfamiliar Lands|In Ashes|Realm of Uncertainty|New Journey`,
@@ -224,6 +481,8 @@ Hernand:`A Rumor Fueled by Greed|Alden's Request|Ambition in the Ruins|Annabella
 Pailune:`White Bear|Snowwhite Deer|Harry's Request|Lola's Request|Gunter's Request`
 };
 
+const sideRegions=Object.keys(sideQuestNames);
+
 function slug(s){
 return s.toLowerCase()
 .normalize("NFD")
@@ -233,16 +492,25 @@ return s.toLowerCase()
 }
 
 const originalIds=[
-"unfamiliar-lands","in-ashes","realm-of-uncertainty","new-journey",
-"where-rumors-gather","mysterious-man","true-wisdom","actions-speak",
-"heart-beyond","mystical-key","polar-opposites","abyss-without-balance",
+"unfamiliar-lands",
+"in-ashes",
+"realm-of-uncertainty",
+"new-journey",
+"where-rumors-gather",
+"mysterious-man",
+"true-wisdom",
+"actions-speak",
+"heart-beyond",
+"mystical-key",
+"polar-opposites",
+"abyss-without-balance",
 "woman-in-white"
 ];
 
 const quests=[];
 
-mainQuestNames.forEach((chapterText,chapter)=>{
-chapterText.split("|").forEach((name,index)=>{
+mainQuestNames.forEach((text,chapter)=>{
+text.split("|").forEach((name,index)=>{
 let id;
 if(chapter===0||chapter===1){
 id=originalIds[chapter===0?index:index+4];
@@ -251,7 +519,12 @@ id=slug(name);
 }else{
 id="c"+chapter+"-"+slug(name);
 }
-quests.push({id,name,chapter,type:"main"});
+quests.push({
+id,
+name,
+chapter,
+type:"main"
+});
 });
 });
 
@@ -259,15 +532,12 @@ Object.entries(sideQuestNames).forEach(([region,names])=>{
 names.split("|").forEach((name,index)=>{
 quests.push({
 id:"side-"+region.toLowerCase()+"-"+(index+1),
-name,chapter:region,type:"side"
+name,
+chapter:region,
+type:"side"
 });
 });
 });
-
-/*
- Vorhandene Kurzlösungen aus den bisherigen Versionen.
- Sie sind noch keine vollständigen Komplettlösungen.
-*/
 
 const solutions={
 "where-rumors-gather":[
@@ -306,8 +576,12 @@ q.steps=solutions[q.id].map(([de,en])=>({de,en}));
 });
 
 const sections=[
-["home","⌂"],["map","🗺"],["quests","📜"],
-["collection","⚔"],["progress","✓"],["settings","⚙"]
+["home","⌂"],
+["map","🗺"],
+["quests","📜"],
+["collection","⚔"],
+["progress","✓"],
+["settings","⚙"]
 ];
 
 function readObject(key){
@@ -316,23 +590,31 @@ const v=JSON.parse(localStorage.getItem(key)||"{}");
 return v&&typeof v==="object"&&!Array.isArray(v)?v:{};
 }catch{return {}}
 }
+
 function readArray(key){
 try{
 const v=JSON.parse(localStorage.getItem(key)||"[]");
 return Array.isArray(v)?v:[];
 }catch{return []}
 }
+
 function validPoint(p){
-return p&&Number.isFinite(p.x)&&Number.isFinite(p.y)&&
-p.x>=0&&p.x<=100&&p.y>=0&&p.y<=100;
+return p&&Number.isFinite(p.x)&&Number.isFinite(p.y)
+&&p.x>=0&&p.x<=100&&p.y>=0&&p.y<=100;
 }
+
 function readPoint(key){
 const p=readObject(key);
 return validPoint(p)?{x:p.x,y:p.y}:null;
 }
+
 function esc(value){
 return String(value??"").replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
 })[c]);
 }
 
@@ -346,6 +628,7 @@ progress["quest:"+q.id]=true;
 }
 
 const types=["quest","boss","treasure","npc","material","other"];
+
 let markers=readArray(MARKERS_KEY)
 .filter(m=>validPoint(m)&&typeof m.name==="string")
 .slice(0,500)
@@ -353,301 +636,644 @@ let markers=readArray(MARKERS_KEY)
 id:String(m.id||"m"+Math.random()),
 name:m.name.slice(0,100),
 type:types.includes(m.type)?m.type:"other",
-x:m.x,y:m.y,completed:m.completed===true
+x:m.x,
+y:m.y,
+completed:m.completed===true
 }));
 
 let player=readPoint(POSITION_KEY);
 let target=readPoint(TARGET_KEY);
 let language=localStorage.getItem("crimson-guide-language")==="en"?"en":"de";
+
 let page="home";
+let questView="chapters";
+let activeGroup=null;
 let selectedQuest=null;
 let solutionVisible=false;
 let questQuery="";
-let questChapter="all";
 let questStatus="all";
-let questType="all";
 let collectionTab="items";
 let mapMode="pan";
-let zoom=1,offsetX=0,offsetY=0;
+let zoom=1;
+let offsetX=0;
+let offsetY=0;
 
 const t=k=>TXT[language][k]||k;
 const mainCount=quests.filter(q=>q.type==="main").length;
 const sideCount=quests.filter(q=>q.type==="side").length;
 
-function chapterLabel(chapter){
+function chapterLabel(q){
+const chapter=typeof q==="object"?q.chapter:q;
 if(typeof chapter==="string")return chapter;
 if(chapter===0)return t("prologue");
 if(chapter===13)return t("epilogue");
-if(chapter===2)return language==="de"?"Kapitel 2 – Golden Greed":"Chapter 2 – Golden Greed";
+if(chapter===2){
+return language==="de"
+?"Kapitel 2 – Golden Greed"
+:"Chapter 2 – Golden Greed";
+}
 return t("chapter")+" "+chapter;
 }
 
 function save(){
 localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
 localStorage.setItem(MARKERS_KEY,JSON.stringify(markers));
-if(player)localStorage.setItem(POSITION_KEY,JSON.stringify(player));
-else localStorage.removeItem(POSITION_KEY);
-if(target)localStorage.setItem(TARGET_KEY,JSON.stringify(target));
-else localStorage.removeItem(TARGET_KEY);
+
+if(player){
+localStorage.setItem(POSITION_KEY,JSON.stringify(player));
+}else{
+localStorage.removeItem(POSITION_KEY);
 }
-function questDone(id){return progress["quest:"+id]===true}
-function stepDone(id,i){return progress["step:"+id+":"+i]===true}
-function doneCount(){return quests.filter(q=>questDone(q.id)).length}
+
+if(target){
+localStorage.setItem(TARGET_KEY,JSON.stringify(target));
+}else{
+localStorage.removeItem(TARGET_KEY);
+}
+}
+
+function questDone(id){
+return progress["quest:"+id]===true;
+}
+
+function stepDone(id,i){
+return progress["step:"+id+":"+i]===true;
+}
+
+function doneCount(){
+return quests.filter(q=>questDone(q.id)).length;
+}
+
 function meter(n,total){
 return `<div class="meter"><div style="width:${total?100*n/total:0}%"></div></div>`;
 }
+
 function navigate(next){
-page=next;selectedQuest=null;solutionVisible=false;mapMode="pan";
-render();window.scrollTo(0,0);
+page=next;
+selectedQuest=null;
+solutionVisible=false;
+
+if(next==="quests"){
+questView="chapters";
+activeGroup=null;
+questQuery="";
+questStatus="all";
 }
+
+mapMode="pan";
+render();
+window.scrollTo(0,0);
+}
+
 function renderNav(){
-document.getElementById("nav").innerHTML=sections.map(([id,icon])=>
-`<button data-go="${id}" class="${page===id?"active":""}">${icon} ${t(id)}</button>`
-).join("");
-document.getElementById("mobileNav").innerHTML=sections.slice(0,5).map(([id,icon])=>
-`<button data-go="${id}" class="${page===id?"active":""}">
-<span class="ico">${icon}</span><span>${t(id)}</span></button>`
-).join("");
+document.getElementById("nav").innerHTML=sections.map(([id,icon])=>`
+<button data-go="${id}" class="${page===id?"active":""}">
+${icon} ${t(id)}
+</button>
+`).join("");
+
+document.getElementById("mobileNav").innerHTML=sections.slice(0,5).map(([id,icon])=>`
+<button data-go="${id}" class="${page===id?"active":""}">
+<span class="ico">${icon}</span>
+<span>${t(id)}</span>
+</button>
+`).join("");
 }
 
 function homePage(){
 return `
 <div class="hero">
-<div class="eyebrow">CRIMSON DESERT COMPANION • VERSION 4.0</div>
+<div class="eyebrow">CRIMSON DESERT COMPANION • VERSION 4.1</div>
 <h1>${t("welcome")}</h1>
 <p>${t("intro")}</p>
-<button class="btn gold" data-go="quests">📜 ${t("questDatabase")}</button>
+<button class="btn gold" data-go="quests">
+📜 ${t("questDatabase")}
+</button>
 </div>
+
 <div class="grid">
-<div class="card"><span class="small">${t("main")}</span>
-<h1>${mainCount}</h1></div>
-<div class="card"><span class="small">${t("side")}</span>
-<h1>${sideCount}</h1></div>
+<div class="card">
+<span class="small">${t("main")}</span>
+<h1>${mainCount}</h1>
 </div>
+<div class="card">
+<span class="small">${t("side")}</span>
+<h1>${sideCount}</h1>
+</div>
+</div>
+
 <div class="card" style="margin-top:12px">
-<div class="between"><strong>${t("progress")}</strong>
-<span>${doneCount()} / ${quests.length}</span></div>
-<div style="margin-top:12px">${meter(doneCount(),quests.length)}</div>
+<div class="between">
+<strong>${t("progress")}</strong>
+<span class="counter">${doneCount()} / ${quests.length}</span>
 </div>
+<div style="margin-top:12px">
+${meter(doneCount(),quests.length)}
+</div>
+</div>
+
 <div class="grid">
 ${sections.slice(1,5).map(([id,icon])=>`
 <div class="card" data-go="${id}" style="cursor:pointer">
 <h3>${icon} ${t(id)}</h3>
 <p class="small">→</p>
-</div>`).join("")}
 </div>
+`).join("")}
+</div>
+
 <div class="notice">
 ${language==="de"
-?"Hinweis: Die Questdatenbank ist umfangreich, aber die Komplettlösungen sind noch nicht vollständig."
-:"Note: The quest database is extensive, but full walkthroughs are not yet complete."}
-</div>`;
-}
-
-function questPage(){
-if(selectedQuest){
-const q=quests.find(x=>x.id===selectedQuest);
-if(!q){selectedQuest=null;return questPage()}
-const steps=q.steps||[];
-return `
-<button class="btn alt" id="backQuest">← ${t("back")}</button>
-<h1>${esc(q.name)}</h1>
-<p class="small">${esc(chapterLabel(q.chapter))} · ${t(q.type)}</p>
-<div class="card">
-<label><input type="checkbox" data-quest="${esc(q.id)}"
-${questDone(q.id)?"checked":""}> ${t("finished")}</label>
+?"Die Questdatenbank ist umfangreich. Vollständige Lösungen sind noch nicht für alle Quests vorhanden."
+:"The quest database is extensive. Full walkthroughs are not yet available for every quest."}
 </div>
-<div>
-<span class="questtag">${t("solutionStatus")}: ${steps.length?t("partial"):t("pending")}</span>
-<span class="questtag">${steps.length} ${t("steps")}</span>
-</div>
-<button class="btn alt" id="toggleSolution" aria-expanded="${solutionVisible}">
-${solutionVisible?t("hideSolution"):t("showSolution")}
-</button>
-${solutionVisible?`
-<h2>${t("steps")}</h2>
-${steps.length?steps.map((s,i)=>`
-<label class="step">
-<input type="checkbox" data-step="${esc(q.id)}:${i}"
-${stepDone(q.id,i)?"checked":""}>
-<span>${esc(s[language]||s.en)}</span>
-</label>`).join(""):`<div class="empty">${t("noSteps")}</div>`}
-`:`<div class="solutionhidden">🔒 ${t("showSolution")}</div>`}
-${q.type==="main"?`
-<p><a class="btn" href="${GUIDE_URL}" target="_blank"
-rel="noopener noreferrer">${t("guide")} ↗</a></p>`:""}
 `;
 }
 
-const found=quests.filter(q=>
-(questChapter==="all"||String(q.chapter)===questChapter)&&
-(questType==="all"||q.type===questType)&&
-(questStatus==="all"||(questStatus==="done")===questDone(q.id))&&
-q.name.toLowerCase().includes(questQuery.toLowerCase())
-);
+function groupCard(group){
+const list=quests.filter(q=>String(q.chapter)===String(group));
+const completed=list.filter(q=>questDone(q.id)).length;
 
-const chapters=[
-...Array.from({length:14},(_,i)=>i),
-"Hernand","Pailune"
-];
+const name=typeof group==="number"
+?(group===0?t("prologue"):group===13?t("epilogue"):t("chapter")+" "+group)
+:group;
+
+const subtitle=typeof group==="number"
+?chapterNames[group]
+:(language==="de"?"Nebenquests nach Region":"Side quests by region");
 
 return `
-<h1>📜 ${t("questDatabase")}</h1>
-<div class="grid">
-<div class="card"><strong>${mainCount} ${t("main")}</strong></div>
-<div class="card"><strong>${sideCount} ${t("side")}</strong></div>
+<button class="chapterCard ${completed===list.length?"chapterComplete":""}"
+data-group="${esc(String(group))}">
+<span class="chapterIcon">
+${typeof group==="number"?(group===0?"✦":group===13?"♛":"⚔"):"✧"}
+</span>
+<span class="chapterContent">
+<span class="chapterTop">
+<strong>${esc(name)}</strong>
+<span class="counter">${completed}/${list.length}</span>
+</span>
+<span class="chapterSubtitle">${esc(subtitle)}</span>
+<span class="chapterProgress">
+${meter(completed,list.length)}
+</span>
+</span>
+<span class="chapterArrow">›</span>
+</button>
+`;
+}
+
+function questPage(){
+
+if(selectedQuest){
+const q=quests.find(x=>x.id===selectedQuest);
+
+if(!q){
+selectedQuest=null;
+return questPage();
+}
+
+const steps=q.steps||[];
+const groupQuests=quests.filter(x=>String(x.chapter)===String(q.chapter));
+const total=groupQuests.length;
+const completed=groupQuests.filter(x=>questDone(x.id)).length;
+
+return `
+<div class="crumb">
+<button class="textbtn" id="backChapters">
+${language==="de"?"Kapitel":"Chapters"}
+</button>
+<span>›</span>
+<button class="textbtn" id="backQuest">
+${esc(chapterLabel(q))}
+</button>
+<span>›</span>
+<span>${esc(q.name)}</span>
 </div>
+
+<div class="questDetailHero">
+<span class="eyebrow">
+${q.type==="main"
+?(language==="de"?"HAUPTQUEST":"MAIN QUEST")
+:(language==="de"?"NEBENQUEST":"SIDE QUEST")}
+</span>
+<h1>${esc(q.name)}</h1>
+<p>${esc(chapterLabel(q))}</p>
+</div>
+
+<div class="card">
+<div class="between">
+<strong>${language==="de"?"Kapitel-Fortschritt":"Chapter progress"}</strong>
+<span class="counter">${completed}/${total}</span>
+</div>
+<div style="margin-top:12px">
+${meter(completed,total)}
+</div>
+</div>
+
+<div class="card">
+<label class="completeLine">
+<input type="checkbox" data-quest="${esc(q.id)}"
+${questDone(q.id)?"checked":""}>
+<span>${t("finished")}</span>
+</label>
+</div>
+
+<div class="questmeta">
+<span class="questtag">
+${t("solutionStatus")}: ${steps.length?t("verifiedSteps"):t("pendingSteps")}
+</span>
+<span class="questtag">${steps.length} ${t("steps")}</span>
+</div>
+
+<button class="btn gold" id="toggleSolution"
+aria-expanded="${solutionVisible}">
+${solutionVisible?t("hideSolution"):t("showSolution")}
+</button>
+
+${solutionVisible?`
+<h2>${t("steps")}</h2>
+${steps.length?steps.map((step,i)=>`
+<label class="step">
+<input type="checkbox" data-step="${esc(q.id)}:${i}"
+${stepDone(q.id,i)?"checked":""}>
+<span><b>${i+1}.</b> ${esc(step[language]||step.en)}</span>
+</label>
+`).join(""):`<div class="empty">${t("noSteps")}</div>`}
+`:`<div class="solutionhidden">
+🔒 ${language==="de"
+?"Tippe auf „Lösung anzeigen“, um Spoiler zu öffnen."
+:"Tap “Show solution” to reveal spoilers."}
+</div>`}
+
+${q.type==="main"?`
+<p>
+<a class="btn alt" href="${GUIDE_URL}" target="_blank"
+rel="noopener noreferrer">
+${t("guide")} ↗
+</a>
+</p>
+`:""}
+`;
+}
+
+if(questView==="list"&&activeGroup!==null){
+
+const group=String(activeGroup);
+const groupQuests=quests.filter(q=>String(q.chapter)===group);
+const completed=groupQuests.filter(q=>questDone(q.id)).length;
+const label=groupQuests[0]?chapterLabel(groupQuests[0]):group;
+
+const found=groupQuests.filter(q=>
+(questStatus==="all"||(questStatus==="done")===questDone(q.id))
+&&q.name.toLowerCase().includes(questQuery.toLowerCase())
+);
+
+return `
+<div class="crumb">
+<button class="textbtn" id="backChapters">
+← ${language==="de"?"Alle Kapitel":"All chapters"}
+</button>
+<span>›</span>
+<span>${esc(label)}</span>
+</div>
+
+<div class="chapterHero">
+<span class="eyebrow">
+${groupQuests[0]?.type==="side"
+?(language==="de"?"NEBENQUESTS":"SIDE QUESTS")
+:(language==="de"?"HAUPTQUESTS":"MAIN QUESTS")}
+</span>
+<h1>${esc(label)}</h1>
+<div class="between">
+<span>${language==="de"?"Abgeschlossen":"Completed"}</span>
+<strong class="counter">${completed}/${groupQuests.length}</strong>
+</div>
+<div style="margin-top:12px">
+${meter(completed,groupQuests.length)}
+</div>
+</div>
+
 <div class="toolbar">
 <input id="questSearch" type="search"
-placeholder="${t("questSearch")}" value="${esc(questQuery)}">
-<select id="questType">
-<option value="all">${t("allTypes")}</option>
-<option value="main" ${questType==="main"?"selected":""}>${t("main")}</option>
-<option value="side" ${questType==="side"?"selected":""}>${t("side")}</option>
-</select>
-<select id="questChapter">
-<option value="all">${t("allChapters")}</option>
-${chapters.map(c=>`
-<option value="${c}" ${questChapter===String(c)?"selected":""}>
-${esc(chapterLabel(c))}</option>`).join("")}
-</select>
+placeholder="${t("questSearch")}"
+value="${esc(questQuery)}">
+
 <select id="questStatus">
 <option value="all">${t("allStatus")}</option>
 <option value="open" ${questStatus==="open"?"selected":""}>${t("open")}</option>
 <option value="done" ${questStatus==="done"?"selected":""}>${t("done")}</option>
 </select>
 </div>
-<p class="small">${found.length} / ${quests.length}</p>
+
+<p class="small">
+${found.length} / ${groupQuests.length}
+${language==="de"?"Quests":"quests"}
+</p>
+
 ${found.length?found.map(q=>`
-<div class="questrow">
-<input type="checkbox" data-quest="${esc(q.id)}" ${questDone(q.id)?"checked":""}>
+<div class="questrow ${questDone(q.id)?"completed":""}">
+<input type="checkbox" data-quest="${esc(q.id)}"
+${questDone(q.id)?"checked":""}
+aria-label="${esc(q.name)}">
+
 <button data-openquest="${esc(q.id)}">
+<small>
+${String(groupQuests.indexOf(q)+1).padStart(2,"0")}
+·
+${q.steps?.length?t("partial"):t("pending")}
+</small>
 <strong>${esc(q.name)}</strong>
-<small>${esc(chapterLabel(q.chapter))} · ${t(q.type)} · ${q.steps?.length?t("partial"):t("pending")}</small>
-</button><span>›</span>
-</div>`).join(""):`<div class="empty">
-${language==="de"?"Keine Quests gefunden":"No quests found"}
-</div>`}`;
+</button>
+<span class="chevron">›</span>
+</div>
+`).join(""):`<div class="empty">
+${language==="de"?"Keine Quests gefunden.":"No quests found."}
+</div>`}
+`;
+}
+
+const mainGroups=Array.from({length:14},(_,i)=>i);
+
+return `
+<div class="chapterHero">
+<span class="eyebrow">
+CRIMSON GUIDE • CHAPTER EDITION
+</span>
+<h1>
+📜 ${language==="de"?"Deine Quest-Kapitel":"Your Quest Chapters"}
+</h1>
+<p>
+${language==="de"
+?"Wähle ein Kapitel und öffne anschließend die gewünschte Quest. Dein Fortschritt wird automatisch gespeichert."
+:"Choose a chapter, then open a quest. Your progress is saved automatically."}
+</p>
+<div class="between">
+<strong>
+${language==="de"?"Gesamtfortschritt":"Overall progress"}
+</strong>
+<span class="counter">${doneCount()}/${quests.length}</span>
+</div>
+<div style="margin-top:12px">
+${meter(doneCount(),quests.length)}
+</div>
+</div>
+
+<h2 class="sectionHeading">⚔ ${t("main")}</h2>
+
+<div class="chapterGrid">
+${mainGroups.map(groupCard).join("")}
+</div>
+
+<h2 class="sectionHeading">✧ ${t("side")}</h2>
+
+<div class="chapterGrid">
+${sideRegions.map(groupCard).join("")}
+</div>
+
+<p class="small" style="margin-top:18px">
+${language==="de"
+?"Die Questdaten und bisherigen Speicherstände bleiben erhalten. Nicht alle Quests haben bereits eine vollständige Lösung."
+:"Quest data and existing saves are preserved. Not all quests have complete walkthroughs yet."}
+</p>
+`;
 }
 
 function iconFor(type){
-return {quest:"📜",boss:"🐉",treasure:"💰",npc:"♟",material:"💎",other:"📍"}[type]||"📍";
+return {
+quest:"📜",
+boss:"🐉",
+treasure:"💰",
+npc:"♟",
+material:"💎",
+other:"📍"
+}[type]||"📍";
 }
 
 function mapPage(){
 const route=player&&target?`
-<svg class="route" viewBox="0 0 100 100" preserveAspectRatio="none">
-<line x1="${player.x}" y1="${player.y}" x2="${target.x}" y2="${target.y}"></line>
-</svg>`:"";
+<svg class="route" viewBox="0 0 100 100"
+preserveAspectRatio="none">
+<line x1="${player.x}" y1="${player.y}"
+x2="${target.x}" y2="${target.y}"></line>
+</svg>
+`:"";
+
 return `
 <div class="between">
 <h1>🗺 ${t("map")}</h1>
-<a class="btn alt smallbtn" href="${MAP_URL}" target="_blank"
-rel="noopener noreferrer">↗ ${t("realMap")}</a>
+<a class="btn alt smallbtn" href="${MAP_URL}"
+target="_blank" rel="noopener noreferrer">
+↗ ${t("realMap")}
+</a>
 </div>
+
 <p class="small">${t("mapNote")}</p>
+
 <div class="maptools">
-<button class="btn ${mapMode==="player"?"":"alt"}" data-mode="player">🔵 ${t("setPlayer")}</button>
-<button class="btn ${mapMode==="target"?"":"alt"}" data-mode="target">🎯 ${t("setTarget")}</button>
-<button class="btn ${mapMode==="marker"?"":"alt"}" data-mode="marker">＋ ${t("addMarker")}</button>
+<button class="btn ${mapMode==="player"?"":"alt"}"
+data-mode="player">🔵 ${t("setPlayer")}</button>
+
+<button class="btn ${mapMode==="target"?"":"alt"}"
+data-mode="target">🎯 ${t("setTarget")}</button>
+
+<button class="btn ${mapMode==="marker"?"":"alt"}"
+data-mode="marker">＋ ${t("addMarker")}</button>
 </div>
-${mapMode!=="pan"?`<div class="notice">Tippe auf die Karte / Tap the map</div>`:""}
+
+${mapMode!=="pan"?`
+<div class="notice">
+${language==="de"?"Tippe auf die Karte.":"Tap the map."}
+</div>
+`:""}
+
 <div class="mapwrap" id="mapwrap">
 <div class="mapworld" id="mapworld">
-<div class="mapcenter">✦ PYWEL<small>PLANNING CANVAS</small></div>
+
+<div class="mapcenter">
+✦ PYWEL
+<small>PLANNING CANVAS</small>
+</div>
+
 ${route}
+
 ${markers.map(m=>`
 <button class="mapmarker ${m.completed?"completed":""}"
 style="left:${m.x}%;top:${m.y}%"
-data-marker="${esc(m.id)}" title="${esc(m.name)}">${iconFor(m.type)}</button>`).join("")}
-${player?`<span class="mapmarker player" style="left:${player.x}%;top:${player.y}%">●</span>`:""}
-${target?`<span class="mapmarker target" style="left:${target.x}%;top:${target.y}%">★</span>`:""}
-</div></div>
+data-marker="${esc(m.id)}"
+title="${esc(m.name)}">
+${iconFor(m.type)}
+</button>
+`).join("")}
+
+${player?`
+<span class="mapmarker player"
+style="left:${player.x}%;top:${player.y}%">●</span>
+`:""}
+
+${target?`
+<span class="mapmarker target"
+style="left:${target.x}%;top:${target.y}%">★</span>
+`:""}
+
+</div>
+</div>
+
 <div class="maptools">
 <button class="btn alt" id="zoomIn">＋</button>
 <button class="btn alt" id="zoomOut">－</button>
 <button class="btn alt" id="resetView">${t("resetView")}</button>
 </div>
+
 <div class="notice">${t("mapWarning")}</div>
-${player&&target?`<div class="card">
+
+${player&&target?`
+<div class="card">
 <strong>🧭 ${t("target")}</strong>
 <p class="small">${t("navigationHint")}</p>
-</div>`:""}
-<div class="maptools">
-${player?`<button class="btn alt smallbtn" id="clearPlayer">${t("removePlayer")}</button>`:""}
-${target?`<button class="btn alt smallbtn" id="clearTarget">${t("removeTarget")}</button>`:""}
 </div>
+`:""}
+
+<div class="maptools">
+${player?`
+<button class="btn alt smallbtn" id="clearPlayer">
+${t("removePlayer")}
+</button>
+`:""}
+
+${target?`
+<button class="btn alt smallbtn" id="clearTarget">
+${t("removeTarget")}
+</button>
+`:""}
+</div>
+
 <h2>${t("markerList")} (${markers.length})</h2>
+
 ${markers.length?markers.map(m=>`
 <div class="markerrow">
 <span>${iconFor(m.type)}</span>
-<div class="name"><strong>${esc(m.name)}</strong>
-<small>${esc(m.type)} ${m.completed?"· ✓":""}</small></div>
-<button class="btn alt smallbtn" data-targetmarker="${esc(m.id)}">🎯</button>
-<button class="btn alt smallbtn" data-donemarker="${esc(m.id)}">${m.completed?"↩":"✓"}</button>
-<button class="btn alt smallbtn" data-deletemarker="${esc(m.id)}">✕</button>
-</div>`).join(""):`<div class="empty">${t("noMarkers")}</div>`}`;
+<div class="name">
+<strong>${esc(m.name)}</strong>
+<small>${esc(m.type)} ${m.completed?"· ✓":""}</small>
+</div>
+<button class="btn alt smallbtn"
+data-targetmarker="${esc(m.id)}">🎯</button>
+<button class="btn alt smallbtn"
+data-donemarker="${esc(m.id)}">
+${m.completed?"↩":"✓"}
+</button>
+<button class="btn alt smallbtn"
+data-deletemarker="${esc(m.id)}">✕</button>
+</div>
+`).join(""):`<div class="empty">${t("noMarkers")}</div>`}
+`;
 }
 
 function collectionPage(){
 return `
 <h1>⚔ ${t("collection")}</h1>
 <p>${t("collectionInfo")}</p>
+
 <div class="grid">
-${[["items","⚔"],["bosses","🐉"],["npcs","♟"],["materials","💎"]]
-.map(([id,icon])=>`
-<button class="card" data-collection="${id}" style="text-align:left;color:white">
-<h3>${icon} ${t(id)}</h3></button>`).join("")}
+${[
+["items","⚔"],
+["bosses","🐉"],
+["npcs","♟"],
+["materials","💎"]
+].map(([id,icon])=>`
+<button class="card" data-collection="${id}"
+style="text-align:left;color:white">
+<h3>${icon} ${t(id)}</h3>
+</button>
+`).join("")}
 </div>
+
 <div class="card" style="margin-top:15px">
 <h2>${t(collectionTab)}</h2>
 <div class="empty">${t("notReady")}</div>
-</div>`;
+</div>
+`;
 }
 
 function progressPage(){
 const main=quests.filter(q=>q.type==="main");
 const side=quests.filter(q=>q.type==="side");
+
 return `
 <h1>✓ ${t("progress")}</h1>
+
 <div class="card">
-<div class="between"><strong>${t("allQuests")}</strong>
-<span>${doneCount()} / ${quests.length}</span></div>
-<div style="margin-top:12px">${meter(doneCount(),quests.length)}</div>
+<div class="between">
+<strong>${t("allQuests")}</strong>
+<span class="counter">${doneCount()} / ${quests.length}</span>
 </div>
+<div style="margin-top:12px">
+${meter(doneCount(),quests.length)}
+</div>
+</div>
+
 ${[["main",main],["side",side]].map(([label,qs])=>{
 const n=qs.filter(q=>questDone(q.id)).length;
-return `<div class="card">
-<div class="between"><strong>${t(label)}</strong><span>${n} / ${qs.length}</span></div>
-<div style="margin-top:12px">${meter(n,qs.length)}</div>
-</div>`;
+return `
+<div class="card">
+<div class="between">
+<strong>${t(label)}</strong>
+<span class="counter">${n} / ${qs.length}</span>
+</div>
+<div style="margin-top:12px">
+${meter(n,qs.length)}
+</div>
+</div>
+`;
 }).join("")}
+
 <h2>${t("main")}</h2>
+
 ${Array.from({length:14},(_,c)=>{
 const qs=quests.filter(q=>q.chapter===c);
 const n=qs.filter(q=>questDone(q.id)).length;
-return `<div class="card">
-<div class="between"><strong>${chapterLabel(c)}</strong>
-<span>${n} / ${qs.length}</span></div>
-<div style="margin-top:12px">${meter(n,qs.length)}</div>
-</div>`;
+return `
+<div class="card">
+<div class="between">
+<strong>${chapterLabel(c)}</strong>
+<span class="counter">${n} / ${qs.length}</span>
+</div>
+<div style="margin-top:12px">
+${meter(n,qs.length)}
+</div>
+</div>
+`;
 }).join("")}
+
 <h2>${t("side")}</h2>
-${["Hernand","Pailune"].map(region=>{
+
+${sideRegions.map(region=>{
 const qs=quests.filter(q=>q.chapter===region);
 const n=qs.filter(q=>questDone(q.id)).length;
-return `<div class="card">
-<div class="between"><strong>${region}</strong>
-<span>${n} / ${qs.length}</span></div>
-<div style="margin-top:12px">${meter(n,qs.length)}</div>
-</div>`;
+return `
+<div class="card">
+<div class="between">
+<strong>${region}</strong>
+<span class="counter">${n} / ${qs.length}</span>
+</div>
+<div style="margin-top:12px">
+${meter(n,qs.length)}
+</div>
+</div>
+`;
 }).join("")}
-<div class="card"><strong>📍 ${t("markerCount")}</strong>
-<p>${markers.length} ${t("total")}</p></div>`;
+
+<div class="card">
+<strong>📍 ${t("markerCount")}</strong>
+<p>${markers.length} ${t("total")}</p>
+</div>
+`;
 }
 
 function settingsPage(){
 return `
 <h1>⚙ ${t("settings")}</h1>
+
 <div class="card">
 <p>${t("local")}</p>
 <div class="toolbar">
@@ -655,18 +1281,23 @@ return `
 <button class="btn alt" id="importBtn">${t("import")}</button>
 <button class="btn alt" id="resetBtn">${t("reset")}</button>
 </div>
-<input type="file" id="backupFile" accept=".json,application/json" hidden>
+<input type="file" id="backupFile"
+accept=".json,application/json" hidden>
 </div>
+
 <div class="card">
-<strong>Crimson Guide 4.0</strong>
+<strong>Crimson Guide 4.1 – Chapter Edition</strong>
 <p class="small">PS5 Companion · DE / EN</p>
-<p class="small">${mainCount} ${t("main")} · ${sideCount} ${t("side")}</p>
+<p class="small">
+${mainCount} ${t("main")} · ${sideCount} ${t("side")}
+</p>
 <p class="small">
 ${language==="de"
-?"Die vollständigen Lösungen und weitere Nebenquests werden später ergänzt."
-:"Full walkthroughs and more side quests will be added later."}
+?"Weitere Nebenquests und ausführliche Lösungen werden später ergänzt."
+:"More side quests and detailed walkthroughs will be added later."}
 </p>
-</div>`;
+</div>
+`;
 }
 
 function render(){
@@ -682,40 +1313,79 @@ page==="collection"?collectionPage():
 page==="progress"?progressPage():
 settingsPage();
 
-document.querySelectorAll("[data-go]").forEach(b=>
-b.onclick=()=>navigate(b.dataset.go));
-
-document.querySelectorAll("[data-quest]").forEach(b=>
-b.onchange=()=>{
-progress["quest:"+b.dataset.quest]=b.checked;
-save();render();
+document.querySelectorAll("[data-go]").forEach(b=>{
+b.onclick=()=>navigate(b.dataset.go);
 });
 
-document.querySelectorAll("[data-openquest]").forEach(b=>
+document.querySelectorAll("[data-quest]").forEach(b=>{
+b.onchange=()=>{
+progress["quest:"+b.dataset.quest]=b.checked;
+save();
+render();
+};
+});
+
+document.querySelectorAll("[data-group]").forEach(b=>{
 b.onclick=()=>{
-selectedQuest=b.dataset.openquest;
+activeGroup=b.dataset.group;
+questView="list";
+questQuery="";
+questStatus="all";
+selectedQuest=null;
+render();
+window.scrollTo(0,0);
+};
+});
+
+document.getElementById("backChapters")?.addEventListener("click",()=>{
+selectedQuest=null;
+questView="chapters";
+activeGroup=null;
+questQuery="";
+questStatus="all";
 solutionVisible=false;
 render();
 window.scrollTo(0,0);
 });
 
+document.querySelectorAll("[data-openquest]").forEach(b=>{
+b.onclick=()=>{
+selectedQuest=b.dataset.openquest;
+solutionVisible=false;
+render();
+window.scrollTo(0,0);
+};
+});
+
 document.getElementById("backQuest")?.addEventListener("click",()=>{
-selectedQuest=null;solutionVisible=false;render();
+selectedQuest=null;
+solutionVisible=false;
+questView="list";
+render();
+window.scrollTo(0,0);
 });
 
 document.getElementById("toggleSolution")?.addEventListener("click",()=>{
-solutionVisible=!solutionVisible;render();
+solutionVisible=!solutionVisible;
+render();
 });
 
-document.querySelectorAll("[data-step]").forEach(b=>
+document.querySelectorAll("[data-step]").forEach(b=>{
 b.onchange=()=>{
-const [id,index]=b.dataset.step.split(":");
-progress["step:"+id+":"+index]=b.checked;
-save();render();
+const value=b.dataset.step;
+const index=value.lastIndexOf(":");
+const id=value.slice(0,index);
+const stepIndex=value.slice(index+1);
+progress["step:"+id+":"+stepIndex]=b.checked;
+save();
+render();
+};
 });
 
 const search=document.getElementById("questSearch");
-if(search)search.oninput=e=>{
+
+if(search){
+search.oninput=e=>{
 questQuery=e.target.value;
 const pos=e.target.selectionStart;
 render();
@@ -723,19 +1393,19 @@ const next=document.getElementById("questSearch");
 next.focus();
 next.setSelectionRange(pos,pos);
 };
+}
 
-document.getElementById("questChapter")?.addEventListener("change",e=>{
-questChapter=e.target.value;render();
-});
-document.getElementById("questType")?.addEventListener("change",e=>{
-questType=e.target.value;render();
-});
 document.getElementById("questStatus")?.addEventListener("change",e=>{
-questStatus=e.target.value;render();
+questStatus=e.target.value;
+render();
 });
 
-document.querySelectorAll("[data-collection]").forEach(b=>
-b.onclick=()=>{collectionTab=b.dataset.collection;render()});
+document.querySelectorAll("[data-collection]").forEach(b=>{
+b.onclick=()=>{
+collectionTab=b.dataset.collection;
+render();
+};
+});
 
 if(page==="map")setupMap();
 if(page==="settings")setupSettings();
@@ -746,62 +1416,95 @@ const wrap=document.getElementById("mapwrap");
 const world=document.getElementById("mapworld");
 
 function transform(){
-world.style.transform=`translate(${offsetX}px,${offsetY}px) scale(${zoom})`;
+world.style.transform=
+`translate(${offsetX}px,${offsetY}px) scale(${zoom})`;
 }
 
 document.getElementById("zoomIn").onclick=()=>{
-zoom=Math.min(4,zoom+.25);transform();
-};
-document.getElementById("zoomOut").onclick=()=>{
-zoom=Math.max(.6,zoom-.25);transform();
-};
-document.getElementById("resetView").onclick=()=>{
-zoom=1;offsetX=0;offsetY=0;transform();
+zoom=Math.min(4,zoom+.25);
+transform();
 };
 
-document.querySelectorAll("[data-mode]").forEach(b=>
+document.getElementById("zoomOut").onclick=()=>{
+zoom=Math.max(.6,zoom-.25);
+transform();
+};
+
+document.getElementById("resetView").onclick=()=>{
+zoom=1;
+offsetX=0;
+offsetY=0;
+transform();
+};
+
+document.querySelectorAll("[data-mode]").forEach(b=>{
 b.onclick=()=>{
 mapMode=mapMode===b.dataset.mode?"pan":b.dataset.mode;
 render();
+};
 });
 
 document.getElementById("clearPlayer")?.addEventListener("click",()=>{
-player=null;save();render();
-});
-document.getElementById("clearTarget")?.addEventListener("click",()=>{
-target=null;save();render();
+player=null;
+save();
+render();
 });
 
-document.querySelectorAll("[data-targetmarker]").forEach(b=>
+document.getElementById("clearTarget")?.addEventListener("click",()=>{
+target=null;
+save();
+render();
+});
+
+document.querySelectorAll("[data-targetmarker]").forEach(b=>{
 b.onclick=()=>{
 const m=markers.find(x=>x.id===b.dataset.targetmarker);
-if(m){target={x:m.x,y:m.y};save();render()}
+if(m){
+target={x:m.x,y:m.y};
+save();
+render();
+}
+};
 });
 
-document.querySelectorAll("[data-donemarker]").forEach(b=>
+document.querySelectorAll("[data-donemarker]").forEach(b=>{
 b.onclick=()=>{
 const m=markers.find(x=>x.id===b.dataset.donemarker);
-if(m){m.completed=!m.completed;save();render()}
+if(m){
+m.completed=!m.completed;
+save();
+render();
+}
+};
 });
 
-document.querySelectorAll("[data-deletemarker]").forEach(b=>
+document.querySelectorAll("[data-deletemarker]").forEach(b=>{
 b.onclick=()=>{
 markers=markers.filter(m=>m.id!==b.dataset.deletemarker);
-save();render();
+save();
+render();
+};
 });
 
-document.querySelectorAll("[data-marker]").forEach(b=>
+document.querySelectorAll("[data-marker]").forEach(b=>{
 b.onclick=e=>{
 e.stopPropagation();
 const m=markers.find(x=>x.id===b.dataset.marker);
 if(m)alert(m.name+" · "+m.type);
+};
 });
 
-let dragging=false,moved=false,lastX=0,lastY=0,startX=0,startY=0;
+let dragging=false;
+let moved=false;
+let lastX=0;
+let lastY=0;
+let startX=0;
+let startY=0;
 
 wrap.addEventListener("pointerdown",e=>{
 if(e.target.closest("button"))return;
-dragging=true;moved=false;
+dragging=true;
+moved=false;
 startX=lastX=e.clientX;
 startY=lastY=e.clientY;
 wrap.setPointerCapture(e.pointerId);
@@ -809,12 +1512,17 @@ wrap.setPointerCapture(e.pointerId);
 
 wrap.addEventListener("pointermove",e=>{
 if(!dragging)return;
-if(Math.hypot(e.clientX-startX,e.clientY-startY)>7)moved=true;
+
+if(Math.hypot(e.clientX-startX,e.clientY-startY)>7){
+moved=true;
+}
+
 if(mapMode==="pan"){
 offsetX+=e.clientX-lastX;
 offsetY+=e.clientY-lastY;
 transform();
 }
+
 lastX=e.clientX;
 lastY=e.clientY;
 });
@@ -822,42 +1530,62 @@ lastY=e.clientY;
 wrap.addEventListener("pointerup",e=>{
 if(!dragging)return;
 dragging=false;
+
 if(moved||mapMode==="pan")return;
 
 const rect=wrap.getBoundingClientRect();
-const cx=rect.width/2,cy=rect.height/2;
+const cx=rect.width/2;
+const cy=rect.height/2;
+
 const px=(e.clientX-rect.left-cx-offsetX)/zoom+cx;
 const py=(e.clientY-rect.top-cy-offsetY)/zoom+cy;
+
 const x=px/rect.width*100;
 const y=py/rect.height*100;
 
 if(x<0||x>100||y<0||y>100)return;
 
 if(mapMode==="player"){
-player={x,y};mapMode="pan";save();render();return;
+player={x,y};
+mapMode="pan";
+save();
+render();
+return;
 }
+
 if(mapMode==="target"){
-target={x,y};mapMode="pan";save();render();return;
+target={x,y};
+mapMode="pan";
+save();
+render();
+return;
 }
+
 if(mapMode==="marker"){
 const name=prompt(
 language==="de"?"Name des Fundorts:":"Location name:"
 );
+
 if(!name?.trim())return;
 
 const raw=prompt(
 "Category: quest, boss, treasure, npc, material, other",
 "other"
 );
+
 if(raw===null)return;
 
 const type=types.includes(raw.trim().toLowerCase())
-?raw.trim().toLowerCase():"other";
+?raw.trim().toLowerCase()
+:"other";
 
 markers.push({
 id:"m"+Date.now()+"-"+Math.random().toString(36).slice(2,8),
 name:name.trim().slice(0,100),
-type,x,y,completed:false
+type,
+x,
+y,
+completed:false
 });
 
 mapMode="pan";
@@ -866,11 +1594,15 @@ render();
 }
 });
 
-wrap.addEventListener("pointercancel",()=>dragging=false);
+wrap.addEventListener("pointercancel",()=>{
+dragging=false;
+});
+
 transform();
 }
 
 function setupSettings(){
+
 document.getElementById("exportBtn").onclick=()=>{
 const backup={
 version:31,
@@ -880,15 +1612,19 @@ player,
 target,
 exportedAt:new Date().toISOString()
 };
+
 const blob=new Blob(
 [JSON.stringify(backup,null,2)],
 {type:"application/json"}
 );
+
 const url=URL.createObjectURL(blob);
 const a=document.createElement("a");
+
 a.href=url;
 a.download="crimson-guide-backup.json";
 a.click();
+
 setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 
@@ -904,10 +1640,10 @@ if(file.size>1000000)throw Error("size");
 
 const data=JSON.parse(await file.text());
 
-if(![1,2,3,31].includes(data.version)||
-!data.progress||
-typeof data.progress!=="object"||
-Array.isArray(data.progress)){
+if(![1,2,3,31].includes(data.version)
+||!data.progress
+||typeof data.progress!=="object"
+||Array.isArray(data.progress)){
 throw Error("format");
 }
 
@@ -915,9 +1651,11 @@ const clean={};
 
 for(let [key,value] of Object.entries(data.progress)){
 if(key.length>160||typeof value!=="boolean")continue;
+
 if(data.version===1&&key.startsWith("quests:")){
 key="quest:"+key.slice(7);
 }
+
 clean[key]=value;
 }
 
@@ -970,6 +1708,12 @@ render();
 };
 
 render();
+
+if("serviceWorker" in navigator){
+window.addEventListener("load",()=>{
+navigator.serviceWorker.register("./sw.js").catch(()=>{});
+});
+}
 </script>
 </body>
 </html>
