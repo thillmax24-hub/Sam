@@ -4,459 +4,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#101015">
+<meta name="theme-color" content="#151217">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Crimson Guide">
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>Crimson Guide 4.1</title>
+<title>Crimson Guide 4.2</title>
 <style>
-:root{
---bg:#101015;
---panel:#1d1c23;
---panel2:#292731;
---line:#40383d;
---text:#f6f2ec;
---muted:#aaa5ad;
---gold:#e2bd7b;
---red:#9e3e4b;
---green:#78c9a2;
-}
+:root{--bg:#121116;--panel:#211e25;--panel2:#2e2931;--line:#493b42;--red:#a84653;--gold:#e3bf82;--text:#f7f2ec;--muted:#b1a6ad;--green:#8acaa3}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-margin:0;
-background:radial-gradient(ellipse at 85% 0%,#44252b45,transparent 38%),var(--bg);
-color:var(--text);
-font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-button,input,select{font:inherit}
-button{cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible{
-outline:2px solid var(--gold);outline-offset:2px
-}
-a{color:var(--gold)}
-.layout{display:flex;min-height:100dvh}
-aside{
-width:225px;flex-shrink:0;background:#17171e;
-border-right:1px solid var(--line);padding:20px 12px
-}
-.brand{font-size:21px;font-weight:900;color:var(--gold);padding:12px}
-.brand small{
-display:block;font-size:10px;letter-spacing:2px;
-color:var(--muted);margin-top:5px
-}
-nav{display:grid;gap:5px;margin-top:20px}
-nav button{
-border:0;background:none;color:var(--muted);
-padding:13px;border-radius:10px;text-align:left
-}
-nav button.active{background:#4a292e;color:white}
-main{
-width:100%;max-width:1250px;min-width:0;
-margin:auto;padding:22px;align-self:flex-start
-}
-header{
-display:flex;justify-content:space-between;
-align-items:center;gap:10px;margin-bottom:22px
-}
-.eyebrow{font-size:11px;letter-spacing:2px;color:var(--gold)}
-h1{font-size:clamp(27px,4vw,39px);margin:8px 0 15px}
-h2{font-size:20px}
-h3{font-size:16px}
-p{color:var(--muted);line-height:1.55}
-.small{font-size:13px;color:var(--muted)}
-.card{
-background:var(--panel);border:1px solid var(--line);
-border-radius:14px;padding:17px;margin-bottom:12px
-}
-.hero,.chapterHero{
-background:linear-gradient(135deg,#4a262f 0%,#29222a 46%,#19191f 100%);
-border:1px solid #72515a;border-radius:18px;
-padding:24px;margin-bottom:19px;box-shadow:0 14px 40px #0002
-}
-.hero p,.chapterHero p{color:#d4c5c4}
-.grid{
-display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
-}
-.grid .card{margin:0}
-.btn{
-display:inline-flex;justify-content:center;align-items:center;gap:7px;
-background:var(--red);color:white;border:0;border-radius:10px;
-padding:11px 15px;font-weight:650;text-decoration:none
-}
-.btn.alt{background:#30343e}
-.btn.gold{
-background:linear-gradient(115deg,#e4c38b,#bd8b55);color:#201b1b
-}
-.btn.smallbtn{padding:8px 11px;font-size:12px}
-.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-input[type=search],input[type=text],select{
-background:var(--panel2);border:1px solid var(--line);
-color:white;border-radius:10px;padding:11px;min-width:0
-}
-input[type=search]{flex:1;min-width:140px}
-input[type=checkbox]{accent-color:var(--red);width:17px;height:17px}
-.between{
-display:flex;justify-content:space-between;align-items:center;gap:10px
-}
-.meter{
-height:9px;background:#373943;border-radius:20px;overflow:hidden
-}
-.meter div{
-height:100%;background:linear-gradient(90deg,#a74250,#d8b77c)
-}
-.counter{
-font-weight:800;font-variant-numeric:tabular-nums;
-color:var(--gold);white-space:nowrap
-}
-.sectionHeading{margin:27px 0 14px;color:#f1e6d4}
-.chapterGrid{
-display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
-}
-.chapterCard{
-display:flex;align-items:center;gap:13px;min-width:0;width:100%;
-background:linear-gradient(120deg,#25222a,#1a1b22);
-border:1px solid #494047;border-radius:15px;
-padding:17px;color:var(--text);text-align:left;
-transition:transform .15s,border-color .15s
-}
-.chapterCard:hover{transform:translateY(-2px);border-color:var(--gold)}
-.chapterCard:active{transform:scale(.99)}
-.chapterIcon{
-display:grid;place-items:center;flex:0 0 44px;
-width:44px;height:44px;border-radius:12px;
-background:#56333a;color:#e9bd79;font-size:23px
-}
-.chapterContent{flex:1;min-width:0}
-.chapterTop{
-display:flex;justify-content:space-between;align-items:center;gap:8px
-}
-.chapterTop strong{font-size:16px}
-.chapterSubtitle{
-display:block;color:var(--muted);font-size:12px;
-margin:5px 0 12px;white-space:nowrap;
-overflow:hidden;text-overflow:ellipsis
-}
-.chapterProgress{display:block}
-.chapterProgress .meter{height:7px}
-.chapterArrow,.chevron{color:var(--gold);font-size:24px}
-.chapterComplete{border-color:#59735d}
-.chapterComplete .chapterIcon{background:#294638;color:#9de1b0}
-.crumb{
-display:flex;flex-wrap:wrap;align-items:center;gap:9px;
-color:var(--muted);font-size:13px;margin:2px 0 16px
-}
-.textbtn{
-border:0;background:transparent;color:var(--gold);
-padding:6px 0;text-align:left
-}
-.textbtn:hover{text-decoration:underline}
-.questDetailHero{
-padding:22px 24px;border-radius:16px;
-background:linear-gradient(130deg,#462630,#211e27);
-border:1px solid #60414a;margin-bottom:16px
-}
-.questDetailHero h1{margin:8px 0}
-.questrow{
-display:flex;align-items:center;gap:12px;padding:13px;
-background:var(--panel);border:1px solid var(--line);
-border-radius:11px;margin-bottom:8px
-}
-.questrow:hover{border-color:#79606a}
-.questrow.completed{background:#1d2a26}
-.questrow button{
-flex:1;min-width:0;background:none;border:0;
-color:white;text-align:left
-}
-.questrow button strong{display:block;font-size:16px}
-.questrow button small{
-display:block;color:var(--muted);margin-bottom:5px
-}
-.completeLine{display:flex;gap:12px;align-items:center;font-weight:650}
-.step{
-display:flex;gap:10px;align-items:flex-start;
-background:var(--panel2);border-radius:10px;
-padding:13px;margin-bottom:8px;line-height:1.5
-}
-.questmeta{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.questtag{
-border:1px solid var(--line);border-radius:20px;
-padding:6px 10px;color:var(--muted);font-size:12px
-}
-.solutionhidden{
-padding:22px;text-align:center;border:1px dashed var(--line);
-border-radius:12px;margin-top:12px;color:var(--muted)
-}
-.notice{
-padding:12px;background:#2c281f;border-left:3px solid var(--gold);
-color:#e7d5b5;font-size:13px;margin:12px 0
-}
-.empty{
-border:1px dashed var(--line);border-radius:12px;
-padding:26px;text-align:center;color:var(--muted)
-}
-.maptools{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.mapwrap{
-position:relative;height:min(65vh,620px);min-height:350px;
-border-radius:15px;border:1px solid var(--line);
-overflow:hidden;background:#242a31;
-touch-action:none;cursor:grab
-}
-.mapworld{
-position:absolute;inset:0;transform-origin:center;
-background:
-radial-gradient(ellipse at 35% 35%,#48574a,transparent 48%),
-radial-gradient(ellipse at 72% 68%,#535063,transparent 49%),
-repeating-linear-gradient(0deg,transparent 0 49px,#ffffff0a 50px),
-repeating-linear-gradient(90deg,transparent 0 49px,#ffffff0a 50px),
-#28323a
-}
-.mapcenter{
-position:absolute;top:50%;left:50%;
-transform:translate(-50%,-50%);
-text-align:center;color:#dbc398;
-pointer-events:none;font-size:23px;letter-spacing:2px;opacity:.8
-}
+body{margin:0;background:radial-gradient(ellipse at 80% 0%,#572b3444,transparent 42%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+a{color:var(--gold)}p{color:var(--muted);line-height:1.6}h1{font-size:clamp(27px,4vw,38px);margin:8px 0 16px}h2{font-size:21px}h3{font-size:16px}
+.layout{display:flex;min-height:100dvh}aside{width:225px;flex-shrink:0;background:#19171d;border-right:1px solid var(--line);padding:18px 12px}
+.brand{font-size:21px;font-weight:900;color:var(--gold);padding:12px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:5px}
+nav{display:grid;gap:5px;margin-top:20px}nav button{border:0;background:none;color:var(--muted);text-align:left;padding:13px;border-radius:10px}nav button.active{background:#4d2a33;color:#fff}
+main{width:100%;max-width:1200px;min-width:0;margin:auto;padding:22px;align-self:flex-start}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:22px}
+.eyebrow{font-size:11px;letter-spacing:2px;color:var(--gold)}.small{font-size:13px;color:var(--muted)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:17px;margin-bottom:12px}
+.hero{background:linear-gradient(135deg,#4e2833,#282029 60%,#19191e);border:1px solid #77515b;border-radius:18px;padding:24px;margin-bottom:18px}
+.hero p{color:#d8c7c7}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.grid>.card{margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;background:var(--red);color:white;border-radius:10px;padding:11px 15px;font-weight:650;text-decoration:none}
+.btn.alt{background:#35313b}.btn.gold{background:linear-gradient(115deg,#e6c48a,#c2935e);color:#231b1b}.btn.sm{padding:8px 11px;font-size:12px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+input[type=search],input[type=text],select{background:var(--panel2);border:1px solid var(--line);color:white;border-radius:10px;padding:11px;min-width:0}
+input[type=search]{flex:1;min-width:130px}input[type=checkbox]{accent-color:var(--red);width:18px;height:18px}
+.between{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.meter{height:8px;background:#403942;border-radius:20px;overflow:hidden}.meter>div{height:100%;background:linear-gradient(90deg,#ac4756,#e2bd82)}
+.counter{font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+.chapterGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.chapterCard{display:flex;align-items:center;gap:13px;width:100%;min-width:0;background:linear-gradient(115deg,#2b242d,#1d1c22);border:1px solid var(--line);border-radius:15px;padding:17px;color:white;text-align:left}
+.chapterCard:hover{border-color:var(--gold)}.chapterCard.complete{border-color:#51715b}
+.chapterIcon{display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;border-radius:12px;background:#56313b;color:var(--gold);font-size:23px}
+.chapterContent{flex:1;min-width:0}.chapterTop{display:flex;justify-content:space-between;align-items:center;gap:8px}.chapterSubtitle{display:block;color:var(--muted);font-size:12px;margin:6px 0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chapterArrow{font-size:24px;color:var(--gold)}.sectionHeading{margin:28px 0 14px}
+.crumb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 16px;font-size:13px;color:var(--muted)}
+.textbtn{border:0;background:none;color:var(--gold);padding:5px 0}
+.questrow{display:flex;align-items:center;gap:12px;padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:11px;margin-bottom:8px}
+.questrow.completed{background:#1d2924}.questrow button{flex:1;min-width:0;border:0;background:none;text-align:left;color:white}.questrow button strong{display:block}.questrow button small{display:block;color:var(--muted);margin-bottom:5px}
+.questtag{display:inline-block;border:1px solid var(--line);border-radius:20px;padding:6px 10px;font-size:12px;color:var(--muted);margin:3px}
+.step{display:flex;gap:11px;align-items:flex-start;padding:14px;background:var(--panel2);border-radius:10px;margin-bottom:8px;line-height:1.55}
+.step.checked span{text-decoration:line-through;color:var(--muted)}
+.notice{padding:13px;background:#312a20;border-left:3px solid var(--gold);color:#ead5af;border-radius:4px;margin:13px 0;line-height:1.55}
+.empty{padding:25px;border:1px dashed var(--line);border-radius:12px;text-align:center;color:var(--muted)}
+.guideBox{background:#29242c;border:1px solid #5e4650;border-radius:14px;padding:17px;margin:15px 0}
+.guideBox h3{color:var(--gold);margin:0 0 8px}
+.guideBox p{margin:7px 0}.completeLine{display:flex;align-items:center;gap:12px;font-weight:700}
+.mapwrap{position:relative;height:min(62vh,600px);min-height:340px;overflow:hidden;border-radius:14px;border:1px solid var(--line);background:#29343c;touch-action:none}
+.mapworld{position:absolute;inset:0;transform-origin:center;background:radial-gradient(ellipse at 30% 30%,#52634e,transparent 45%),radial-gradient(ellipse at 75% 70%,#625c69,transparent 50%),repeating-linear-gradient(0deg,transparent 0 49px,#ffffff0a 50px),repeating-linear-gradient(90deg,transparent 0 49px,#ffffff0a 50px),#303b43}
+.mapcenter{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#dfc38c;font-size:24px;pointer-events:none}
 .mapcenter small{display:block;font-size:10px;margin-top:8px}
-.mapmarker{
-position:absolute;transform:translate(-50%,-50%);
-width:34px;height:34px;border-radius:50%;
-border:2px solid #fff3d8;background:#a8424b;
-color:white;display:grid;place-items:center;z-index:4
-}
-.mapmarker.player{background:#1b86dc}
-.mapmarker.target{background:#c18c2b}
-.mapmarker.completed{opacity:.5}
-.route{
-position:absolute;inset:0;width:100%;height:100%;
-pointer-events:none;z-index:2
-}
-.route line{
-stroke:#f4d084;stroke-width:.7;
-stroke-dasharray:1.5 1;vector-effect:non-scaling-stroke
-}
-.markerrow{
-display:flex;align-items:center;gap:10px;padding:12px;
-background:var(--panel);border:1px solid var(--line);
-border-radius:10px;margin-bottom:7px
-}
-.markerrow .name{flex:1;min-width:0}
-.markerrow strong{display:block}
-.markerrow small{color:var(--muted)}
-.mobileNav{display:none}
-footer{font-size:11px;color:var(--muted);margin-top:35px}
-@media(max-width:800px){
-.chapterGrid{grid-template-columns:1fr}
-.chapterCard{padding:15px}
-.chapterHero{padding:19px}
-.chapterIcon{flex-basis:40px;width:40px;height:40px}
-}
-@media(max-width:760px){
-.layout{display:block}
-aside{display:none}
-main{padding:15px 13px 105px}
-.hero{padding:20px}
-.grid{gap:9px}
-.grid .card{padding:13px}
-.mapwrap{height:53dvh;min-height:320px}
-.mobileNav{
-position:fixed;bottom:0;left:0;right:0;z-index:50;
-display:flex;justify-content:space-around;background:#191b22;
-border-top:1px solid var(--line);
-padding:7px 3px calc(7px + env(safe-area-inset-bottom))
-}
-.mobileNav button{
-flex:1;display:flex;flex-direction:column;align-items:center;
-gap:4px;border:0;background:none;color:var(--muted);
-padding:7px 2px;font-size:10px
-}
-.mobileNav button.active{color:var(--gold)}
-.mobileNav .ico{font-size:22px}
-}
+.mapmarker{position:absolute;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;border:2px solid #fff0d6;background:#a84653;color:white;display:grid;place-items:center;z-index:4}
+.mapmarker.player{background:#2589d4}.mapmarker.target{background:#c19038}.mapmarker.completed{opacity:.5}
+.route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}.route line{stroke:#ffdf91;stroke-width:.7;stroke-dasharray:1.5 1;vector-effect:non-scaling-stroke}
+.markerrow{display:flex;align-items:center;gap:10px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:7px}.markerrow .name{flex:1;min-width:0}.markerrow strong{display:block}.markerrow small{color:var(--muted)}
+.mobileNav{display:none}footer{font-size:11px;color:var(--muted);margin-top:35px}
+@media(max-width:800px){.chapterGrid{grid-template-columns:1fr}}
+@media(max-width:760px){.layout{display:block}aside{display:none}main{padding:15px 13px 105px}.hero{padding:19px}.grid{gap:9px}.grid>.card{padding:13px}.mapwrap{height:53dvh;min-height:320px}.mobileNav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;justify-content:space-around;background:#19191f;border-top:1px solid var(--line);padding:7px 3px calc(7px + env(safe-area-inset-bottom))}.mobileNav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:none;color:var(--muted);padding:7px 2px;font-size:10px}.mobileNav button.active{color:var(--gold)}.mobileNav .ico{font-size:22px}}
 </style>
 </head>
 <body>
 <div class="layout">
 <aside>
-<div class="brand">
-⚔ CRIMSON GUIDE
-<small>PYWEL COMPANION</small>
-</div>
+<div class="brand">⚔ CRIMSON GUIDE<small>PYWEL COMPANION</small></div>
 <nav id="nav"></nav>
 </aside>
 <main>
 <header>
-<span class="eyebrow">CRIMSON GUIDE • 4.1</span>
+<span class="eyebrow">CRIMSON GUIDE • VERSION 4.2</span>
 <select id="lang" aria-label="Language">
 <option value="de">🇩🇪 Deutsch</option>
 <option value="en">🇬🇧 English</option>
 </select>
 </header>
 <div id="app"></div>
-<footer>
-Unofficial fan project. Not affiliated with Pearl Abyss.
-</footer>
+<footer>Unofficial fan project. Not affiliated with Pearl Abyss.</footer>
 </main>
 </div>
 <div id="mobileNav" class="mobileNav"></div>
-
 <script>
 "use strict";
 
-const MAP_URL="https://crimsondesert.th.gl/maps/Continent%20of%20Pywel";
-const GUIDE_URL="https://www.powerpyx.com/crimson-desert-walkthrough-all-main-quests/";
 const PROGRESS_KEY="crimson-guide-progress-v2";
 const MARKERS_KEY="crimson-guide-markers-v3";
 const POSITION_KEY="crimson-guide-player-v31";
 const TARGET_KEY="crimson-guide-target-v31";
+const MAP_URL="https://crimsondesert.th.gl/maps/Continent%20of%20Pywel";
+const MAIN_GUIDE="https://www.powerpyx.com/crimson-desert-walkthrough-all-main-quests/";
 
 const TXT={
 de:{
-home:"Start",
-map:"Karte",
-quests:"Quests",
-collection:"Sammlung",
-progress:"Fortschritt",
-settings:"Einstellungen",
-welcome:"Dein Abenteuer in Pywel",
-intro:"Deine Quest-Datenbank mit Kapitelübersicht und persönlichem Fortschritt.",
-realMap:"Pywel-Karte öffnen",
-mapNote:"Eigene Planungsfläche. Noch keine echte Pywel-Karte.",
+home:"Start",map:"Karte",quests:"Quests",collection:"Sammlung",progress:"Fortschritt",settings:"Einstellungen",
+main:"Hauptquests",side:"Nebenquests",done:"Erledigt",open:"Offen",
+welcome:"Dein Abenteuer in Pywel",intro:"Questlösungen, Kapitelübersicht und dein persönlicher Fortschritt.",
+chapters:"Alle Kapitel",search:"Quest suchen...",allStatus:"Alle Status",
+steps:"Schritt-für-Schritt-Lösung",show:"🔒 Lösung anzeigen",hide:"🔓 Lösung verbergen",
+finished:"Quest abgeschlossen",noGuide:"Für diese Quest ist noch keine ausführliche Lösung hinterlegt.",
+location:"Fundort",tip:"Hilfreicher Tipp",source:"Original-Walkthrough öffnen",
+partial:"Lösung vorhanden",pending:"Lösung ausstehend",chapter:"Kapitel",
+total:"Gesamt",mapNote:"Eigene Planungsfläche – keine echte Pywel-Karte.",
 mapWarning:"Die Positionen entsprechen keinen echten Spielkoordinaten.",
-questSearch:"Quest suchen...",
-allChapters:"Alle Kapitel und Regionen",
-allStatus:"Alle Status",
-allTypes:"Alle Questtypen",
-main:"Hauptquests",
-side:"Nebenquests",
-open:"Offen",
-done:"Erledigt",
-steps:"Lösungsschritte",
-showSolution:"🔒 Lösung anzeigen (Spoiler)",
-hideSolution:"🔓 Lösung verbergen",
-noSteps:"Für diese Quest ist noch keine geprüfte Komplettlösung eingetragen.",
-guide:"Externen Quest-Guide öffnen",
-finished:"Quest abgeschlossen",
-back:"Zurück",
-solutionStatus:"Lösungsstatus",
-partial:"Kurze Anleitung vorhanden",
-pending:"Lösung noch ausstehend",
+realMap:"Interaktive Pywel-Karte öffnen",player:"Spielerposition setzen",target:"Ziel setzen",
+addMarker:"Marker hinzufügen",resetView:"Ansicht zurücksetzen",
+markerList:"Meine Fundorte",removePlayer:"Position entfernen",removeTarget:"Ziel entfernen",
+noMarkers:"Noch keine Markierungen vorhanden.",
+routeHint:"Die Linie zeigt nur die direkte Richtung, keinen echten Spielweg.",
 collectionInfo:"Die vollständigen Sammlungsdaten werden später ergänzt.",
-items:"Gegenstände",
-bosses:"Bosse",
-npcs:"NPCs",
-materials:"Materialien",
+items:"Gegenstände",bosses:"Bosse",npcs:"NPCs",materials:"Materialien",
 notReady:"Noch keine geprüften Inhalte vorhanden.",
 local:"Deine Daten bleiben lokal auf diesem Gerät. Erstelle regelmäßig ein Backup.",
-export:"Backup exportieren",
-import:"Backup importieren",
-reset:"Alle Daten löschen",
-confirmReset:"Wirklich Fortschritt und Markierungen löschen?",
-invalid:"Ungültige Backup-Datei.",
-imported:"Backup importiert.",
-total:"Gesamt",
-markerCount:"Markierungen",
-setPlayer:"Spielerposition setzen",
-setTarget:"Ziel setzen",
-addMarker:"Marker hinzufügen",
-resetView:"Ansicht zurücksetzen",
-markerList:"Meine Fundorte",
-noMarkers:"Noch keine Markierungen vorhanden.",
-target:"Zielpunkt",
-removeTarget:"Ziel entfernen",
-removePlayer:"Position entfernen",
-navigationHint:"Die Linie zeigt nur die direkte Richtung, keinen begehbaren Spielweg.",
-chapter:"Kapitel",
-prologue:"Prolog",
-epilogue:"Epilog",
-region:"Region",
-allQuests:"Alle Quests",
-questDatabase:"Quest-Datenbank",
-verifiedSteps:"Kurze Anleitung vorhanden",
-pendingSteps:"Lösung ausstehend"
+export:"Backup exportieren",import:"Backup importieren",reset:"Alle Daten löschen",
+confirmReset:"Wirklich alle Fortschritte und Markierungen löschen?",
+invalid:"Ungültige Backup-Datei.",imported:"Backup importiert.",
+chapter1Ready:"Kapitel 1 enthält jetzt neun Questanleitungen.",
+chapterProgress:"Kapitel-Fortschritt",noResults:"Keine Quests gefunden."
 },
 en:{
-home:"Home",
-map:"Map",
-quests:"Quests",
-collection:"Collection",
-progress:"Progress",
-settings:"Settings",
-welcome:"Your adventure in Pywel",
-intro:"Your quest database with chapter navigation and personal progress.",
-realMap:"Open Pywel map",
-mapNote:"Personal planning canvas. Not a real Pywel map yet.",
-mapWarning:"Positions do not represent actual game coordinates.",
-questSearch:"Search quests...",
-allChapters:"All chapters and regions",
-allStatus:"All statuses",
-allTypes:"All quest types",
-main:"Main quests",
-side:"Side quests",
-open:"Open",
-done:"Completed",
-steps:"Walkthrough steps",
-showSolution:"🔒 Show solution (spoilers)",
-hideSolution:"🔓 Hide solution",
-noSteps:"No verified complete walkthrough has been added for this quest.",
-guide:"Open external quest guide",
-finished:"Quest completed",
-back:"Back",
-solutionStatus:"Solution status",
-partial:"Short guide available",
-pending:"Solution pending",
+home:"Home",map:"Map",quests:"Quests",collection:"Collection",progress:"Progress",settings:"Settings",
+main:"Main quests",side:"Side quests",done:"Completed",open:"Open",
+welcome:"Your adventure in Pywel",intro:"Quest walkthroughs, chapter navigation and personal progress.",
+chapters:"All chapters",search:"Search quests...",allStatus:"All statuses",
+steps:"Step-by-step walkthrough",show:"🔒 Show solution",hide:"🔓 Hide solution",
+finished:"Quest completed",noGuide:"No detailed walkthrough has been added for this quest yet.",
+location:"Location",tip:"Helpful tip",source:"Open original walkthrough",
+partial:"Guide available",pending:"Guide pending",chapter:"Chapter",
+total:"Total",mapNote:"Personal planning canvas – not an actual Pywel map.",
+mapWarning:"Positions do not represent real game coordinates.",
+realMap:"Open interactive Pywel map",player:"Set player position",target:"Set destination",
+addMarker:"Add marker",resetView:"Reset view",markerList:"My locations",
+removePlayer:"Clear player position",removeTarget:"Clear destination",
+noMarkers:"No markers yet.",routeHint:"The line shows direct direction only, not a real game route.",
 collectionInfo:"Complete collection data will be added later.",
-items:"Items",
-bosses:"Bosses",
-npcs:"NPCs",
-materials:"Materials",
+items:"Items",bosses:"Bosses",npcs:"NPCs",materials:"Materials",
 notReady:"No verified content available yet.",
 local:"Your data stays on this device. Export backups regularly.",
-export:"Export backup",
-import:"Import backup",
-reset:"Delete all data",
-confirmReset:"Delete progress and markers?",
-invalid:"Invalid backup file.",
-imported:"Backup imported.",
-total:"Total",
-markerCount:"Markers",
-setPlayer:"Set player position",
-setTarget:"Set destination",
-addMarker:"Add marker",
-resetView:"Reset view",
-markerList:"My locations",
-noMarkers:"No markers yet.",
-target:"Destination",
-removeTarget:"Clear destination",
-removePlayer:"Clear position",
-navigationHint:"The line shows direct direction only, not a traversable game route.",
-chapter:"Chapter",
-prologue:"Prologue",
-epilogue:"Epilogue",
-region:"Region",
-allQuests:"All quests",
-questDatabase:"Quest database",
-verifiedSteps:"Short guide available",
-pendingSteps:"Solution pending"
+export:"Export backup",import:"Import backup",reset:"Delete all data",
+confirmReset:"Delete all progress and markers?",
+invalid:"Invalid backup file.",imported:"Backup imported.",
+chapter1Ready:"Chapter 1 now includes nine quest guides.",
+chapterProgress:"Chapter progress",noResults:"No quests found."
 }
 };
-
+const t=k=>TXT[language][k]||k;
 const chapterNames=[
-"Prologue",
-"Chapter 1",
-"Golden Greed",
-"Chapter 3",
-"Chapter 4",
-"Chapter 5",
-"Chapter 6",
-"Chapter 7",
-"Chapter 8",
-"Chapter 9",
-"Chapter 10",
-"Chapter 11",
-"Chapter 12",
-"Epilogue"
+"Dead of Night","The First Encounter","Golden Greed","Howling Hill",
+"The Price of Knowledge","Guest Unbidden","Cracks in the Shield",
+"Homecoming","Blood Coronation","The Sage of the Desert",
+"Counterattack","Truth and Reality","The Abyss","Journey’s End"
 ];
 
 const mainQuestNames=[
@@ -481,34 +176,23 @@ Hernand:`A Rumor Fueled by Greed|Alden's Request|Ambition in the Ruins|Annabella
 Pailune:`White Bear|Snowwhite Deer|Harry's Request|Lola's Request|Gunter's Request`
 };
 
-const sideRegions=Object.keys(sideQuestNames);
-
 function slug(s){
-return s.toLowerCase()
-.normalize("NFD")
+return s.toLowerCase().normalize("NFD")
 .replace(/[\u0300-\u036f]/g,"")
-.replace(/[^a-z0-9]+/g,"-")
-.replace(/^-|-$/g,"");
+.replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 }
-
-const originalIds=[
-"unfamiliar-lands",
-"in-ashes",
-"realm-of-uncertainty",
-"new-journey",
-"where-rumors-gather",
-"mysterious-man",
-"true-wisdom",
-"actions-speak",
-"heart-beyond",
-"mystical-key",
-"polar-opposites",
-"abyss-without-balance",
-"woman-in-white"
-];
-
+function esc(s){
+return String(s??"").replace(/[&<>"']/g,c=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+})[c]);
+}
 const quests=[];
-
+const originalIds=[
+"unfamiliar-lands","in-ashes","realm-of-uncertainty","new-journey",
+"where-rumors-gather","mysterious-man","true-wisdom",
+"actions-speak","heart-beyond","mystical-key",
+"polar-opposites","abyss-without-balance","woman-in-white"
+];
 mainQuestNames.forEach((text,chapter)=>{
 text.split("|").forEach((name,index)=>{
 let id;
@@ -519,761 +203,469 @@ id=slug(name);
 }else{
 id="c"+chapter+"-"+slug(name);
 }
-quests.push({
-id,
-name,
-chapter,
-type:"main"
+quests.push({id,name,chapter,type:"main"});
 });
 });
-});
-
-Object.entries(sideQuestNames).forEach(([region,names])=>{
-names.split("|").forEach((name,index)=>{
+Object.entries(sideQuestNames).forEach(([region,text])=>{
+text.split("|").forEach((name,index)=>{
 quests.push({
 id:"side-"+region.toLowerCase()+"-"+(index+1),
-name,
-chapter:region,
-type:"side"
+name,chapter:region,type:"side"
 });
 });
 });
 
-const solutions={
-"where-rumors-gather":[
-["Begib dich nach Hernand und suche die Taverne auf.","Travel to Hernand and visit the tavern."],
-["Sprich mit den Soldaten und nimm die Herausforderung zum Armdrücken an.","Talk to the soldiers and accept the arm-wrestling challenge."],
-["Folge den eingeblendeten Tastenhinweisen.","Follow the on-screen prompts."]
+/*
+CHAPTER 1 WALKTHROUGHS
+Each step is bilingual: [German, English].
+These are original concise summaries of external guides.
+*/
+
+const chapter1Guides={
+"where-rumors-gather":{
+location:["Taverne in Hernand","Hernand Tavern"],
+steps:[
+["Gehe vom Lager aus in die Stadt Hernand und suche die Taverne. Achte auf das große Fass am Gebäude.","Head from camp into Hernand and find the tavern. Look for the large barrel sign."],
+["Betritt die Taverne und suche den Soldaten, der über Armdrücken spricht.","Enter the tavern and find the soldier talking about arm wrestling."],
+["Sprich ihn an und fordere ihn zum Armdrücken heraus.","Talk to him and challenge him to arm wrestling."],
+["Drücke die angezeigte Taste wiederholt und beachte die eingeblendeten Timing-Ereignisse.","Repeatedly press the displayed button and complete the on-screen timing prompts."],
+["Gewinne das Duell, um die Quest abzuschließen.","Win the contest to finish the quest."]
 ],
-"mysterious-man":[
-["Verlasse die Taverne und suche den älteren Bettler.","Leave the tavern and find the elderly beggar."],
+tip:["Beim Timing-Ereignis bringt ein korrekt gedrückter Knopf einen großen Vorteil.","Successfully timing the quick-time prompt gives a major advantage."],
+url:"https://allthings.how/crimson-desert-trials-of-kindness-every-sub-quest-walkthrough/"
+},
+"mysterious-man":{
+location:["Vor der Taverne in Hernand","Outside Hernand Tavern"],
+steps:[
+["Verlasse die Taverne und suche den alten Bettler in der Nähe.","Leave the tavern and find the elderly beggar nearby."],
 ["Sprich mit ihm und gib ihm eine Münze.","Talk to him and give him a coin."],
-["Nimm den hölzernen Schlüssel entgegen.","Receive the wooden key."]
+["Nimm den Schlüssel entgegen, den du für die folgenden Aufgaben benötigst.","Receive the key needed for the following objectives."],
+["Achte auf die neu verfügbaren Questziele in Hernand.","Check the newly available quest objectives in Hernand."]
 ],
-"where-the-light-leads":[
-["Folge dem Licht des Shai-Anhängers zum Lioncrest-Wachturm außerhalb von Hernand.","Follow the light from the Shai pendant to Lioncrest Watchtower outside Hernand."],
-["Besiege die Banditen und steige auf den Wachturm.","Defeat the bandits and climb the watchtower."],
-["Untersuche den auffälligen Helm.","Inspect the unusual helmet."]
+tip:["Bewahre den Schlüssel auf. Er wird für die weitere Handlung benötigt.","Keep the key. It is needed for story progression."],
+url:"https://allthings.how/crimson-desert-trials-of-kindness-every-sub-quest-walkthrough/"
+},
+"true-wisdom":{
+location:["Kanalisation von Hernand","Hernand Sewers"],
+steps:[
+["Untersuche den Bereich beim Bettler und finde den Zugang zur Kanalisation.","Inspect the area by the beggar and locate the sewer entrance."],
+["Öffne den Zugang und steige hinunter.","Open the entrance and descend."],
+["Schalte deine Laterne ein, damit du die dunklen Wege erkennen kannst.","Turn on your lantern to see the dark paths."],
+["Bewege dich vorsichtig über die Plattformen und Hindernisse.","Carefully navigate the platforms and obstacles."],
+["Suche die Person, die in der Kanalisation Hilfe benötigt.","Find the person in distress inside the sewers."],
+["Hilf der Person und schließe das Questziel ab.","Help the person and complete the objective."]
 ],
-"memory-fragment":[
-["Nimm den Helm aus dem Wachturm auf und rüste ihn aus.","Collect and equip the helmet from the watchtower."],
-["Nutze die Erinnerungsfunktion und sieh die gespeicherte Erinnerung an.","Use the memory ability to view the stored memory."]
+tip:["Achte auf deinen Sprungzeitpunkt, besonders bei instabilen Plattformen.","Time your jumps carefully, especially around unstable platforms."],
+url:"https://www.crimsondesert.app/en/wiki/quests/trials-of-kindness"
+},
+"actions-speak":{
+location:["Wohnviertel von Hernand","Hernand residential area"],
+steps:[
+["Folge der Questmarkierung zu den Bewohnern, die Hilfe benötigen.","Follow the quest marker to the residents asking for help."],
+["Sprich mit dem Paar vor dem Haus.","Talk to the couple outside the house."],
+["Nimm den Besen auf, der für die Aufgabe bereitliegt.","Pick up the broom provided for the task."],
+["Rüste den Besen aus.","Equip the broom."],
+["Erreiche den Schornstein und reinige ihn mit dem Besen.","Reach the chimney and clean it using the broom."],
+["Kehre bei Bedarf zu den Bewohnern zurück und prüfe, ob das Ziel abgeschlossen ist.","Return to the residents if needed and check whether the objective is complete."]
 ],
-"reunion":[
-["Folge dem Questziel zum Kind.","Follow the quest objective to the child."],
-["Lerne die vorgeführten Fähigkeiten Nature’s Grasp und Focus.","Learn the demonstrated abilities Nature’s Grasp and Focus."]
+tip:["Der Besen muss ausgerüstet sein, bevor du den Schornstein reinigen kannst.","The broom must be equipped before you can clean the chimney."],
+url:"https://www.powerpyx.com/crimson-desert-actions-speak-louder-then-words-walkthrough/"
+},
+"heart-beyond":{
+location:["Wohnhäuser westlich des Gasthauses von Hernand","Residential houses west of Hernand Inn"],
+steps:[
+["Suche Rulupee, das Kind mit der grünen Kapuze.","Find Rulupee, the child wearing a green hood."],
+["Sprich mit Rulupee und erfahre, dass die Katze Jiji verschwunden ist.","Talk to Rulupee and learn that the cat Jiji is missing."],
+["Klettere über Kisten und Vorsprünge auf die Dächer.","Climb boxes and ledges to reach the rooftops."],
+["Folge Jiji über die Dächer, bis du die Katze erreichen kannst.","Follow Jiji across the rooftops until you can reach the cat."],
+["Interagiere mit Jiji, um sie aufzunehmen.","Interact with Jiji to pick her up."],
+["Bringe die Katze vorsichtig zu Rulupee zurück.","Carefully carry the cat back to Rulupee."],
+["Nimm anschließend den Shai-Anhänger auf, falls er am Boden liegt.","Pick up the Shai Pendant afterward if it is on the ground."]
 ],
-"for-honor":[
-["Suche in Hernand die Gruppe auf, die über die Greymanes spricht.","Find the group discussing the Greymanes in Hernand."],
-["Stelle dich Matthias im Kampf.","Fight Matthias."]
-]
+tip:["Bewege dich vorsichtig auf den Dächern. Der Shai-Anhänger ist für die folgende Handlung wichtig.","Move carefully across the rooftops. The Shai Pendant matters for the next story section."],
+url:"https://www.crimsondesert.app/en/wiki/quests/heart-beyond-borders"
+},
+"mystical-key":{
+location:["Schloss Hernand","Hernand Castle"],
+steps:[
+["Öffne dein Inventar und untersuche den gravierten Schlüssel.","Open your inventory and inspect the engraved key."],
+["Ziehe die Hernand-Kleidung an, falls sie für den Zugang zum Schloss benötigt wird.","Equip Hernandian attire if required to access the castle."],
+["Folge der Markierung zum Schloss Hernand.","Follow the marker to Hernand Castle."],
+["Betritt das Schloss und gehe in das obere Stockwerk.","Enter the castle and head upstairs."],
+["Suche den Raum, dessen Tür sich mit deinem Schlüssel öffnen lässt.","Find the room that can be unlocked with your key."],
+["Öffne die Tür und untersuche den Raum sowie die Truhe.","Unlock the door and inspect the room and chest."],
+["Betritt das leuchtende Portal, um in den Abyss zu gelangen.","Enter the glowing portal to reach the Abyss."]
+],
+tip:["Wenn du nicht ins Schloss gelangst, prüfe deine Kleidung und die vorherigen Aufgaben.","If you cannot enter the castle, check your clothing and previous objectives."],
+url:"https://www.pcgamer.com/games/action/crimson-desert-mystical-key-polar-opposites/"
+},
+"polar-opposites":{
+location:["Axiom Archive im Abyss","Axiom Archive in the Abyss"],
+steps:[
+["Aktiviere den Abyss-Nexus, indem du die vorgesehene Plattform betrittst.","Activate the Abyss Nexus by stepping onto its platform."],
+["Folge dem Weg in Richtung des Gebäudes.","Follow the route toward the building."],
+["Erhalte die Fähigkeit Axiom Force und achte auf die eingeblendete Steuerung.","Obtain the Axiom Force ability and pay attention to the control instructions."],
+["Nutze Axiom Force, um die beweglichen Elemente zu greifen.","Use Axiom Force to grab movable objects."],
+["Drehe die Scheiben so, dass die Verbindung für den Mechanismus hergestellt wird.","Rotate the discs to complete the mechanism's connection."],
+["Betritt das geöffnete Gebäude und sprich mit Alustin.","Enter the opened building and speak with Alustin."]
+],
+tip:["Drehe die Elemente schrittweise und beobachte, ob der Mechanismus reagiert.","Rotate the pieces gradually and watch for the mechanism's response."],
+url:"https://www.pcgamer.com/games/action/crimson-desert-mystical-key-polar-opposites/"
+},
+"abyss-without-balance":{
+location:["Axiom Archive – Herz des Abyss","Axiom Archive – Heart of the Abyss"],
+steps:[
+["Gehe durch das Skybridge-Tor zum Zentrum des Abyss.","Pass through the skybridge gate toward the heart of the Abyss."],
+["Aktiviere den nächsten Abyss-Nexus.","Activate the next Abyss Nexus."],
+["Nutze deine Fähigkeiten, um die blockierte Passage zu öffnen.","Use your abilities to clear the blocked passage."],
+["Bewege den schwebenden Energiekern zur deaktivierten Vorrichtung.","Move the floating power core toward the inactive device."],
+["Stelle die Abyss-Zelle her, wie es das Questziel verlangt.","Synthesize the Abyss Cell as instructed by the objective."],
+["Aktiviere die Energieversorgung des Abyss.","Activate the Abyss power supply."],
+["Nimm das Abyss-Artefakt auf.","Collect the Abyss Artifact."]
+],
+tip:["Arbeite die eingeblendeten Rätselziele der Reihe nach ab. Die Energieversorgung lässt sich erst nach den vorherigen Schritten aktivieren.","Follow the displayed puzzle objectives in order. The power supply requires the preceding steps."],
+url:"https://www.powerpyx.com/crimson-desert-abyss-without-balance-walkthrough/"
+},
+"woman-in-white":{
+location:["Ethereal Pathway im Abyss","Ethereal Pathway in the Abyss"],
+steps:[
+["Gehe zur geheimnisvollen Frau in Weiß.","Approach the mysterious Woman in White."],
+["Sprich mit ihr und sieh dir die Zwischensequenz an.","Speak with her and watch the cutscene."],
+["Folge dem Questziel, um den Abyss zu verlassen.","Follow the objective to leave the Abyss."],
+["Achte beim Fall auf die eingeblendete Taste, um deine Flügel zu aktivieren.","Watch for the on-screen button prompt while falling to activate your wings."],
+["Gleite kontrolliert in Richtung Hernand.","Glide toward Hernand in a controlled descent."],
+["Behalte genug Ausdauer für die sichere Landung.","Keep enough stamina for a safe landing."]
+],
+tip:["Aktiviere die Gleitfunktion rechtzeitig und achte auf deine Ausdauer.","Activate gliding in time and watch your stamina."],
+url:"https://www.powerpyx.com/crimson-desert-woman-in-white-walkthrough/"
+}
 };
 
-quests.forEach(q=>{
-if(solutions[q.id]){
-q.steps=solutions[q.id].map(([de,en])=>({de,en}));
-}
-});
-
-const sections=[
-["home","⌂"],
-["map","🗺"],
-["quests","📜"],
-["collection","⚔"],
-["progress","✓"],
-["settings","⚙"]
-];
-
 function readObject(key){
-try{
-const v=JSON.parse(localStorage.getItem(key)||"{}");
-return v&&typeof v==="object"&&!Array.isArray(v)?v:{};
-}catch{return {}}
+try{const v=JSON.parse(localStorage.getItem(key)||"{}");return v&&typeof v==="object"&&!Array.isArray(v)?v:{}}catch{return {}}
 }
-
 function readArray(key){
-try{
-const v=JSON.parse(localStorage.getItem(key)||"[]");
-return Array.isArray(v)?v:[];
-}catch{return []}
+try{const v=JSON.parse(localStorage.getItem(key)||"[]");return Array.isArray(v)?v:[]}catch{return []}
 }
-
 function validPoint(p){
-return p&&Number.isFinite(p.x)&&Number.isFinite(p.y)
-&&p.x>=0&&p.x<=100&&p.y>=0&&p.y<=100;
+return p&&Number.isFinite(p.x)&&Number.isFinite(p.y)&&p.x>=0&&p.x<=100&&p.y>=0&&p.y<=100;
 }
-
-function readPoint(key){
-const p=readObject(key);
-return validPoint(p)?{x:p.x,y:p.y}:null;
-}
-
-function esc(value){
-return String(value??"").replace(/[&<>"']/g,c=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#39;"
-})[c]);
-}
-
+function readPoint(key){const p=readObject(key);return validPoint(p)?{x:p.x,y:p.y}:null}
 let progress=readObject(PROGRESS_KEY);
-const legacy=readObject("crimson-guide-progress-v1");
-
-for(const q of quests){
-if(legacy["quests:"+q.id]===true&&progress["quest:"+q.id]===undefined){
-progress["quest:"+q.id]=true;
-}
-}
-
-const types=["quest","boss","treasure","npc","material","other"];
-
-let markers=readArray(MARKERS_KEY)
-.filter(m=>validPoint(m)&&typeof m.name==="string")
-.slice(0,500)
-.map(m=>({
-id:String(m.id||"m"+Math.random()),
-name:m.name.slice(0,100),
-type:types.includes(m.type)?m.type:"other",
-x:m.x,
-y:m.y,
-completed:m.completed===true
-}));
-
+let markers=readArray(MARKERS_KEY).filter(m=>validPoint(m)&&typeof m.name==="string").slice(0,500);
 let player=readPoint(POSITION_KEY);
 let target=readPoint(TARGET_KEY);
 let language=localStorage.getItem("crimson-guide-language")==="en"?"en":"de";
+let page="home",questView="chapters",activeGroup=null,selectedQuest=null;
+let solutionVisible=false,questQuery="",questStatus="all",collectionTab="items";
+let mapMode="pan",zoom=1,offsetX=0,offsetY=0;
 
-let page="home";
-let questView="chapters";
-let activeGroup=null;
-let selectedQuest=null;
-let solutionVisible=false;
-let questQuery="";
-let questStatus="all";
-let collectionTab="items";
-let mapMode="pan";
-let zoom=1;
-let offsetX=0;
-let offsetY=0;
-
-const t=k=>TXT[language][k]||k;
+const sections=[
+["home","⌂"],["map","🗺"],["quests","📜"],
+["collection","⚔"],["progress","✓"],["settings","⚙"]
+];
+const sideRegions=Object.keys(sideQuestNames);
 const mainCount=quests.filter(q=>q.type==="main").length;
 const sideCount=quests.filter(q=>q.type==="side").length;
-
-function chapterLabel(q){
-const chapter=typeof q==="object"?q.chapter:q;
-if(typeof chapter==="string")return chapter;
-if(chapter===0)return t("prologue");
-if(chapter===13)return t("epilogue");
-if(chapter===2){
-return language==="de"
-?"Kapitel 2 – Golden Greed"
-:"Chapter 2 – Golden Greed";
-}
-return t("chapter")+" "+chapter;
-}
 
 function save(){
 localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
 localStorage.setItem(MARKERS_KEY,JSON.stringify(markers));
-
-if(player){
-localStorage.setItem(POSITION_KEY,JSON.stringify(player));
-}else{
-localStorage.removeItem(POSITION_KEY);
+if(player)localStorage.setItem(POSITION_KEY,JSON.stringify(player));
+else localStorage.removeItem(POSITION_KEY);
+if(target)localStorage.setItem(TARGET_KEY,JSON.stringify(target));
+else localStorage.removeItem(TARGET_KEY);
 }
-
-if(target){
-localStorage.setItem(TARGET_KEY,JSON.stringify(target));
-}else{
-localStorage.removeItem(TARGET_KEY);
-}
-}
-
-function questDone(id){
-return progress["quest:"+id]===true;
-}
-
-function stepDone(id,i){
-return progress["step:"+id+":"+i]===true;
-}
-
-function doneCount(){
-return quests.filter(q=>questDone(q.id)).length;
-}
-
+function questDone(id){return progress["quest:"+id]===true}
+function stepDone(id,i){return progress["step:"+id+":"+i]===true}
+function doneCount(){return quests.filter(q=>questDone(q.id)).length}
 function meter(n,total){
 return `<div class="meter"><div style="width:${total?100*n/total:0}%"></div></div>`;
 }
-
+function chapterLabel(ch){
+const c=typeof ch==="object"?ch.chapter:ch;
+if(typeof c==="string")return c;
+if(c===0)return language==="de"?"Prolog":"Prologue";
+if(c===13)return language==="de"?"Epilog":"Epilogue";
+return t("chapter")+" "+c;
+}
 function navigate(next){
-page=next;
-selectedQuest=null;
-solutionVisible=false;
-
+page=next;selectedQuest=null;solutionVisible=false;
 if(next==="quests"){
-questView="chapters";
-activeGroup=null;
-questQuery="";
-questStatus="all";
+questView="chapters";activeGroup=null;questQuery="";questStatus="all";
 }
-
-mapMode="pan";
-render();
-window.scrollTo(0,0);
+mapMode="pan";render();window.scrollTo(0,0);
 }
-
 function renderNav(){
 document.getElementById("nav").innerHTML=sections.map(([id,icon])=>`
-<button data-go="${id}" class="${page===id?"active":""}">
-${icon} ${t(id)}
-</button>
+<button data-go="${id}" class="${page===id?"active":""}">${icon} ${t(id)}</button>
 `).join("");
-
 document.getElementById("mobileNav").innerHTML=sections.slice(0,5).map(([id,icon])=>`
 <button data-go="${id}" class="${page===id?"active":""}">
-<span class="ico">${icon}</span>
-<span>${t(id)}</span>
-</button>
+<span class="ico">${icon}</span><span>${t(id)}</span></button>
 `).join("");
 }
-
 function homePage(){
 return `
 <div class="hero">
-<div class="eyebrow">CRIMSON DESERT COMPANION • VERSION 4.1</div>
+<div class="eyebrow">CRIMSON DESERT COMPANION • 4.2</div>
 <h1>${t("welcome")}</h1>
 <p>${t("intro")}</p>
-<button class="btn gold" data-go="quests">
-📜 ${t("questDatabase")}
-</button>
+<button class="btn gold" data-go="quests">📜 ${t("quests")}</button>
 </div>
-
 <div class="grid">
-<div class="card">
-<span class="small">${t("main")}</span>
-<h1>${mainCount}</h1>
+<div class="card"><span class="small">${t("main")}</span><h1>${mainCount}</h1></div>
+<div class="card"><span class="small">${t("side")}</span><h1>${sideCount}</h1></div>
 </div>
-<div class="card">
-<span class="small">${t("side")}</span>
-<h1>${sideCount}</h1>
-</div>
-</div>
-
 <div class="card" style="margin-top:12px">
-<div class="between">
-<strong>${t("progress")}</strong>
-<span class="counter">${doneCount()} / ${quests.length}</span>
+<div class="between"><strong>${t("progress")}</strong>
+<span class="counter">${doneCount()}/${quests.length}</span></div>
+<div style="margin-top:12px">${meter(doneCount(),quests.length)}</div>
 </div>
-<div style="margin-top:12px">
-${meter(doneCount(),quests.length)}
-</div>
-</div>
-
+<div class="notice">✨ ${t("chapter1Ready")}</div>
 <div class="grid">
 ${sections.slice(1,5).map(([id,icon])=>`
 <div class="card" data-go="${id}" style="cursor:pointer">
-<h3>${icon} ${t(id)}</h3>
-<p class="small">→</p>
-</div>
+<h3>${icon} ${t(id)}</h3><p>→</p></div>
 `).join("")}
-</div>
-
-<div class="notice">
-${language==="de"
-?"Die Questdatenbank ist umfangreich. Vollständige Lösungen sind noch nicht für alle Quests vorhanden."
-:"The quest database is extensive. Full walkthroughs are not yet available for every quest."}
-</div>
-`;
+</div>`;
 }
-
 function groupCard(group){
 const list=quests.filter(q=>String(q.chapter)===String(group));
-const completed=list.filter(q=>questDone(q.id)).length;
-
-const name=typeof group==="number"
-?(group===0?t("prologue"):group===13?t("epilogue"):t("chapter")+" "+group)
-:group;
-
-const subtitle=typeof group==="number"
-?chapterNames[group]
-:(language==="de"?"Nebenquests nach Region":"Side quests by region");
-
+const n=list.filter(q=>questDone(q.id)).length;
+const name=typeof group==="number"?chapterLabel(group):group;
+const subtitle=typeof group==="number"?chapterNames[group]:
+(language==="de"?"Nebenquests nach Region":"Side quests by region");
 return `
-<button class="chapterCard ${completed===list.length?"chapterComplete":""}"
-data-group="${esc(String(group))}">
-<span class="chapterIcon">
-${typeof group==="number"?(group===0?"✦":group===13?"♛":"⚔"):"✧"}
-</span>
+<button class="chapterCard ${n===list.length?"complete":""}" data-group="${esc(group)}">
+<span class="chapterIcon">${typeof group==="number"?"⚔":"✧"}</span>
 <span class="chapterContent">
-<span class="chapterTop">
-<strong>${esc(name)}</strong>
-<span class="counter">${completed}/${list.length}</span>
-</span>
+<span class="chapterTop"><strong>${esc(name)}</strong>
+<span class="counter">${n}/${list.length}</span></span>
 <span class="chapterSubtitle">${esc(subtitle)}</span>
-<span class="chapterProgress">
-${meter(completed,list.length)}
-</span>
-</span>
-<span class="chapterArrow">›</span>
-</button>
-`;
+${meter(n,list.length)}
+</span><span class="chapterArrow">›</span>
+</button>`;
 }
-
 function questPage(){
-
 if(selectedQuest){
 const q=quests.find(x=>x.id===selectedQuest);
-
-if(!q){
-selectedQuest=null;
-return questPage();
-}
-
-const steps=q.steps||[];
-const groupQuests=quests.filter(x=>String(x.chapter)===String(q.chapter));
-const total=groupQuests.length;
-const completed=groupQuests.filter(x=>questDone(x.id)).length;
-
+if(!q){selectedQuest=null;return questPage()}
+const guide=chapter1Guides[q.id];
+const list=quests.filter(x=>String(x.chapter)===String(q.chapter));
+const n=list.filter(x=>questDone(x.id)).length;
 return `
 <div class="crumb">
-<button class="textbtn" id="backChapters">
-${language==="de"?"Kapitel":"Chapters"}
-</button>
+<button class="textbtn" id="backChapters">← ${t("chapters")}</button>
 <span>›</span>
-<button class="textbtn" id="backQuest">
-${esc(chapterLabel(q))}
-</button>
-<span>›</span>
-<span>${esc(q.name)}</span>
+<button class="textbtn" id="backQuest">${esc(chapterLabel(q))}</button>
+<span>›</span><span>${esc(q.name)}</span>
 </div>
-
-<div class="questDetailHero">
-<span class="eyebrow">
-${q.type==="main"
-?(language==="de"?"HAUPTQUEST":"MAIN QUEST")
-:(language==="de"?"NEBENQUEST":"SIDE QUEST")}
-</span>
+<div class="hero">
+<div class="eyebrow">${q.type==="main"?t("main"):t("side")}</div>
 <h1>${esc(q.name)}</h1>
 <p>${esc(chapterLabel(q))}</p>
+<div class="between"><span>${t("chapterProgress")}</span>
+<strong class="counter">${n}/${list.length}</strong></div>
+<div style="margin-top:12px">${meter(n,list.length)}</div>
 </div>
-
-<div class="card">
-<div class="between">
-<strong>${language==="de"?"Kapitel-Fortschritt":"Chapter progress"}</strong>
-<span class="counter">${completed}/${total}</span>
-</div>
-<div style="margin-top:12px">
-${meter(completed,total)}
-</div>
-</div>
-
 <div class="card">
 <label class="completeLine">
-<input type="checkbox" data-quest="${esc(q.id)}"
-${questDone(q.id)?"checked":""}>
+<input type="checkbox" data-quest="${esc(q.id)}" ${questDone(q.id)?"checked":""}>
 <span>${t("finished")}</span>
 </label>
 </div>
-
-<div class="questmeta">
-<span class="questtag">
-${t("solutionStatus")}: ${steps.length?t("verifiedSteps"):t("pendingSteps")}
-</span>
-<span class="questtag">${steps.length} ${t("steps")}</span>
+${guide?`
+<div class="guideBox">
+<h3>📍 ${t("location")}</h3>
+<p>${esc(guide.location[language==="de"?0:1])}</p>
+<span class="small">✓ ${t("partial")}</span>
 </div>
-
-<button class="btn gold" id="toggleSolution"
-aria-expanded="${solutionVisible}">
-${solutionVisible?t("hideSolution"):t("showSolution")}
+`:`<div class="notice">${t("pending")}</div>`}
+<button class="btn gold" id="toggleSolution">
+${solutionVisible?t("hide"):t("show")}
 </button>
-
-${solutionVisible?`
-<h2>${t("steps")}</h2>
-${steps.length?steps.map((step,i)=>`
-<label class="step">
+${solutionVisible?guide?`
+<h2>📜 ${t("steps")}</h2>
+${guide.steps.map((step,i)=>`
+<label class="step ${stepDone(q.id,i)?"checked":""}">
 <input type="checkbox" data-step="${esc(q.id)}:${i}"
 ${stepDone(q.id,i)?"checked":""}>
-<span><b>${i+1}.</b> ${esc(step[language]||step.en)}</span>
+<span><strong>${i+1}.</strong> ${esc(step[language==="de"?0:1])}</span>
 </label>
-`).join(""):`<div class="empty">${t("noSteps")}</div>`}
-`:`<div class="solutionhidden">
-🔒 ${language==="de"
-?"Tippe auf „Lösung anzeigen“, um Spoiler zu öffnen."
-:"Tap “Show solution” to reveal spoilers."}
-</div>`}
-
-${q.type==="main"?`
-<p>
-<a class="btn alt" href="${GUIDE_URL}" target="_blank"
-rel="noopener noreferrer">
-${t("guide")} ↗
-</a>
-</p>
-`:""}
+`).join("")}
+<div class="guideBox">
+<h3>💡 ${t("tip")}</h3>
+<p>${esc(guide.tip[language==="de"?0:1])}</p>
+</div>
+<p><a class="btn alt" href="${esc(guide.url)}" target="_blank"
+rel="noopener noreferrer">↗ ${t("source")}</a></p>
+`:`<div class="empty">${t("noGuide")}</div>`:
+`<div class="empty" style="margin-top:13px">🔒 ${t("show")}</div>`}
+${!guide&&q.type==="main"?`
+<p><a href="${MAIN_GUIDE}" target="_blank" rel="noopener noreferrer">
+↗ ${t("source")}</a></p>`:""}
 `;
 }
-
 if(questView==="list"&&activeGroup!==null){
-
 const group=String(activeGroup);
-const groupQuests=quests.filter(q=>String(q.chapter)===group);
-const completed=groupQuests.filter(q=>questDone(q.id)).length;
-const label=groupQuests[0]?chapterLabel(groupQuests[0]):group;
-
-const found=groupQuests.filter(q=>
-(questStatus==="all"||(questStatus==="done")===questDone(q.id))
-&&q.name.toLowerCase().includes(questQuery.toLowerCase())
+const list=quests.filter(q=>String(q.chapter)===group);
+const n=list.filter(q=>questDone(q.id)).length;
+const found=list.filter(q=>
+(questStatus==="all"||(questStatus==="done")===questDone(q.id))&&
+q.name.toLowerCase().includes(questQuery.toLowerCase())
 );
-
 return `
 <div class="crumb">
-<button class="textbtn" id="backChapters">
-← ${language==="de"?"Alle Kapitel":"All chapters"}
-</button>
-<span>›</span>
-<span>${esc(label)}</span>
+<button class="textbtn" id="backChapters">← ${t("chapters")}</button>
+<span>›</span><span>${esc(chapterLabel(list[0]||group))}</span>
 </div>
-
-<div class="chapterHero">
-<span class="eyebrow">
-${groupQuests[0]?.type==="side"
-?(language==="de"?"NEBENQUESTS":"SIDE QUESTS")
-:(language==="de"?"HAUPTQUESTS":"MAIN QUESTS")}
-</span>
-<h1>${esc(label)}</h1>
-<div class="between">
-<span>${language==="de"?"Abgeschlossen":"Completed"}</span>
-<strong class="counter">${completed}/${groupQuests.length}</strong>
+<div class="hero">
+<div class="eyebrow">${list[0]?.type==="side"?t("side"):t("main")}</div>
+<h1>${esc(chapterLabel(list[0]||group))}</h1>
+<p>${esc(typeof activeGroup==="string"&&/^\d+$/.test(group)?
+chapterNames[Number(group)]||"": "")}</p>
+<div class="between"><strong>${t("chapterProgress")}</strong>
+<span class="counter">${n}/${list.length}</span></div>
+<div style="margin-top:12px">${meter(n,list.length)}</div>
 </div>
-<div style="margin-top:12px">
-${meter(completed,groupQuests.length)}
-</div>
-</div>
-
 <div class="toolbar">
-<input id="questSearch" type="search"
-placeholder="${t("questSearch")}"
-value="${esc(questQuery)}">
-
+<input type="search" id="questSearch" placeholder="${t("search")}" value="${esc(questQuery)}">
 <select id="questStatus">
 <option value="all">${t("allStatus")}</option>
 <option value="open" ${questStatus==="open"?"selected":""}>${t("open")}</option>
 <option value="done" ${questStatus==="done"?"selected":""}>${t("done")}</option>
 </select>
 </div>
-
-<p class="small">
-${found.length} / ${groupQuests.length}
-${language==="de"?"Quests":"quests"}
-</p>
-
+<p class="small">${found.length}/${list.length} Quests</p>
 ${found.length?found.map(q=>`
 <div class="questrow ${questDone(q.id)?"completed":""}">
-<input type="checkbox" data-quest="${esc(q.id)}"
-${questDone(q.id)?"checked":""}
-aria-label="${esc(q.name)}">
-
+<input type="checkbox" data-quest="${esc(q.id)}" ${questDone(q.id)?"checked":""}>
 <button data-openquest="${esc(q.id)}">
-<small>
-${String(groupQuests.indexOf(q)+1).padStart(2,"0")}
-·
-${q.steps?.length?t("partial"):t("pending")}
-</small>
+<small>${String(list.indexOf(q)+1).padStart(2,"0")} ·
+${chapter1Guides[q.id]?"✓ "+t("partial"):t("pending")}</small>
 <strong>${esc(q.name)}</strong>
-</button>
-<span class="chevron">›</span>
-</div>
-`).join(""):`<div class="empty">
-${language==="de"?"Keine Quests gefunden.":"No quests found."}
-</div>`}
+</button><span class="chapterArrow">›</span>
+</div>`).join(""):`<div class="empty">${t("noResults")}</div>`}
 `;
 }
-
-const mainGroups=Array.from({length:14},(_,i)=>i);
-
 return `
-<div class="chapterHero">
-<span class="eyebrow">
-CRIMSON GUIDE • CHAPTER EDITION
-</span>
-<h1>
-📜 ${language==="de"?"Deine Quest-Kapitel":"Your Quest Chapters"}
-</h1>
-<p>
-${language==="de"
-?"Wähle ein Kapitel und öffne anschließend die gewünschte Quest. Dein Fortschritt wird automatisch gespeichert."
-:"Choose a chapter, then open a quest. Your progress is saved automatically."}
-</p>
-<div class="between">
-<strong>
-${language==="de"?"Gesamtfortschritt":"Overall progress"}
-</strong>
-<span class="counter">${doneCount()}/${quests.length}</span>
+<div class="hero">
+<div class="eyebrow">CRIMSON GUIDE • CHAPTER EDITION</div>
+<h1>📜 ${t("chapters")}</h1>
+<p>${language==="de"?"Wähle ein Kapitel, dann eine Quest.":"Choose a chapter, then a quest."}</p>
+<div class="between"><strong>${t("total")}</strong>
+<span class="counter">${doneCount()}/${quests.length}</span></div>
+<div style="margin-top:12px">${meter(doneCount(),quests.length)}</div>
 </div>
-<div style="margin-top:12px">
-${meter(doneCount(),quests.length)}
-</div>
-</div>
-
 <h2 class="sectionHeading">⚔ ${t("main")}</h2>
-
 <div class="chapterGrid">
-${mainGroups.map(groupCard).join("")}
+${Array.from({length:14},(_,i)=>groupCard(i)).join("")}
 </div>
-
 <h2 class="sectionHeading">✧ ${t("side")}</h2>
-
-<div class="chapterGrid">
-${sideRegions.map(groupCard).join("")}
-</div>
-
-<p class="small" style="margin-top:18px">
-${language==="de"
-?"Die Questdaten und bisherigen Speicherstände bleiben erhalten. Nicht alle Quests haben bereits eine vollständige Lösung."
-:"Quest data and existing saves are preserved. Not all quests have complete walkthroughs yet."}
-</p>
+<div class="chapterGrid">${sideRegions.map(groupCard).join("")}</div>
 `;
 }
-
 function iconFor(type){
-return {
-quest:"📜",
-boss:"🐉",
-treasure:"💰",
-npc:"♟",
-material:"💎",
-other:"📍"
-}[type]||"📍";
+return {quest:"📜",boss:"🐉",treasure:"💰",npc:"♟",material:"💎",other:"📍"}[type]||"📍";
 }
-
 function mapPage(){
 const route=player&&target?`
-<svg class="route" viewBox="0 0 100 100"
-preserveAspectRatio="none">
-<line x1="${player.x}" y1="${player.y}"
-x2="${target.x}" y2="${target.y}"></line>
-</svg>
-`:"";
-
+<svg class="route" viewBox="0 0 100 100" preserveAspectRatio="none">
+<line x1="${player.x}" y1="${player.y}" x2="${target.x}" y2="${target.y}"></line>
+</svg>`:"";
 return `
-<div class="between">
-<h1>🗺 ${t("map")}</h1>
-<a class="btn alt smallbtn" href="${MAP_URL}"
-target="_blank" rel="noopener noreferrer">
-↗ ${t("realMap")}
-</a>
-</div>
-
+<div class="between"><h1>🗺 ${t("map")}</h1>
+<a class="btn alt sm" href="${MAP_URL}" target="_blank" rel="noopener noreferrer">
+↗ ${t("realMap")}</a></div>
 <p class="small">${t("mapNote")}</p>
-
-<div class="maptools">
-<button class="btn ${mapMode==="player"?"":"alt"}"
-data-mode="player">🔵 ${t("setPlayer")}</button>
-
-<button class="btn ${mapMode==="target"?"":"alt"}"
-data-mode="target">🎯 ${t("setTarget")}</button>
-
-<button class="btn ${mapMode==="marker"?"":"alt"}"
-data-mode="marker">＋ ${t("addMarker")}</button>
+<div class="toolbar">
+<button class="btn ${mapMode==="player"?"":"alt"}" data-mode="player">🔵 ${t("player")}</button>
+<button class="btn ${mapMode==="target"?"":"alt"}" data-mode="target">🎯 ${t("target")}</button>
+<button class="btn ${mapMode==="marker"?"":"alt"}" data-mode="marker">＋ ${t("addMarker")}</button>
 </div>
-
-${mapMode!=="pan"?`
-<div class="notice">
-${language==="de"?"Tippe auf die Karte.":"Tap the map."}
-</div>
-`:""}
-
+${mapMode!=="pan"?`<div class="notice">${language==="de"?"Tippe auf die Karte.":"Tap the map."}</div>`:""}
 <div class="mapwrap" id="mapwrap">
 <div class="mapworld" id="mapworld">
-
-<div class="mapcenter">
-✦ PYWEL
-<small>PLANNING CANVAS</small>
-</div>
-
+<div class="mapcenter">✦ PYWEL<small>PLANNING CANVAS</small></div>
 ${route}
-
 ${markers.map(m=>`
 <button class="mapmarker ${m.completed?"completed":""}"
 style="left:${m.x}%;top:${m.y}%"
-data-marker="${esc(m.id)}"
-title="${esc(m.name)}">
-${iconFor(m.type)}
-</button>
-`).join("")}
-
-${player?`
-<span class="mapmarker player"
-style="left:${player.x}%;top:${player.y}%">●</span>
-`:""}
-
-${target?`
-<span class="mapmarker target"
-style="left:${target.x}%;top:${target.y}%">★</span>
-`:""}
-
-</div>
-</div>
-
-<div class="maptools">
+data-marker="${esc(m.id)}">${iconFor(m.type)}</button>`).join("")}
+${player?`<span class="mapmarker player" style="left:${player.x}%;top:${player.y}%">●</span>`:""}
+${target?`<span class="mapmarker target" style="left:${target.x}%;top:${target.y}%">★</span>`:""}
+</div></div>
+<div class="toolbar">
 <button class="btn alt" id="zoomIn">＋</button>
 <button class="btn alt" id="zoomOut">－</button>
 <button class="btn alt" id="resetView">${t("resetView")}</button>
 </div>
-
 <div class="notice">${t("mapWarning")}</div>
-
-${player&&target?`
-<div class="card">
-<strong>🧭 ${t("target")}</strong>
-<p class="small">${t("navigationHint")}</p>
+${player&&target?`<div class="card">🧭 ${t("routeHint")}</div>`:""}
+<div class="toolbar">
+${player?`<button class="btn alt sm" id="clearPlayer">${t("removePlayer")}</button>`:""}
+${target?`<button class="btn alt sm" id="clearTarget">${t("removeTarget")}</button>`:""}
 </div>
-`:""}
-
-<div class="maptools">
-${player?`
-<button class="btn alt smallbtn" id="clearPlayer">
-${t("removePlayer")}
-</button>
-`:""}
-
-${target?`
-<button class="btn alt smallbtn" id="clearTarget">
-${t("removeTarget")}
-</button>
-`:""}
-</div>
-
 <h2>${t("markerList")} (${markers.length})</h2>
-
 ${markers.length?markers.map(m=>`
 <div class="markerrow">
 <span>${iconFor(m.type)}</span>
-<div class="name">
-<strong>${esc(m.name)}</strong>
-<small>${esc(m.type)} ${m.completed?"· ✓":""}</small>
-</div>
-<button class="btn alt smallbtn"
-data-targetmarker="${esc(m.id)}">🎯</button>
-<button class="btn alt smallbtn"
-data-donemarker="${esc(m.id)}">
-${m.completed?"↩":"✓"}
-</button>
-<button class="btn alt smallbtn"
-data-deletemarker="${esc(m.id)}">✕</button>
-</div>
-`).join(""):`<div class="empty">${t("noMarkers")}</div>`}
+<div class="name"><strong>${esc(m.name)}</strong><small>${esc(m.type)} ${m.completed?"✓":""}</small></div>
+<button class="btn alt sm" data-targetmarker="${esc(m.id)}">🎯</button>
+<button class="btn alt sm" data-donemarker="${esc(m.id)}">${m.completed?"↩":"✓"}</button>
+<button class="btn alt sm" data-deletemarker="${esc(m.id)}">✕</button>
+</div>`).join(""):`<div class="empty">${t("noMarkers")}</div>`}
 `;
 }
-
 function collectionPage(){
 return `
-<h1>⚔ ${t("collection")}</h1>
-<p>${t("collectionInfo")}</p>
-
+<h1>⚔ ${t("collection")}</h1><p>${t("collectionInfo")}</p>
 <div class="grid">
-${[
-["items","⚔"],
-["bosses","🐉"],
-["npcs","♟"],
-["materials","💎"]
-].map(([id,icon])=>`
-<button class="card" data-collection="${id}"
-style="text-align:left;color:white">
-<h3>${icon} ${t(id)}</h3>
-</button>
-`).join("")}
+${[["items","⚔"],["bosses","🐉"],["npcs","♟"],["materials","💎"]]
+.map(([id,icon])=>`
+<button class="card" data-collection="${id}" style="text-align:left;color:white">
+<h3>${icon} ${t(id)}</h3></button>`).join("")}
 </div>
-
 <div class="card" style="margin-top:15px">
-<h2>${t(collectionTab)}</h2>
-<div class="empty">${t("notReady")}</div>
-</div>
-`;
+<h2>${t(collectionTab)}</h2><div class="empty">${t("notReady")}</div>
+</div>`;
 }
-
 function progressPage(){
 const main=quests.filter(q=>q.type==="main");
 const side=quests.filter(q=>q.type==="side");
-
 return `
 <h1>✓ ${t("progress")}</h1>
-
-<div class="card">
-<div class="between">
-<strong>${t("allQuests")}</strong>
-<span class="counter">${doneCount()} / ${quests.length}</span>
-</div>
-<div style="margin-top:12px">
-${meter(doneCount(),quests.length)}
-</div>
-</div>
-
-${[["main",main],["side",side]].map(([label,qs])=>{
-const n=qs.filter(q=>questDone(q.id)).length;
-return `
-<div class="card">
-<div class="between">
-<strong>${t(label)}</strong>
-<span class="counter">${n} / ${qs.length}</span>
-</div>
-<div style="margin-top:12px">
-${meter(n,qs.length)}
-</div>
-</div>
-`;
+<div class="card"><div class="between"><strong>${t("total")}</strong>
+<span class="counter">${doneCount()}/${quests.length}</span></div>
+<div style="margin-top:12px">${meter(doneCount(),quests.length)}</div></div>
+${[["main",main],["side",side]].map(([key,list])=>{
+const n=list.filter(q=>questDone(q.id)).length;
+return `<div class="card"><div class="between"><strong>${t(key)}</strong>
+<span class="counter">${n}/${list.length}</span></div>
+<div style="margin-top:12px">${meter(n,list.length)}</div></div>`;
 }).join("")}
-
 <h2>${t("main")}</h2>
-
 ${Array.from({length:14},(_,c)=>{
-const qs=quests.filter(q=>q.chapter===c);
-const n=qs.filter(q=>questDone(q.id)).length;
-return `
-<div class="card">
-<div class="between">
-<strong>${chapterLabel(c)}</strong>
-<span class="counter">${n} / ${qs.length}</span>
-</div>
-<div style="margin-top:12px">
-${meter(n,qs.length)}
-</div>
-</div>
-`;
+const list=quests.filter(q=>q.chapter===c);
+const n=list.filter(q=>questDone(q.id)).length;
+return `<div class="card"><div class="between">
+<strong>${chapterLabel(c)}</strong><span class="counter">${n}/${list.length}</span>
+</div><div style="margin-top:12px">${meter(n,list.length)}</div></div>`;
 }).join("")}
-
 <h2>${t("side")}</h2>
-
 ${sideRegions.map(region=>{
-const qs=quests.filter(q=>q.chapter===region);
-const n=qs.filter(q=>questDone(q.id)).length;
-return `
-<div class="card">
-<div class="between">
-<strong>${region}</strong>
-<span class="counter">${n} / ${qs.length}</span>
-</div>
-<div style="margin-top:12px">
-${meter(n,qs.length)}
-</div>
-</div>
-`;
+const list=quests.filter(q=>q.chapter===region);
+const n=list.filter(q=>questDone(q.id)).length;
+return `<div class="card"><div class="between"><strong>${region}</strong>
+<span class="counter">${n}/${list.length}</span></div>
+<div style="margin-top:12px">${meter(n,list.length)}</div></div>`;
 }).join("")}
-
-<div class="card">
-<strong>📍 ${t("markerCount")}</strong>
-<p>${markers.length} ${t("total")}</p>
-</div>
 `;
 }
-
 function settingsPage(){
 return `
 <h1>⚙ ${t("settings")}</h1>
-
 <div class="card">
 <p>${t("local")}</p>
 <div class="toolbar">
@@ -1281,434 +673,242 @@ return `
 <button class="btn alt" id="importBtn">${t("import")}</button>
 <button class="btn alt" id="resetBtn">${t("reset")}</button>
 </div>
-<input type="file" id="backupFile"
-accept=".json,application/json" hidden>
+<input type="file" id="backupFile" accept=".json,application/json" hidden>
 </div>
-
 <div class="card">
-<strong>Crimson Guide 4.1 – Chapter Edition</strong>
-<p class="small">PS5 Companion · DE / EN</p>
-<p class="small">
-${mainCount} ${t("main")} · ${sideCount} ${t("side")}
-</p>
-<p class="small">
-${language==="de"
-?"Weitere Nebenquests und ausführliche Lösungen werden später ergänzt."
-:"More side quests and detailed walkthroughs will be added later."}
-</p>
-</div>
-`;
+<strong>Crimson Guide 4.2 – Chapter 1 Solutions</strong>
+<p class="small">${mainCount} ${t("main")} · ${sideCount} ${t("side")}</p>
+<p class="small">${t("chapter1Ready")}</p>
+</div>`;
 }
-
 function render(){
 document.documentElement.lang=language;
 document.getElementById("lang").value=language;
 renderNav();
-
 document.getElementById("app").innerHTML=
 page==="home"?homePage():
-page==="map"?mapPage():
 page==="quests"?questPage():
+page==="map"?mapPage():
 page==="collection"?collectionPage():
-page==="progress"?progressPage():
-settingsPage();
+page==="progress"?progressPage():settingsPage();
 
 document.querySelectorAll("[data-go]").forEach(b=>{
 b.onclick=()=>navigate(b.dataset.go);
 });
-
+document.querySelectorAll("[data-group]").forEach(b=>{
+b.onclick=()=>{
+activeGroup=b.dataset.group;questView="list";
+questQuery="";questStatus="all";selectedQuest=null;
+render();window.scrollTo(0,0);
+};
+});
+document.querySelectorAll("[data-openquest]").forEach(b=>{
+b.onclick=()=>{
+selectedQuest=b.dataset.openquest;solutionVisible=false;
+render();window.scrollTo(0,0);
+};
+});
+document.getElementById("backChapters")?.addEventListener("click",()=>{
+selectedQuest=null;questView="chapters";activeGroup=null;
+questQuery="";questStatus="all";solutionVisible=false;
+render();window.scrollTo(0,0);
+});
+document.getElementById("backQuest")?.addEventListener("click",()=>{
+selectedQuest=null;questView="list";solutionVisible=false;
+render();window.scrollTo(0,0);
+});
 document.querySelectorAll("[data-quest]").forEach(b=>{
 b.onchange=()=>{
 progress["quest:"+b.dataset.quest]=b.checked;
-save();
-render();
+save();render();
 };
 });
-
-document.querySelectorAll("[data-group]").forEach(b=>{
-b.onclick=()=>{
-activeGroup=b.dataset.group;
-questView="list";
-questQuery="";
-questStatus="all";
-selectedQuest=null;
-render();
-window.scrollTo(0,0);
-};
-});
-
-document.getElementById("backChapters")?.addEventListener("click",()=>{
-selectedQuest=null;
-questView="chapters";
-activeGroup=null;
-questQuery="";
-questStatus="all";
-solutionVisible=false;
-render();
-window.scrollTo(0,0);
-});
-
-document.querySelectorAll("[data-openquest]").forEach(b=>{
-b.onclick=()=>{
-selectedQuest=b.dataset.openquest;
-solutionVisible=false;
-render();
-window.scrollTo(0,0);
-};
-});
-
-document.getElementById("backQuest")?.addEventListener("click",()=>{
-selectedQuest=null;
-solutionVisible=false;
-questView="list";
-render();
-window.scrollTo(0,0);
-});
-
-document.getElementById("toggleSolution")?.addEventListener("click",()=>{
-solutionVisible=!solutionVisible;
-render();
-});
-
 document.querySelectorAll("[data-step]").forEach(b=>{
 b.onchange=()=>{
-const value=b.dataset.step;
-const index=value.lastIndexOf(":");
-const id=value.slice(0,index);
-const stepIndex=value.slice(index+1);
-progress["step:"+id+":"+stepIndex]=b.checked;
-save();
-render();
+const raw=b.dataset.step;
+const i=raw.lastIndexOf(":");
+progress["step:"+raw.slice(0,i)+":"+raw.slice(i+1)]=b.checked;
+save();render();
 };
 });
-
+document.getElementById("toggleSolution")?.addEventListener("click",()=>{
+solutionVisible=!solutionVisible;render();
+});
 const search=document.getElementById("questSearch");
-
-if(search){
-search.oninput=e=>{
+if(search)search.oninput=e=>{
 questQuery=e.target.value;
 const pos=e.target.selectionStart;
 render();
 const next=document.getElementById("questSearch");
-next.focus();
-next.setSelectionRange(pos,pos);
+next.focus();next.setSelectionRange(pos,pos);
 };
-}
-
 document.getElementById("questStatus")?.addEventListener("change",e=>{
-questStatus=e.target.value;
-render();
+questStatus=e.target.value;render();
 });
-
 document.querySelectorAll("[data-collection]").forEach(b=>{
-b.onclick=()=>{
-collectionTab=b.dataset.collection;
-render();
-};
+b.onclick=()=>{collectionTab=b.dataset.collection;render()};
 });
-
 if(page==="map")setupMap();
 if(page==="settings")setupSettings();
 }
-
 function setupMap(){
 const wrap=document.getElementById("mapwrap");
 const world=document.getElementById("mapworld");
-
 function transform(){
-world.style.transform=
-`translate(${offsetX}px,${offsetY}px) scale(${zoom})`;
+world.style.transform=`translate(${offsetX}px,${offsetY}px) scale(${zoom})`;
 }
-
 document.getElementById("zoomIn").onclick=()=>{
-zoom=Math.min(4,zoom+.25);
-transform();
+zoom=Math.min(4,zoom+.25);transform();
 };
-
 document.getElementById("zoomOut").onclick=()=>{
-zoom=Math.max(.6,zoom-.25);
-transform();
+zoom=Math.max(.6,zoom-.25);transform();
 };
-
 document.getElementById("resetView").onclick=()=>{
-zoom=1;
-offsetX=0;
-offsetY=0;
-transform();
+zoom=1;offsetX=0;offsetY=0;transform();
 };
-
 document.querySelectorAll("[data-mode]").forEach(b=>{
 b.onclick=()=>{
-mapMode=mapMode===b.dataset.mode?"pan":b.dataset.mode;
-render();
+mapMode=mapMode===b.dataset.mode?"pan":b.dataset.mode;render();
 };
 });
-
 document.getElementById("clearPlayer")?.addEventListener("click",()=>{
-player=null;
-save();
-render();
+player=null;save();render();
 });
-
 document.getElementById("clearTarget")?.addEventListener("click",()=>{
-target=null;
-save();
-render();
+target=null;save();render();
 });
-
 document.querySelectorAll("[data-targetmarker]").forEach(b=>{
 b.onclick=()=>{
-const m=markers.find(x=>x.id===b.dataset.targetmarker);
-if(m){
-target={x:m.x,y:m.y};
-save();
-render();
-}
+const m=markers.find(x=>String(x.id)===b.dataset.targetmarker);
+if(m){target={x:m.x,y:m.y};save();render()}
 };
 });
-
 document.querySelectorAll("[data-donemarker]").forEach(b=>{
 b.onclick=()=>{
-const m=markers.find(x=>x.id===b.dataset.donemarker);
-if(m){
-m.completed=!m.completed;
-save();
-render();
-}
+const m=markers.find(x=>String(x.id)===b.dataset.donemarker);
+if(m){m.completed=!m.completed;save();render()}
 };
 });
-
 document.querySelectorAll("[data-deletemarker]").forEach(b=>{
 b.onclick=()=>{
-markers=markers.filter(m=>m.id!==b.dataset.deletemarker);
-save();
-render();
+markers=markers.filter(m=>String(m.id)!==b.dataset.deletemarker);
+save();render();
 };
 });
-
 document.querySelectorAll("[data-marker]").forEach(b=>{
 b.onclick=e=>{
 e.stopPropagation();
-const m=markers.find(x=>x.id===b.dataset.marker);
+const m=markers.find(x=>String(x.id)===b.dataset.marker);
 if(m)alert(m.name+" · "+m.type);
 };
 });
-
-let dragging=false;
-let moved=false;
-let lastX=0;
-let lastY=0;
-let startX=0;
-let startY=0;
-
+let dragging=false,moved=false,lastX=0,lastY=0,startX=0,startY=0;
 wrap.addEventListener("pointerdown",e=>{
 if(e.target.closest("button"))return;
-dragging=true;
-moved=false;
-startX=lastX=e.clientX;
-startY=lastY=e.clientY;
+dragging=true;moved=false;
+startX=lastX=e.clientX;startY=lastY=e.clientY;
 wrap.setPointerCapture(e.pointerId);
 });
-
 wrap.addEventListener("pointermove",e=>{
 if(!dragging)return;
-
-if(Math.hypot(e.clientX-startX,e.clientY-startY)>7){
-moved=true;
-}
-
+if(Math.hypot(e.clientX-startX,e.clientY-startY)>7)moved=true;
 if(mapMode==="pan"){
-offsetX+=e.clientX-lastX;
-offsetY+=e.clientY-lastY;
-transform();
+offsetX+=e.clientX-lastX;offsetY+=e.clientY-lastY;transform();
 }
-
-lastX=e.clientX;
-lastY=e.clientY;
+lastX=e.clientX;lastY=e.clientY;
 });
-
 wrap.addEventListener("pointerup",e=>{
 if(!dragging)return;
 dragging=false;
-
 if(moved||mapMode==="pan")return;
-
 const rect=wrap.getBoundingClientRect();
-const cx=rect.width/2;
-const cy=rect.height/2;
-
+const cx=rect.width/2,cy=rect.height/2;
 const px=(e.clientX-rect.left-cx-offsetX)/zoom+cx;
 const py=(e.clientY-rect.top-cy-offsetY)/zoom+cy;
-
-const x=px/rect.width*100;
-const y=py/rect.height*100;
-
+const x=px/rect.width*100,y=py/rect.height*100;
 if(x<0||x>100||y<0||y>100)return;
-
 if(mapMode==="player"){
-player={x,y};
-mapMode="pan";
-save();
-render();
-return;
+player={x,y};mapMode="pan";save();render();return;
 }
-
 if(mapMode==="target"){
-target={x,y};
-mapMode="pan";
-save();
-render();
-return;
+target={x,y};mapMode="pan";save();render();return;
 }
-
 if(mapMode==="marker"){
-const name=prompt(
-language==="de"?"Name des Fundorts:":"Location name:"
-);
-
+const name=prompt(language==="de"?"Name des Fundorts:":"Location name:");
 if(!name?.trim())return;
-
-const raw=prompt(
-"Category: quest, boss, treasure, npc, material, other",
-"other"
-);
-
+const raw=prompt("Category: quest, boss, treasure, npc, material, other","other");
 if(raw===null)return;
-
-const type=types.includes(raw.trim().toLowerCase())
-?raw.trim().toLowerCase()
-:"other";
-
+const types=["quest","boss","treasure","npc","material","other"];
+const type=types.includes(raw.trim().toLowerCase())?raw.trim().toLowerCase():"other";
 markers.push({
 id:"m"+Date.now()+"-"+Math.random().toString(36).slice(2,8),
-name:name.trim().slice(0,100),
-type,
-x,
-y,
-completed:false
+name:name.trim().slice(0,100),type,x,y,completed:false
 });
-
-mapMode="pan";
-save();
-render();
+mapMode="pan";save();render();
 }
 });
-
-wrap.addEventListener("pointercancel",()=>{
-dragging=false;
-});
-
+wrap.addEventListener("pointercancel",()=>{dragging=false});
 transform();
 }
-
 function setupSettings(){
-
 document.getElementById("exportBtn").onclick=()=>{
 const backup={
-version:31,
-progress,
-markers,
-player,
-target,
+version:31,progress,markers,player,target,
 exportedAt:new Date().toISOString()
 };
-
-const blob=new Blob(
-[JSON.stringify(backup,null,2)],
-{type:"application/json"}
-);
-
+const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
 const url=URL.createObjectURL(blob);
 const a=document.createElement("a");
-
-a.href=url;
-a.download="crimson-guide-backup.json";
-a.click();
-
+a.href=url;a.download="crimson-guide-backup.json";a.click();
 setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
-
 document.getElementById("importBtn").onclick=()=>{
 document.getElementById("backupFile").click();
 };
-
 document.getElementById("backupFile").onchange=async e=>{
 try{
-const file=e.target.files[0];
-if(!file)return;
+const file=e.target.files[0];if(!file)return;
 if(file.size>1000000)throw Error("size");
-
 const data=JSON.parse(await file.text());
-
-if(![1,2,3,31].includes(data.version)
-||!data.progress
-||typeof data.progress!=="object"
-||Array.isArray(data.progress)){
+if(![1,2,3,31].includes(data.version)||!data.progress||
+typeof data.progress!=="object"||Array.isArray(data.progress)){
 throw Error("format");
 }
-
 const clean={};
-
 for(let [key,value] of Object.entries(data.progress)){
 if(key.length>160||typeof value!=="boolean")continue;
-
-if(data.version===1&&key.startsWith("quests:")){
-key="quest:"+key.slice(7);
-}
-
+if(data.version===1&&key.startsWith("quests:"))key="quest:"+key.slice(7);
 clean[key]=value;
 }
-
 progress=clean;
-
 if(Array.isArray(data.markers)){
-markers=data.markers
-.filter(m=>validPoint(m)&&typeof m.name==="string")
-.slice(0,500)
-.map(m=>({
+markers=data.markers.filter(m=>validPoint(m)&&typeof m.name==="string")
+.slice(0,500).map(m=>({
 id:String(m.id||"m"+Math.random()).slice(0,100),
 name:m.name.slice(0,100),
-type:types.includes(m.type)?m.type:"other",
-x:m.x,
-y:m.y,
-completed:m.completed===true
+type:["quest","boss","treasure","npc","material","other"].includes(m.type)?m.type:"other",
+x:m.x,y:m.y,completed:m.completed===true
 }));
 }
-
 if(data.version===31){
 player=validPoint(data.player)?data.player:null;
 target=validPoint(data.target)?data.target:null;
 }
-
-save();
-alert(t("imported"));
-render();
-
-}catch{
-alert(t("invalid"));
-}
+save();alert(t("imported"));render();
+}catch{alert(t("invalid"))}
 };
-
 document.getElementById("resetBtn").onclick=()=>{
 if(confirm(t("confirmReset"))){
-progress={};
-markers=[];
-player=null;
-target=null;
-save();
-render();
+progress={};markers=[];player=null;target=null;save();render();
 }
 };
 }
-
 document.getElementById("lang").onchange=e=>{
 language=e.target.value;
 localStorage.setItem("crimson-guide-language",language);
 render();
 };
-
 render();
-
 if("serviceWorker" in navigator){
 window.addEventListener("load",()=>{
 navigator.serviceWorker.register("./sw.js").catch(()=>{});
