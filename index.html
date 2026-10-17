@@ -9,70 +9,261 @@
 <meta name="apple-mobile-web-app-title" content="Crimson Guide">
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>Crimson Guide 4.2</title>
+<title>Crimson Guide 4.3</title>
 <style>
-:root{--bg:#121116;--panel:#211e25;--panel2:#2e2931;--line:#493b42;--red:#a84653;--gold:#e3bf82;--text:#f7f2ec;--muted:#b1a6ad;--green:#8acaa3}
+:root{
+--bg:#121116;--panel:#211e25;--panel2:#302a33;
+--line:#493b42;--red:#a84653;--gold:#e3bf82;
+--text:#f7f2ec;--muted:#b1a6ad;--green:#8acaa3
+}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 80% 0%,#572b3444,transparent 42%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-a{color:var(--gold)}p{color:var(--muted);line-height:1.6}h1{font-size:clamp(27px,4vw,38px);margin:8px 0 16px}h2{font-size:21px}h3{font-size:16px}
-.layout{display:flex;min-height:100dvh}aside{width:225px;flex-shrink:0;background:#19171d;border-right:1px solid var(--line);padding:18px 12px}
-.brand{font-size:21px;font-weight:900;color:var(--gold);padding:12px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:5px}
-nav{display:grid;gap:5px;margin-top:20px}nav button{border:0;background:none;color:var(--muted);text-align:left;padding:13px;border-radius:10px}nav button.active{background:#4d2a33;color:#fff}
-main{width:100%;max-width:1200px;min-width:0;margin:auto;padding:22px;align-self:flex-start}
-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:22px}
-.eyebrow{font-size:11px;letter-spacing:2px;color:var(--gold)}.small{font-size:13px;color:var(--muted)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:17px;margin-bottom:12px}
-.hero{background:linear-gradient(135deg,#4e2833,#282029 60%,#19191e);border:1px solid #77515b;border-radius:18px;padding:24px;margin-bottom:18px}
-.hero p{color:#d8c7c7}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.grid>.card{margin:0}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;background:var(--red);color:white;border-radius:10px;padding:11px 15px;font-weight:650;text-decoration:none}
-.btn.alt{background:#35313b}.btn.gold{background:linear-gradient(115deg,#e6c48a,#c2935e);color:#231b1b}.btn.sm{padding:8px 11px;font-size:12px}
+body{
+margin:0;color:var(--text);
+background:radial-gradient(ellipse at 80% 0%,#572b3444,transparent 42%),var(--bg);
+font-family:system-ui,-apple-system,"Segoe UI",sans-serif
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{
+outline:2px solid var(--gold);outline-offset:2px
+}
+a{color:var(--gold)}
+h1{font-size:clamp(27px,4vw,38px);margin:8px 0 16px}
+h2{font-size:21px}
+h3{font-size:16px}
+p{color:var(--muted);line-height:1.6}
+.layout{display:flex;min-height:100dvh}
+aside{
+width:225px;flex-shrink:0;background:#19171d;
+border-right:1px solid var(--line);padding:18px 12px
+}
+.brand{font-size:21px;font-weight:900;color:var(--gold);padding:12px}
+.brand small{
+display:block;color:var(--muted);font-size:10px;
+letter-spacing:2px;margin-top:5px
+}
+nav{display:grid;gap:5px;margin-top:20px}
+nav button{
+border:0;background:none;color:var(--muted);
+text-align:left;padding:13px;border-radius:10px
+}
+nav button.active{background:#4d2a33;color:white}
+main{
+width:100%;max-width:1200px;min-width:0;
+margin:auto;padding:22px;align-self:flex-start
+}
+header{
+display:flex;justify-content:space-between;
+align-items:center;gap:10px;margin-bottom:22px
+}
+.eyebrow{font-size:11px;letter-spacing:2px;color:var(--gold)}
+.small{font-size:13px;color:var(--muted)}
+.card{
+background:var(--panel);border:1px solid var(--line);
+border-radius:14px;padding:17px;margin-bottom:12px
+}
+.hero{
+background:linear-gradient(135deg,#4e2833,#282029 60%,#19191e);
+border:1px solid #77515b;border-radius:18px;
+padding:24px;margin-bottom:18px
+}
+.hero p{color:#d8c7c7}
+.grid{
+display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px
+}
+.grid>.card{margin:0}
+.btn{
+display:inline-flex;align-items:center;justify-content:center;
+gap:7px;border:0;background:var(--red);color:white;
+border-radius:10px;padding:11px 15px;font-weight:650;
+text-decoration:none
+}
+.btn.alt{background:#35313b}
+.btn.gold{
+background:linear-gradient(115deg,#e6c48a,#c2935e);
+color:#231b1b
+}
+.btn.sm{padding:8px 11px;font-size:12px}
 .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
-input[type=search],input[type=text],select{background:var(--panel2);border:1px solid var(--line);color:white;border-radius:10px;padding:11px;min-width:0}
-input[type=search]{flex:1;min-width:130px}input[type=checkbox]{accent-color:var(--red);width:18px;height:18px}
-.between{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.meter{height:8px;background:#403942;border-radius:20px;overflow:hidden}.meter>div{height:100%;background:linear-gradient(90deg,#ac4756,#e2bd82)}
-.counter{font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
-.chapterGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.chapterCard{display:flex;align-items:center;gap:13px;width:100%;min-width:0;background:linear-gradient(115deg,#2b242d,#1d1c22);border:1px solid var(--line);border-radius:15px;padding:17px;color:white;text-align:left}
-.chapterCard:hover{border-color:var(--gold)}.chapterCard.complete{border-color:#51715b}
-.chapterIcon{display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;border-radius:12px;background:#56313b;color:var(--gold);font-size:23px}
-.chapterContent{flex:1;min-width:0}.chapterTop{display:flex;justify-content:space-between;align-items:center;gap:8px}.chapterSubtitle{display:block;color:var(--muted);font-size:12px;margin:6px 0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chapterArrow{font-size:24px;color:var(--gold)}.sectionHeading{margin:28px 0 14px}
-.crumb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 16px;font-size:13px;color:var(--muted)}
+input[type=search],input[type=text],select{
+background:var(--panel2);border:1px solid var(--line);
+color:white;border-radius:10px;padding:11px;min-width:0
+}
+input[type=search]{flex:1;min-width:130px}
+input[type=checkbox]{
+accent-color:var(--red);width:18px;height:18px
+}
+.between{
+display:flex;justify-content:space-between;
+align-items:center;gap:10px
+}
+.meter{
+height:8px;background:#403942;border-radius:20px;
+overflow:hidden
+}
+.meter>div{
+height:100%;
+background:linear-gradient(90deg,#ac4756,#e2bd82)
+}
+.counter{
+font-weight:800;color:var(--gold);
+font-variant-numeric:tabular-nums;white-space:nowrap
+}
+.chapterGrid{
+display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px
+}
+.chapterCard{
+display:flex;align-items:center;gap:13px;width:100%;
+min-width:0;background:linear-gradient(115deg,#2b242d,#1d1c22);
+border:1px solid var(--line);border-radius:15px;
+padding:17px;color:white;text-align:left
+}
+.chapterCard:hover{border-color:var(--gold)}
+.chapterCard.complete{border-color:#51715b}
+.chapterIcon{
+display:grid;place-items:center;flex:0 0 43px;
+width:43px;height:43px;border-radius:12px;
+background:#56313b;color:var(--gold);font-size:23px
+}
+.chapterContent{flex:1;min-width:0}
+.chapterTop{
+display:flex;justify-content:space-between;
+align-items:center;gap:8px
+}
+.chapterSubtitle{
+display:block;color:var(--muted);font-size:12px;
+margin:6px 0 12px;white-space:nowrap;
+overflow:hidden;text-overflow:ellipsis
+}
+.chapterArrow{font-size:24px;color:var(--gold)}
+.sectionHeading{margin:28px 0 14px}
+.crumb{
+display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+margin:0 0 16px;font-size:13px;color:var(--muted)
+}
 .textbtn{border:0;background:none;color:var(--gold);padding:5px 0}
-.questrow{display:flex;align-items:center;gap:12px;padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:11px;margin-bottom:8px}
-.questrow.completed{background:#1d2924}.questrow button{flex:1;min-width:0;border:0;background:none;text-align:left;color:white}.questrow button strong{display:block}.questrow button small{display:block;color:var(--muted);margin-bottom:5px}
-.questtag{display:inline-block;border:1px solid var(--line);border-radius:20px;padding:6px 10px;font-size:12px;color:var(--muted);margin:3px}
-.step{display:flex;gap:11px;align-items:flex-start;padding:14px;background:var(--panel2);border-radius:10px;margin-bottom:8px;line-height:1.55}
+.questrow{
+display:flex;align-items:center;gap:12px;padding:13px;
+background:var(--panel);border:1px solid var(--line);
+border-radius:11px;margin-bottom:8px
+}
+.questrow.completed{background:#1d2924}
+.questrow button{
+flex:1;min-width:0;border:0;background:none;
+text-align:left;color:white
+}
+.questrow button strong{display:block}
+.questrow button small{
+display:block;color:var(--muted);margin-bottom:5px
+}
+.step{
+display:flex;gap:11px;align-items:flex-start;
+padding:14px;background:var(--panel2);
+border-radius:10px;margin-bottom:8px;line-height:1.55
+}
 .step.checked span{text-decoration:line-through;color:var(--muted)}
-.notice{padding:13px;background:#312a20;border-left:3px solid var(--gold);color:#ead5af;border-radius:4px;margin:13px 0;line-height:1.55}
-.empty{padding:25px;border:1px dashed var(--line);border-radius:12px;text-align:center;color:var(--muted)}
-.guideBox{background:#29242c;border:1px solid #5e4650;border-radius:14px;padding:17px;margin:15px 0}
+.notice{
+padding:13px;background:#312a20;border-left:3px solid var(--gold);
+color:#ead5af;border-radius:4px;margin:13px 0;line-height:1.55
+}
+.empty{
+padding:25px;border:1px dashed var(--line);
+border-radius:12px;text-align:center;color:var(--muted)
+}
+.guideBox{
+background:#29242c;border:1px solid #5e4650;
+border-radius:14px;padding:17px;margin:15px 0
+}
 .guideBox h3{color:var(--gold);margin:0 0 8px}
-.guideBox p{margin:7px 0}.completeLine{display:flex;align-items:center;gap:12px;font-weight:700}
-.mapwrap{position:relative;height:min(62vh,600px);min-height:340px;overflow:hidden;border-radius:14px;border:1px solid var(--line);background:#29343c;touch-action:none}
-.mapworld{position:absolute;inset:0;transform-origin:center;background:radial-gradient(ellipse at 30% 30%,#52634e,transparent 45%),radial-gradient(ellipse at 75% 70%,#625c69,transparent 50%),repeating-linear-gradient(0deg,transparent 0 49px,#ffffff0a 50px),repeating-linear-gradient(90deg,transparent 0 49px,#ffffff0a 50px),#303b43}
-.mapcenter{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#dfc38c;font-size:24px;pointer-events:none}
+.guideBox p{margin:7px 0}
+.completeLine{display:flex;align-items:center;gap:12px;font-weight:700}
+.mapwrap{
+position:relative;height:min(62vh,600px);min-height:340px;
+overflow:hidden;border-radius:14px;border:1px solid var(--line);
+background:#29343c;touch-action:none
+}
+.mapworld{
+position:absolute;inset:0;transform-origin:center;
+background:
+radial-gradient(ellipse at 30% 30%,#52634e,transparent 45%),
+radial-gradient(ellipse at 75% 70%,#625c69,transparent 50%),
+repeating-linear-gradient(0deg,transparent 0 49px,#ffffff0a 50px),
+repeating-linear-gradient(90deg,transparent 0 49px,#ffffff0a 50px),
+#303b43
+}
+.mapcenter{
+position:absolute;top:50%;left:50%;
+transform:translate(-50%,-50%);
+text-align:center;color:#dfc38c;
+font-size:24px;pointer-events:none
+}
 .mapcenter small{display:block;font-size:10px;margin-top:8px}
-.mapmarker{position:absolute;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;border:2px solid #fff0d6;background:#a84653;color:white;display:grid;place-items:center;z-index:4}
-.mapmarker.player{background:#2589d4}.mapmarker.target{background:#c19038}.mapmarker.completed{opacity:.5}
-.route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}.route line{stroke:#ffdf91;stroke-width:.7;stroke-dasharray:1.5 1;vector-effect:non-scaling-stroke}
-.markerrow{display:flex;align-items:center;gap:10px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:7px}.markerrow .name{flex:1;min-width:0}.markerrow strong{display:block}.markerrow small{color:var(--muted)}
-.mobileNav{display:none}footer{font-size:11px;color:var(--muted);margin-top:35px}
-@media(max-width:800px){.chapterGrid{grid-template-columns:1fr}}
-@media(max-width:760px){.layout{display:block}aside{display:none}main{padding:15px 13px 105px}.hero{padding:19px}.grid{gap:9px}.grid>.card{padding:13px}.mapwrap{height:53dvh;min-height:320px}.mobileNav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;justify-content:space-around;background:#19191f;border-top:1px solid var(--line);padding:7px 3px calc(7px + env(safe-area-inset-bottom))}.mobileNav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:none;color:var(--muted);padding:7px 2px;font-size:10px}.mobileNav button.active{color:var(--gold)}.mobileNav .ico{font-size:22px}}
+.mapmarker{
+position:absolute;transform:translate(-50%,-50%);
+width:34px;height:34px;border-radius:50%;
+border:2px solid #fff0d6;background:#a84653;color:white;
+display:grid;place-items:center;z-index:4
+}
+.mapmarker.player{background:#2589d4}
+.mapmarker.target{background:#c19038}
+.mapmarker.completed{opacity:.5}
+.route{
+position:absolute;inset:0;width:100%;height:100%;
+pointer-events:none;z-index:2
+}
+.route line{
+stroke:#ffdf91;stroke-width:.7;
+stroke-dasharray:1.5 1;vector-effect:non-scaling-stroke
+}
+.markerrow{
+display:flex;align-items:center;gap:10px;padding:12px;
+background:var(--panel);border:1px solid var(--line);
+border-radius:10px;margin-bottom:7px
+}
+.markerrow .name{flex:1;min-width:0}
+.markerrow strong{display:block}
+.markerrow small{color:var(--muted)}
+.mobileNav{display:none}
+footer{font-size:11px;color:var(--muted);margin-top:35px}
+@media(max-width:800px){
+.chapterGrid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+.layout{display:block}
+aside{display:none}
+main{padding:15px 13px 105px}
+.hero{padding:19px}
+.grid{gap:9px}
+.grid>.card{padding:13px}
+.mapwrap{height:53dvh;min-height:320px}
+.mobileNav{
+display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;
+justify-content:space-around;background:#19191f;
+border-top:1px solid var(--line);
+padding:7px 3px calc(7px + env(safe-area-inset-bottom))
+}
+.mobileNav button{
+flex:1;display:flex;flex-direction:column;align-items:center;
+gap:4px;border:0;background:none;color:var(--muted);
+padding:7px 2px;font-size:10px
+}
+.mobileNav button.active{color:var(--gold)}
+.mobileNav .ico{font-size:22px}
+}
 </style>
 </head>
 <body>
 <div class="layout">
 <aside>
-<div class="brand">⚔ CRIMSON GUIDE<small>PYWEL COMPANION</small></div>
+<div class="brand">⚔ CRIMSON GUIDE
+<small>PYWEL COMPANION</small></div>
 <nav id="nav"></nav>
 </aside>
 <main>
 <header>
-<span class="eyebrow">CRIMSON GUIDE • VERSION 4.2</span>
+<span class="eyebrow">CRIMSON GUIDE • VERSION 4.3</span>
 <select id="lang" aria-label="Language">
 <option value="de">🇩🇪 Deutsch</option>
 <option value="en">🇬🇧 English</option>
@@ -83,75 +274,128 @@ input[type=search]{flex:1;min-width:130px}input[type=checkbox]{accent-color:var(
 </main>
 </div>
 <div id="mobileNav" class="mobileNav"></div>
+
 <script>
 "use strict";
+
+/* ==========================================
+   CRIMSON GUIDE 4.3
+   CHAPTER 1 + CHAPTER 2 SOLUTIONS
+   ========================================== */
 
 const PROGRESS_KEY="crimson-guide-progress-v2";
 const MARKERS_KEY="crimson-guide-markers-v3";
 const POSITION_KEY="crimson-guide-player-v31";
 const TARGET_KEY="crimson-guide-target-v31";
-const MAP_URL="https://crimsondesert.th.gl/maps/Continent%20of%20Pywel";
-const MAIN_GUIDE="https://www.powerpyx.com/crimson-desert-walkthrough-all-main-quests/";
+const LANGUAGE_KEY="crimson-guide-language";
+
+const MAP_URL=
+"https://crimsondesert.th.gl/maps/Continent%20of%20Pywel";
+
+const MAIN_GUIDE=
+"https://www.powerpyx.com/crimson-desert-walkthrough-all-main-quests/";
 
 const TXT={
 de:{
-home:"Start",map:"Karte",quests:"Quests",collection:"Sammlung",progress:"Fortschritt",settings:"Einstellungen",
-main:"Hauptquests",side:"Nebenquests",done:"Erledigt",open:"Offen",
-welcome:"Dein Abenteuer in Pywel",intro:"Questlösungen, Kapitelübersicht und dein persönlicher Fortschritt.",
-chapters:"Alle Kapitel",search:"Quest suchen...",allStatus:"Alle Status",
-steps:"Schritt-für-Schritt-Lösung",show:"🔒 Lösung anzeigen",hide:"🔓 Lösung verbergen",
-finished:"Quest abgeschlossen",noGuide:"Für diese Quest ist noch keine ausführliche Lösung hinterlegt.",
-location:"Fundort",tip:"Hilfreicher Tipp",source:"Original-Walkthrough öffnen",
-partial:"Lösung vorhanden",pending:"Lösung ausstehend",chapter:"Kapitel",
-total:"Gesamt",mapNote:"Eigene Planungsfläche – keine echte Pywel-Karte.",
+home:"Start",map:"Karte",quests:"Quests",
+collection:"Sammlung",progress:"Fortschritt",settings:"Einstellungen",
+main:"Hauptquests",side:"Nebenquests",
+done:"Erledigt",open:"Offen",
+welcome:"Dein Abenteuer in Pywel",
+intro:"Questlösungen, Kapitelübersicht und dein persönlicher Fortschritt.",
+chapters:"Alle Kapitel",search:"Quest suchen...",
+allStatus:"Alle Status",
+steps:"Schritt-für-Schritt-Lösung",
+show:"🔒 Lösung anzeigen",hide:"🔓 Lösung verbergen",
+finished:"Quest abgeschlossen",
+noGuide:"Für diese Quest ist noch keine ausführliche Lösung hinterlegt.",
+location:"Fundort",tip:"Hilfreicher Tipp",
+source:"Original-Walkthrough öffnen",
+partial:"Lösung vorhanden",pending:"Lösung ausstehend",
+chapter:"Kapitel",total:"Gesamt",
+mapNote:"Eigene Planungsfläche – keine echte Pywel-Karte.",
 mapWarning:"Die Positionen entsprechen keinen echten Spielkoordinaten.",
-realMap:"Interaktive Pywel-Karte öffnen",player:"Spielerposition setzen",target:"Ziel setzen",
+realMap:"Interaktive Pywel-Karte öffnen",
+player:"Spielerposition setzen",target:"Ziel setzen",
 addMarker:"Marker hinzufügen",resetView:"Ansicht zurücksetzen",
-markerList:"Meine Fundorte",removePlayer:"Position entfernen",removeTarget:"Ziel entfernen",
+markerList:"Meine Fundorte",
+removePlayer:"Position entfernen",removeTarget:"Ziel entfernen",
 noMarkers:"Noch keine Markierungen vorhanden.",
 routeHint:"Die Linie zeigt nur die direkte Richtung, keinen echten Spielweg.",
 collectionInfo:"Die vollständigen Sammlungsdaten werden später ergänzt.",
 items:"Gegenstände",bosses:"Bosse",npcs:"NPCs",materials:"Materialien",
 notReady:"Noch keine geprüften Inhalte vorhanden.",
 local:"Deine Daten bleiben lokal auf diesem Gerät. Erstelle regelmäßig ein Backup.",
-export:"Backup exportieren",import:"Backup importieren",reset:"Alle Daten löschen",
+export:"Backup exportieren",import:"Backup importieren",
+reset:"Alle Daten löschen",
 confirmReset:"Wirklich alle Fortschritte und Markierungen löschen?",
 invalid:"Ungültige Backup-Datei.",imported:"Backup importiert.",
-chapter1Ready:"Kapitel 1 enthält jetzt neun Questanleitungen.",
-chapterProgress:"Kapitel-Fortschritt",noResults:"Keine Quests gefunden."
+chapterProgress:"Kapitel-Fortschritt",
+noResults:"Keine Quests gefunden.",
+bossTip:"Boss-Strategie",
+newGuides:"Kapitel 1 und 2 enthalten jetzt Questanleitungen.",
+available:"Anleitungen verfügbar",
+guideCoverage:"Verfügbare Questlösungen"
 },
 en:{
-home:"Home",map:"Map",quests:"Quests",collection:"Collection",progress:"Progress",settings:"Settings",
-main:"Main quests",side:"Side quests",done:"Completed",open:"Open",
-welcome:"Your adventure in Pywel",intro:"Quest walkthroughs, chapter navigation and personal progress.",
-chapters:"All chapters",search:"Search quests...",allStatus:"All statuses",
-steps:"Step-by-step walkthrough",show:"🔒 Show solution",hide:"🔓 Hide solution",
-finished:"Quest completed",noGuide:"No detailed walkthrough has been added for this quest yet.",
-location:"Location",tip:"Helpful tip",source:"Open original walkthrough",
-partial:"Guide available",pending:"Guide pending",chapter:"Chapter",
-total:"Total",mapNote:"Personal planning canvas – not an actual Pywel map.",
+home:"Home",map:"Map",quests:"Quests",
+collection:"Collection",progress:"Progress",settings:"Settings",
+main:"Main quests",side:"Side quests",
+done:"Completed",open:"Open",
+welcome:"Your adventure in Pywel",
+intro:"Quest walkthroughs, chapter navigation and personal progress.",
+chapters:"All chapters",search:"Search quests...",
+allStatus:"All statuses",
+steps:"Step-by-step walkthrough",
+show:"🔒 Show solution",hide:"🔓 Hide solution",
+finished:"Quest completed",
+noGuide:"No detailed walkthrough has been added for this quest yet.",
+location:"Location",tip:"Helpful tip",
+source:"Open original walkthrough",
+partial:"Guide available",pending:"Guide pending",
+chapter:"Chapter",total:"Total",
+mapNote:"Personal planning canvas – not an actual Pywel map.",
 mapWarning:"Positions do not represent real game coordinates.",
-realMap:"Open interactive Pywel map",player:"Set player position",target:"Set destination",
-addMarker:"Add marker",resetView:"Reset view",markerList:"My locations",
-removePlayer:"Clear player position",removeTarget:"Clear destination",
-noMarkers:"No markers yet.",routeHint:"The line shows direct direction only, not a real game route.",
+realMap:"Open interactive Pywel map",
+player:"Set player position",target:"Set destination",
+addMarker:"Add marker",resetView:"Reset view",
+markerList:"My locations",
+removePlayer:"Clear player position",
+removeTarget:"Clear destination",
+noMarkers:"No markers yet.",
+routeHint:"The line shows direct direction only, not a real game route.",
 collectionInfo:"Complete collection data will be added later.",
 items:"Items",bosses:"Bosses",npcs:"NPCs",materials:"Materials",
 notReady:"No verified content available yet.",
 local:"Your data stays on this device. Export backups regularly.",
-export:"Export backup",import:"Import backup",reset:"Delete all data",
+export:"Export backup",import:"Import backup",
+reset:"Delete all data",
 confirmReset:"Delete all progress and markers?",
 invalid:"Invalid backup file.",imported:"Backup imported.",
-chapter1Ready:"Chapter 1 now includes nine quest guides.",
-chapterProgress:"Chapter progress",noResults:"No quests found."
+chapterProgress:"Chapter progress",
+noResults:"No quests found.",
+bossTip:"Boss strategy",
+newGuides:"Chapters 1 and 2 now contain quest walkthroughs.",
+available:"Guides available",
+guideCoverage:"Available walkthroughs"
 }
 };
-const t=k=>TXT[language][k]||k;
+
 const chapterNames=[
-"Dead of Night","The First Encounter","Golden Greed","Howling Hill",
-"The Price of Knowledge","Guest Unbidden","Cracks in the Shield",
-"Homecoming","Blood Coronation","The Sage of the Desert",
-"Counterattack","Truth and Reality","The Abyss","Journey’s End"
+"Dead of Night",
+"The First Encounter",
+"Golden Greed",
+"Howling Hill",
+"The Price of Knowledge",
+"Guest Unbidden",
+"Cracks in the Shield",
+"Homecoming",
+"Blood Coronation",
+"The Sage of the Desert",
+"Counterattack",
+"Truth and Reality",
+"The Abyss",
+"Journey’s End"
 ];
 
 const mainQuestNames=[
@@ -179,20 +423,38 @@ Pailune:`White Bear|Snowwhite Deer|Harry's Request|Lola's Request|Gunter's Reque
 function slug(s){
 return s.toLowerCase().normalize("NFD")
 .replace(/[\u0300-\u036f]/g,"")
-.replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+.replace(/[^a-z0-9]+/g,"-")
+.replace(/^-|-$/g,"");
 }
+
 function esc(s){
 return String(s??"").replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
 })[c]);
 }
-const quests=[];
+
 const originalIds=[
-"unfamiliar-lands","in-ashes","realm-of-uncertainty","new-journey",
-"where-rumors-gather","mysterious-man","true-wisdom",
-"actions-speak","heart-beyond","mystical-key",
-"polar-opposites","abyss-without-balance","woman-in-white"
+"unfamiliar-lands",
+"in-ashes",
+"realm-of-uncertainty",
+"new-journey",
+"where-rumors-gather",
+"mysterious-man",
+"true-wisdom",
+"actions-speak",
+"heart-beyond",
+"mystical-key",
+"polar-opposites",
+"abyss-without-balance",
+"woman-in-white"
 ];
+
+const quests=[];
+
 mainQuestNames.forEach((text,chapter)=>{
 text.split("|").forEach((name,index)=>{
 let id;
@@ -206,6 +468,7 @@ id="c"+chapter+"-"+slug(name);
 quests.push({id,name,chapter,type:"main"});
 });
 });
+
 Object.entries(sideQuestNames).forEach(([region,text])=>{
 text.split("|").forEach((name,index)=>{
 quests.push({
@@ -215,705 +478,1779 @@ name,chapter:region,type:"side"
 });
 });
 
-/*
-CHAPTER 1 WALKTHROUGHS
-Each step is bilingual: [German, English].
-These are original concise summaries of external guides.
-*/
+/* ==========================================
+   BILINGUAL QUEST GUIDE HELPER
+   ========================================== */
+
+function G(locationDE,locationEN,steps,tipDE,tipEN,url,bossDE="",bossEN=""){
+return {
+location:[locationDE,locationEN],
+steps,
+tip:[tipDE,tipEN],
+url,
+boss:bossDE?[bossDE,bossEN]:null
+};
+}
+
+/* ==========================================
+   CHAPTER 1
+   ========================================== */
 
 const chapter1Guides={
-"where-rumors-gather":{
-location:["Taverne in Hernand","Hernand Tavern"],
-steps:[
-["Gehe vom Lager aus in die Stadt Hernand und suche die Taverne. Achte auf das große Fass am Gebäude.","Head from camp into Hernand and find the tavern. Look for the large barrel sign."],
-["Betritt die Taverne und suche den Soldaten, der über Armdrücken spricht.","Enter the tavern and find the soldier talking about arm wrestling."],
-["Sprich ihn an und fordere ihn zum Armdrücken heraus.","Talk to him and challenge him to arm wrestling."],
-["Drücke die angezeigte Taste wiederholt und beachte die eingeblendeten Timing-Ereignisse.","Repeatedly press the displayed button and complete the on-screen timing prompts."],
-["Gewinne das Duell, um die Quest abzuschließen.","Win the contest to finish the quest."]
+
+"where-rumors-gather":G(
+"Taverne in Hernand","Hernand Tavern",
+[
+["Gehe zur Taverne in Hernand.","Go to the tavern in Hernand."],
+["Betritt die Taverne und suche den Soldaten beim Armdrücken.","Enter the tavern and find the soldier offering arm wrestling."],
+["Sprich mit ihm und starte den Wettkampf.","Talk to him and start the contest."],
+["Drücke die angezeigte Taste wiederholt und beachte das Timing.","Repeatedly press the displayed button and follow the timing prompts."],
+["Gewinne das Armdrücken.","Win the arm-wrestling contest."]
 ],
-tip:["Beim Timing-Ereignis bringt ein korrekt gedrückter Knopf einen großen Vorteil.","Successfully timing the quick-time prompt gives a major advantage."],
-url:"https://allthings.how/crimson-desert-trials-of-kindness-every-sub-quest-walkthrough/"
-},
-"mysterious-man":{
-location:["Vor der Taverne in Hernand","Outside Hernand Tavern"],
-steps:[
-["Verlasse die Taverne und suche den alten Bettler in der Nähe.","Leave the tavern and find the elderly beggar nearby."],
+"Ein korrektes Timing hilft besonders beim letzten Teil.",
+"Correct timing is especially helpful toward the end.",
+"https://allthings.how/crimson-desert-trials-of-kindness-every-sub-quest-walkthrough/"
+),
+
+"mysterious-man":G(
+"Vor der Taverne in Hernand","Outside Hernand Tavern",
+[
+["Verlasse die Taverne.","Leave the tavern."],
+["Suche den alten Bettler in der Nähe.","Find the elderly beggar nearby."],
 ["Sprich mit ihm und gib ihm eine Münze.","Talk to him and give him a coin."],
-["Nimm den Schlüssel entgegen, den du für die folgenden Aufgaben benötigst.","Receive the key needed for the following objectives."],
-["Achte auf die neu verfügbaren Questziele in Hernand.","Check the newly available quest objectives in Hernand."]
+["Nimm den Schlüssel entgegen.","Receive the key."],
+["Prüfe die neuen Questziele.","Check the new quest objectives."]
 ],
-tip:["Bewahre den Schlüssel auf. Er wird für die weitere Handlung benötigt.","Keep the key. It is needed for story progression."],
-url:"https://allthings.how/crimson-desert-trials-of-kindness-every-sub-quest-walkthrough/"
-},
-"true-wisdom":{
-location:["Kanalisation von Hernand","Hernand Sewers"],
-steps:[
-["Untersuche den Bereich beim Bettler und finde den Zugang zur Kanalisation.","Inspect the area by the beggar and locate the sewer entrance."],
+"Der Schlüssel wird später benötigt.",
+"The key is needed later.",
+"https://allthings.how/crimson-desert-trials-of-kindness-every-sub-quest-walkthrough/"
+),
+
+"true-wisdom":G(
+"Kanalisation von Hernand","Hernand Sewers",
+[
+["Suche den Zugang zur Kanalisation beim Bettler.","Find the sewer entrance near the beggar."],
 ["Öffne den Zugang und steige hinunter.","Open the entrance and descend."],
-["Schalte deine Laterne ein, damit du die dunklen Wege erkennen kannst.","Turn on your lantern to see the dark paths."],
-["Bewege dich vorsichtig über die Plattformen und Hindernisse.","Carefully navigate the platforms and obstacles."],
-["Suche die Person, die in der Kanalisation Hilfe benötigt.","Find the person in distress inside the sewers."],
-["Hilf der Person und schließe das Questziel ab.","Help the person and complete the objective."]
+["Aktiviere deine Laterne.","Turn on your lantern."],
+["Überquere vorsichtig die Hindernisse.","Carefully cross the obstacles."],
+["Suche die Person, die Hilfe benötigt.","Find the person who needs help."],
+["Hilf ihr und schließe das Ziel ab.","Help them and complete the objective."]
 ],
-tip:["Achte auf deinen Sprungzeitpunkt, besonders bei instabilen Plattformen.","Time your jumps carefully, especially around unstable platforms."],
-url:"https://www.crimsondesert.app/en/wiki/quests/trials-of-kindness"
-},
-"actions-speak":{
-location:["Wohnviertel von Hernand","Hernand residential area"],
-steps:[
-["Folge der Questmarkierung zu den Bewohnern, die Hilfe benötigen.","Follow the quest marker to the residents asking for help."],
-["Sprich mit dem Paar vor dem Haus.","Talk to the couple outside the house."],
-["Nimm den Besen auf, der für die Aufgabe bereitliegt.","Pick up the broom provided for the task."],
+"Nutze die Laterne und achte auf deine Sprünge.",
+"Use your lantern and time your jumps.",
+"https://www.crimsondesert.app/en/wiki/quests/trials-of-kindness"
+),
+
+"actions-speak":G(
+"Wohnviertel von Hernand","Hernand residential area",
+[
+["Folge der Questmarkierung zum Haus.","Follow the quest marker to the house."],
+["Sprich mit den Bewohnern.","Talk to the residents."],
+["Nimm den Besen auf.","Pick up the broom."],
 ["Rüste den Besen aus.","Equip the broom."],
-["Erreiche den Schornstein und reinige ihn mit dem Besen.","Reach the chimney and clean it using the broom."],
-["Kehre bei Bedarf zu den Bewohnern zurück und prüfe, ob das Ziel abgeschlossen ist.","Return to the residents if needed and check whether the objective is complete."]
+["Erreiche den Schornstein.","Reach the chimney."],
+["Reinige den Schornstein.","Clean the chimney."]
 ],
-tip:["Der Besen muss ausgerüstet sein, bevor du den Schornstein reinigen kannst.","The broom must be equipped before you can clean the chimney."],
-url:"https://www.powerpyx.com/crimson-desert-actions-speak-louder-then-words-walkthrough/"
-},
-"heart-beyond":{
-location:["Wohnhäuser westlich des Gasthauses von Hernand","Residential houses west of Hernand Inn"],
-steps:[
-["Suche Rulupee, das Kind mit der grünen Kapuze.","Find Rulupee, the child wearing a green hood."],
-["Sprich mit Rulupee und erfahre, dass die Katze Jiji verschwunden ist.","Talk to Rulupee and learn that the cat Jiji is missing."],
-["Klettere über Kisten und Vorsprünge auf die Dächer.","Climb boxes and ledges to reach the rooftops."],
-["Folge Jiji über die Dächer, bis du die Katze erreichen kannst.","Follow Jiji across the rooftops until you can reach the cat."],
-["Interagiere mit Jiji, um sie aufzunehmen.","Interact with Jiji to pick her up."],
-["Bringe die Katze vorsichtig zu Rulupee zurück.","Carefully carry the cat back to Rulupee."],
-["Nimm anschließend den Shai-Anhänger auf, falls er am Boden liegt.","Pick up the Shai Pendant afterward if it is on the ground."]
+"Der Besen muss ausgerüstet sein.",
+"The broom must be equipped.",
+"https://www.powerpyx.com/crimson-desert-actions-speak-louder-then-words-walkthrough/"
+),
+
+"heart-beyond":G(
+"Westlich des Gasthauses von Hernand",
+"West of Hernand Inn",
+[
+["Suche Rulupee mit der grünen Kapuze.","Find Rulupee wearing a green hood."],
+["Sprich mit Rulupee über die Katze Jiji.","Talk to Rulupee about the cat Jiji."],
+["Klettere auf die Dächer.","Climb onto the rooftops."],
+["Folge Jiji.","Follow Jiji."],
+["Nimm die Katze auf.","Pick up the cat."],
+["Bringe Jiji zu Rulupee zurück.","Return Jiji to Rulupee."],
+["Nimm den Shai-Anhänger auf, falls er erscheint.","Collect the Shai Pendant if it appears."]
 ],
-tip:["Bewege dich vorsichtig auf den Dächern. Der Shai-Anhänger ist für die folgende Handlung wichtig.","Move carefully across the rooftops. The Shai Pendant matters for the next story section."],
-url:"https://www.crimsondesert.app/en/wiki/quests/heart-beyond-borders"
-},
-"mystical-key":{
-location:["Schloss Hernand","Hernand Castle"],
-steps:[
-["Öffne dein Inventar und untersuche den gravierten Schlüssel.","Open your inventory and inspect the engraved key."],
-["Ziehe die Hernand-Kleidung an, falls sie für den Zugang zum Schloss benötigt wird.","Equip Hernandian attire if required to access the castle."],
-["Folge der Markierung zum Schloss Hernand.","Follow the marker to Hernand Castle."],
-["Betritt das Schloss und gehe in das obere Stockwerk.","Enter the castle and head upstairs."],
-["Suche den Raum, dessen Tür sich mit deinem Schlüssel öffnen lässt.","Find the room that can be unlocked with your key."],
-["Öffne die Tür und untersuche den Raum sowie die Truhe.","Unlock the door and inspect the room and chest."],
-["Betritt das leuchtende Portal, um in den Abyss zu gelangen.","Enter the glowing portal to reach the Abyss."]
+"Bewege dich vorsichtig auf den Dächern.",
+"Move carefully on the rooftops.",
+"https://www.crimsondesert.app/en/wiki/quests/heart-beyond-borders"
+),
+
+"mystical-key":G(
+"Schloss Hernand","Hernand Castle",
+[
+["Untersuche den gravierten Schlüssel.","Inspect the engraved key."],
+["Ziehe bei Bedarf Hernand-Kleidung an.","Equip Hernandian attire if necessary."],
+["Gehe zum Schloss.","Go to the castle."],
+["Steige ins obere Stockwerk.","Head upstairs."],
+["Suche die verschlossene Tür.","Find the locked door."],
+["Öffne sie und untersuche den Raum.","Unlock it and inspect the room."],
+["Betritt das Portal zum Abyss.","Enter the portal to the Abyss."]
 ],
-tip:["Wenn du nicht ins Schloss gelangst, prüfe deine Kleidung und die vorherigen Aufgaben.","If you cannot enter the castle, check your clothing and previous objectives."],
-url:"https://www.pcgamer.com/games/action/crimson-desert-mystical-key-polar-opposites/"
-},
-"polar-opposites":{
-location:["Axiom Archive im Abyss","Axiom Archive in the Abyss"],
-steps:[
-["Aktiviere den Abyss-Nexus, indem du die vorgesehene Plattform betrittst.","Activate the Abyss Nexus by stepping onto its platform."],
-["Folge dem Weg in Richtung des Gebäudes.","Follow the route toward the building."],
-["Erhalte die Fähigkeit Axiom Force und achte auf die eingeblendete Steuerung.","Obtain the Axiom Force ability and pay attention to the control instructions."],
-["Nutze Axiom Force, um die beweglichen Elemente zu greifen.","Use Axiom Force to grab movable objects."],
-["Drehe die Scheiben so, dass die Verbindung für den Mechanismus hergestellt wird.","Rotate the discs to complete the mechanism's connection."],
-["Betritt das geöffnete Gebäude und sprich mit Alustin.","Enter the opened building and speak with Alustin."]
+"Prüfe bei Zugangsproblemen deine Kleidung.",
+"If access is blocked, check your clothing.",
+"https://www.pcgamer.com/games/action/crimson-desert-mystical-key-polar-opposites/"
+),
+
+"polar-opposites":G(
+"Axiom Archive im Abyss","Axiom Archive in the Abyss",
+[
+["Aktiviere den Abyss-Nexus.","Activate the Abyss Nexus."],
+["Folge dem Weg zum Gebäude.","Follow the path toward the building."],
+["Lerne Axiom Force.","Learn Axiom Force."],
+["Greife die beweglichen Elemente.","Grab the movable objects."],
+["Drehe die Scheiben zum Öffnen des Mechanismus.","Rotate the discs to unlock the mechanism."],
+["Betritt das Gebäude und sprich mit Alustin.","Enter the building and speak to Alustin."]
 ],
-tip:["Drehe die Elemente schrittweise und beobachte, ob der Mechanismus reagiert.","Rotate the pieces gradually and watch for the mechanism's response."],
-url:"https://www.pcgamer.com/games/action/crimson-desert-mystical-key-polar-opposites/"
-},
-"abyss-without-balance":{
-location:["Axiom Archive – Herz des Abyss","Axiom Archive – Heart of the Abyss"],
-steps:[
-["Gehe durch das Skybridge-Tor zum Zentrum des Abyss.","Pass through the skybridge gate toward the heart of the Abyss."],
-["Aktiviere den nächsten Abyss-Nexus.","Activate the next Abyss Nexus."],
-["Nutze deine Fähigkeiten, um die blockierte Passage zu öffnen.","Use your abilities to clear the blocked passage."],
-["Bewege den schwebenden Energiekern zur deaktivierten Vorrichtung.","Move the floating power core toward the inactive device."],
-["Stelle die Abyss-Zelle her, wie es das Questziel verlangt.","Synthesize the Abyss Cell as instructed by the objective."],
-["Aktiviere die Energieversorgung des Abyss.","Activate the Abyss power supply."],
-["Nimm das Abyss-Artefakt auf.","Collect the Abyss Artifact."]
+"Beobachte die Reaktion der Mechanismen.",
+"Watch how the mechanisms respond.",
+"https://www.pcgamer.com/games/action/crimson-desert-mystical-key-polar-opposites/"
+),
+
+"abyss-without-balance":G(
+"Herz des Abyss","Heart of the Abyss",
+[
+["Gehe durch das Skybridge-Tor.","Pass through the skybridge gate."],
+["Aktiviere den Nexus.","Activate the Nexus."],
+["Öffne die blockierte Passage.","Clear the blocked passage."],
+["Bewege den Energiekern zur Vorrichtung.","Move the power core to the device."],
+["Stelle die Abyss-Zelle her.","Synthesize the Abyss Cell."],
+["Aktiviere die Energieversorgung.","Activate the power supply."],
+["Sammle das Abyss-Artefakt ein.","Collect the Abyss Artifact."]
 ],
-tip:["Arbeite die eingeblendeten Rätselziele der Reihe nach ab. Die Energieversorgung lässt sich erst nach den vorherigen Schritten aktivieren.","Follow the displayed puzzle objectives in order. The power supply requires the preceding steps."],
-url:"https://www.powerpyx.com/crimson-desert-abyss-without-balance-walkthrough/"
-},
-"woman-in-white":{
-location:["Ethereal Pathway im Abyss","Ethereal Pathway in the Abyss"],
-steps:[
-["Gehe zur geheimnisvollen Frau in Weiß.","Approach the mysterious Woman in White."],
-["Sprich mit ihr und sieh dir die Zwischensequenz an.","Speak with her and watch the cutscene."],
-["Folge dem Questziel, um den Abyss zu verlassen.","Follow the objective to leave the Abyss."],
-["Achte beim Fall auf die eingeblendete Taste, um deine Flügel zu aktivieren.","Watch for the on-screen button prompt while falling to activate your wings."],
-["Gleite kontrolliert in Richtung Hernand.","Glide toward Hernand in a controlled descent."],
-["Behalte genug Ausdauer für die sichere Landung.","Keep enough stamina for a safe landing."]
+"Arbeite die Rätselziele in Reihenfolge ab.",
+"Complete the puzzle objectives in order.",
+"https://www.powerpyx.com/crimson-desert-abyss-without-balance-walkthrough/"
+),
+
+"woman-in-white":G(
+"Ethereal Pathway im Abyss","Ethereal Pathway in the Abyss",
+[
+["Gehe zur Frau in Weiß.","Approach the Woman in White."],
+["Sprich mit ihr.","Talk to her."],
+["Sieh dir die Zwischensequenz an.","Watch the cutscene."],
+["Folge dem Ziel aus dem Abyss.","Follow the objective out of the Abyss."],
+["Aktiviere während des Falls deine Flügel.","Activate your wings while falling."],
+["Gleite Richtung Hernand.","Glide toward Hernand."],
+["Lande sicher.","Land safely."]
 ],
-tip:["Aktiviere die Gleitfunktion rechtzeitig und achte auf deine Ausdauer.","Activate gliding in time and watch your stamina."],
-url:"https://www.powerpyx.com/crimson-desert-woman-in-white-walkthrough/"
-}
+"Achte beim Gleiten auf deine Ausdauer.",
+"Watch your stamina while gliding.",
+"https://www.powerpyx.com/crimson-desert-woman-in-white-walkthrough/"
+)
+
 };
 
+/* ==========================================
+   CHAPTER 2 – GOLDEN GREED
+   ========================================== */
+
+const chapter2Guides={
+
+"where-the-light-leads":G(
+"Lioncrest-Wachturm, Hernand",
+"Lioncrest Watchtower, Hernand",
+[
+["Reise zum Lioncrest-Wachturm.","Travel to Lioncrest Watchtower."],
+["Betritt den Außenhof.","Enter the courtyard."],
+["Besiege die Banditen und zuerst die Bogenschützen.","Defeat the bandits, prioritizing archers."],
+["Verbrenne das Gestrüpp vor der Tür mit einem Feuerpfeil oder Focused Light.","Burn the shrubs blocking the door with a fire arrow or Focused Light."],
+["Steige ins oberste Stockwerk.","Climb to the top floor."],
+["Untersuche den Visione-Helm.","Inspect the Visione helmet."]
+],
+"Alternativ kannst du außen hochklettern und durch das Dach einsteigen.",
+"You can also climb outside and enter through the roof.",
+"https://www.powerpyx.com/crimson-desert-where-the-light-leads-walkthrough/"
+),
+
+"memory-fragment":G(
+"Oberstes Stockwerk des Lioncrest-Wachturms",
+"Top floor of Lioncrest Watchtower",
+[
+["Nimm den goldenen Visione-Helm auf.","Pick up the golden Visione helmet."],
+["Rüste den Helm aus.","Equip the helmet."],
+["Öffne das Visione-Erinnerungsmenü.","Open the Visione memory menu."],
+["Halte auf PS5 bei Bedarf die Options-Taste gedrückt.","On PS5, hold the Options button if needed."],
+["Wähle die Erinnerung „Visione“ unter Delysia.","Select the Visione memory under Delysia."],
+["Spiele die Erinnerung ab.","Play the memory."]
+],
+"Auf PS5 gelangst du durch langes Drücken von Options zum Erinnerungsmenü.",
+"On PS5, holding Options opens the memory menu.",
+"https://www.powerpyx.com/crimson-desert-memory-fragment-walkthrough/"
+),
+
+"reunion":G(
+"Lioncrest-Wachturm / Meandering Hills",
+"Lioncrest Watchtower / Meandering Hills",
+[
+["Folge dem Questmarker zu den Ruinen.","Follow the quest marker to the ruins."],
+["Untersuche die Ruinen.","Explore the ruins."],
+["Lerne Nature’s Grasp und Focus.","Learn Nature’s Grasp and Focus."],
+["Suche die kreisförmigen Mechanismen.","Find the circular mechanisms."],
+["Verwende Force Palm auf den Mechanismen.","Use Force Palm on the mechanisms."],
+["Öffne damit den Weg.","Open the path."],
+["Folge den nächsten Questmarkierungen.","Follow the next quest markers."]
+],
+"Für das Scheibenrätsel wird Mitte – links – rechts beschrieben. Prüfe die Anzeige im Spiel.",
+"The reported disc order is middle – left – right. Check the in-game prompt.",
+"https://thegameswiki.com/crimson-desert/wiki/chapter-2-golden-greed-walkthrough"
+),
+
+"for-honor":G(
+"Stadtplatz von Hernand",
+"Hernand Square",
+[
+["Gehe zum Stadtplatz.","Go to the town square."],
+["Nähere dich der Gruppe, die über die Greymanes spricht.","Approach the group discussing the Greymanes."],
+["Sprich mit dem Ritter Matthias.","Speak with the knight Matthias."],
+["Starte das Duell.","Start the duel."],
+["Weiche seinen langsamen Angriffen aus.","Dodge his slow attacks."],
+["Kontere mit kurzen Angriffskombinationen.","Counter with short attack combinations."],
+["Heile dich bei Bedarf und besiege Matthias.","Heal when needed and defeat Matthias."]
+],
+"Spare Ausdauer zum Ausweichen. Matthias besitzt zwei Lebensleisten.",
+"Save stamina for dodging. Matthias has two health bars.",
+"https://www.powerpyx.com/crimson-desert-for-honor-walkthrough/",
+"Matthias: Warte seine Kombo ab, weiche aus und kontere. Verwende leichte Angriffe, um Ausdauer zu sparen.",
+"Matthias: Wait for his combo, dodge and counter. Use light attacks to conserve stamina."
+),
+
+"c2-awestruck":G(
+"Stadtplatz von Hernand",
+"Hernand Square",
+[
+["Bleibe nach dem Duell auf dem Stadtplatz.","Stay in the town square after the duel."],
+["Suche den Mann in ritterähnlicher Kleidung ohne Helm.","Find the man in knight-like armor without a helmet."],
+["Sprich mit Barden Middler.","Speak with Barden Middler."],
+["Sieh dir die Zwischensequenz an.","Watch the cutscene."]
+],
+"Kein weiterer Kampf oder Rätsel nötig.",
+"No additional fight or puzzle is required.",
+"https://www.powerpyx.com/crimson-desert-awestruck-walkthrough/"
+),
+
+"c2-shadow-cast-over-the-river":G(
+"Brücke bei Springtide Mill",
+"Bridge near Springtide Mill",
+[
+["Reise zur markierten Brücke.","Travel to the marked bridge."],
+["Besiege die Bleed-Banditen.","Defeat the Bleed Bandits."],
+["Achte auf den berittenen Gegner.","Watch out for the mounted enemy."],
+["Greife möglichst den Reiter und nicht das Pferd an.","Aim at the rider rather than the horse."],
+["Untersuche das Lager neben der Brücke.","Check the camp beside the bridge."],
+["Besiege die verbleibenden Feinde.","Defeat the remaining enemies."],
+["Reduziere die feindliche Kontrolle auf 0 %.","Reduce enemy control to 0%."]
+],
+"Die Prozentanzeige hilft, verbleibende Feinde zu finden.",
+"The percentage display helps track remaining enemies.",
+"https://www.powerpyx.com/crimson-desert-shadow-cast-over-the-river-walkthrough/"
+),
+
+"c2-where-misery-gathers":G(
+"Auftragstafel bei Springtide Mill",
+"Request board near Springtide Mill",
+[
+["Suche die Auftragstafel.","Find the request board."],
+["Untersuche den Aushang zu den gestohlenen Kühen.","Inspect the notice about stolen cows."],
+["Untersuche den Aushang zum Horndieb.","Inspect the notice about the horn thief."],
+["Untersuche den Aushang zum Schaf Wooly.","Inspect the notice about Wooly the sheep."],
+["Untersuche den Aushang zu den Höhlengeräuschen.","Inspect the notice about cave noises."],
+["Nimm alle vier Aufgaben an.","Accept all four tasks."],
+["Erledige die vier zugehörigen Quests.","Complete the four associated quests."]
+],
+"Die vier Aufgaben können in beliebiger Reihenfolge erledigt werden.",
+"The four tasks can be completed in any order.",
+"https://www.powerpyx.com/crimson-desert-where-misery-gathers-walkthrough/"
+),
+
+"c2-trial-after-trial":G(
+"Bauernhof nahe Springtide Mill",
+"Farm near Springtide Mill",
+[
+["Suche den Bauern Bremer im blauen Hemd.","Find the farmer Bremer wearing a blue shirt."],
+["Sprich mit Bremer.","Talk to Bremer."],
+["Sprich mit dem Zeugen am markierten Ort.","Speak to the witness at the marked location."],
+["Folge dem Mann zu Pferd.","Follow the man on horseback."],
+["Suche mit der Laterne die Erinnerungsfragmente.","Use your lantern to find memory fragments."],
+["Spiele die Visione-Erinnerung über die Kühe ab.","Play the Visione memory about the cows."],
+["Kehre zu Bremer zurück.","Return to Bremer."]
+],
+"Laterne und Visione-Helm werden zur Untersuchung benötigt.",
+"Use the lantern and Visione helmet to investigate.",
+"https://www.powerpyx.com/crimson-desert-trial-after-trial-walkthrough/"
+),
+
+"c2-the-man-trapped-in-the-mire":G(
+"Banditenlager östlich von Springtide Mill",
+"Bandit camp east of Springtide Mill",
+[
+["Sprich mit Ibano.","Speak with Ibano."],
+["Reise zum östlichen Banditenlager.","Travel to the eastern bandit camp."],
+["Besiege die drei Banditen.","Defeat the three bandits."],
+["Finde mit der Laterne die Erinnerung „Hornless Goat“.","Find the Hornless Goat memory using the lantern."],
+["Spiele die Erinnerung mit Visione ab.","Play the memory with Visione."],
+["Nimm das Mysterious Elixir vom Felsen.","Collect the Mysterious Elixir from the rock."],
+["Kehre zu Ibano zurück.","Return to Ibano."]
+],
+"Der gesuchte Gegenstand liegt auf einem Felsen im Lager.",
+"The required item is on a rock in the camp.",
+"https://www.powerpyx.com/crimson-desert-the-man-trapped-in-the-mire-walkthrough/"
+),
+
+"c2-missing-companion":G(
+"Bloomwood Ranch",
+"Bloomwood Ranch",
+[
+["Sprich mit dem weinenden Kind Willian.","Talk to the crying child Willian."],
+["Befrage die Kinder südwestlich der Ranch.","Question the children southwest of the ranch."],
+["Befrage die Hirten südlich der Ranch.","Question the herders south of the ranch."],
+["Folge dem Marker über den Fluss.","Follow the marker across the river."],
+["Besiege die Banditen im Lager.","Defeat the bandits in the camp."],
+["Finde das Schaf Wooly im Gehege.","Find Wooly the sheep in the pen."],
+["Nimm Wooly auf und bringe es zu Willian.","Pick up Wooly and carry it back to Willian."]
+],
+"Wooly befindet sich allein in einem Gehege im Banditenlager.",
+"Wooly is alone in a pen inside the bandit camp.",
+"https://www.powerpyx.com/crimson-desert-missing-companion-walkthrough/"
+),
+
+"c2-secrets-hidden-in-the-dark":G(
+"Bloomwood Ranch und nahegelegene Höhle",
+"Bloomwood Ranch and nearby cave",
+[
+["Suche Boris bei Bloomwood Ranch.","Find Boris near Bloomwood Ranch."],
+["Sprich mit Boris.","Talk to Boris."],
+["Rufe dein Pferd und folge ihm zur Höhle.","Call your horse and follow him to the cave."],
+["Besiege die Feinde am Höhleneingang.","Defeat the enemies at the cave entrance."],
+["Untersuche den hinteren Teil der Höhle.","Investigate the back of the cave."],
+["Finde mit der Laterne die Erinnerung „Lair of the Animal Thieves“.","Use the lantern to find the Lair of the Animal Thieves memory."],
+["Spiele die Erinnerung mit Visione ab.","Play the memory using Visione."],
+["Verlasse die Höhle und sprich mit den Wachen nordöstlich.","Leave the cave and speak to the guards northeast."]
+],
+"Die blauen Erinnerungsspuren sind mit der Laterne sichtbar.",
+"The blue memory traces are visible using the lantern.",
+"https://www.powerpyx.com/crimson-desert-secrets-hidden-in-the-dark-walkthrough/"
+),
+
+"c2-the-dark-veil":G(
+"Goldleaf-Handelsposten bei Unicorn Cliff",
+"Goldleaf Tradepost near Unicorn Cliff",
+[
+["Folge der Questmarkierung zum Goldleaf-Handelsposten.","Follow the quest marker to Goldleaf Tradepost."],
+["Suche den Händler Shakatu.","Find the merchant Shakatu."],
+["Sprich mit Shakatu.","Talk to Shakatu."]
+],
+"Diese kurze Quest benötigt keinen Kampf.",
+"This short quest requires no combat.",
+"https://www.powerpyx.com/crimson-desert-the-dark-veil-walkthrough/"
+),
+
+"c2-the-flames-of-greed":G(
+"Goldleaf-Handelsposten / Hernand",
+"Goldleaf Tradepost / Hernand",
+[
+["Folge der Questmarkierung.","Follow the quest marker."],
+["Sprich mit der Nonne, die um Hilfe ruft.","Talk to the nun calling for help."],
+["Folge den nächsten Questzielen.","Follow the next quest objectives."],
+["Untersuche die Ereignisse rund um die Goldleaf-Gilde.","Investigate the events around the Goldleaf Guild."]
+],
+"Für weitere Einzelheiten nutze den verlinkten Walkthrough.",
+"Use the linked walkthrough for additional details.",
+"https://www.powerpyx.com/crimson-desert-the-flames-of-greed-walkthrough/"
+),
+
+"c2-kidnapped-healer":G(
+"Hernand Highlands / Windland Heights",
+"Hernand Highlands / Windland Heights",
+[
+["Reise zum markierten Lager.","Travel to the marked camp."],
+["Besiege den Entführer.","Defeat the kidnapper."],
+["Suche Hubert.","Find Hubert."],
+["Visiere Hubert an und befreie ihn.","Lock onto Hubert and untie him."]
+],
+"Viele Gegner auf dem Weg kannst du mit dem Pferd umgehen.",
+"You can ride past many enemies on the way.",
+"https://www.powerpyx.com/crimson-desert-kidnapped-healer-walkthrough/"
+),
+
+"c2-rebellion-or-revolution":G(
+"Hernand Highlands",
+"Hernand Highlands",
+[
+["Folge der Markierung zu Shakatu.","Follow the marker to Shakatu."],
+["Besiege die angreifenden Soldaten.","Defeat the attacking soldiers."],
+["Folge Shakatu.","Follow Shakatu."],
+["Sprich mit ihm, bis die Quest abgeschlossen ist.","Talk to him until the quest completes."]
+],
+"Besiege zuerst alle Soldaten, bevor du das Gespräch fortsetzt.",
+"Defeat all soldiers before continuing the conversation.",
+"https://www.powerpyx.com/crimson-desert-rebellion-or-revolution-walkthrough/"
+),
+
+"c2-cheers-echoing-from-the-edge":G(
+"Bossarena in den Hernand Highlands",
+"Boss arena in the Hernand Highlands",
+[
+["Bereite ausreichend Heilnahrung vor.","Prepare enough healing food."],
+["Reise zum Bossmarker.","Travel to the boss marker."],
+["Beginne den Kampf gegen Hornsplitter.","Start the fight against Hornsplitter."],
+["Blocke seine weitreichenden Schwertwellen.","Block his wide-ranging sword waves."],
+["Nutze gut getimte Schildkonter.","Use well-timed shield counters."],
+["Wenn er blau leuchtet, greife nicht an.","When he glows blue, stop attacking."],
+["Weiche während seiner Unverwundbarkeit aus.","Dodge during his invulnerability."],
+["Spare Ausdauer und heile bei Bedarf.","Conserve stamina and heal as needed."],
+["Besiege Hornsplitter.","Defeat Hornsplitter."]
+],
+"Hornsplitter hat eine Lebensleiste. Schildkonter und Ausdauerverwaltung sind entscheidend.",
+"Hornsplitter has one health bar. Shield counters and stamina management are essential.",
+"https://www.powerpyx.com/crimson-desert-cheers-echoing-from-the-edge-walkthrough/",
+"Hornsplitter: Blocke die Schwertwellen, kontere mit dem Schild und warte seine blaue Unverwundbarkeitsphase ab.",
+"Hornsplitter: Block sword waves, use shield counters and wait out his blue invulnerability phase."
+)
+
+};
+
+const allGuides={
+...chapter1Guides,
+...chapter2Guides
+};
+
+/* ==========================================
+   STORAGE
+   ========================================== */
+
 function readObject(key){
-try{const v=JSON.parse(localStorage.getItem(key)||"{}");return v&&typeof v==="object"&&!Array.isArray(v)?v:{}}catch{return {}}
+try{
+const v=JSON.parse(localStorage.getItem(key)||"{}");
+return v&&typeof v==="object"&&!Array.isArray(v)?v:{};
+}catch{return {}}
 }
+
 function readArray(key){
-try{const v=JSON.parse(localStorage.getItem(key)||"[]");return Array.isArray(v)?v:[]}catch{return []}
+try{
+const v=JSON.parse(localStorage.getItem(key)||"[]");
+return Array.isArray(v)?v:[];
+}catch{return []}
 }
+
 function validPoint(p){
-return p&&Number.isFinite(p.x)&&Number.isFinite(p.y)&&p.x>=0&&p.x<=100&&p.y>=0&&p.y<=100;
+return p&&
+Number.isFinite(p.x)&&Number.isFinite(p.y)&&
+p.x>=0&&p.x<=100&&p.y>=0&&p.y<=100;
 }
-function readPoint(key){const p=readObject(key);return validPoint(p)?{x:p.x,y:p.y}:null}
+
+function readPoint(key){
+const p=readObject(key);
+return validPoint(p)?{x:p.x,y:p.y}:null;
+}
+
 let progress=readObject(PROGRESS_KEY);
-let markers=readArray(MARKERS_KEY).filter(m=>validPoint(m)&&typeof m.name==="string").slice(0,500);
+let markers=readArray(MARKERS_KEY)
+.filter(m=>validPoint(m)&&typeof m.name==="string")
+.slice(0,500);
+
 let player=readPoint(POSITION_KEY);
 let target=readPoint(TARGET_KEY);
-let language=localStorage.getItem("crimson-guide-language")==="en"?"en":"de";
-let page="home",questView="chapters",activeGroup=null,selectedQuest=null;
-let solutionVisible=false,questQuery="",questStatus="all",collectionTab="items";
-let mapMode="pan",zoom=1,offsetX=0,offsetY=0;
+
+let language=localStorage.getItem(LANGUAGE_KEY)==="en"?"en":"de";
+let page="home";
+let questView="chapters";
+let activeGroup=null;
+let selectedQuest=null;
+let solutionVisible=false;
+let questQuery="";
+let questStatus="all";
+let collectionTab="items";
+let mapMode="pan";
+let zoom=1,offsetX=0,offsetY=0;
 
 const sections=[
-["home","⌂"],["map","🗺"],["quests","📜"],
-["collection","⚔"],["progress","✓"],["settings","⚙"]
+["home","⌂"],
+["map","🗺"],
+["quests","📜"],
+["collection","⚔"],
+["progress","✓"],
+["settings","⚙"]
 ];
+
 const sideRegions=Object.keys(sideQuestNames);
 const mainCount=quests.filter(q=>q.type==="main").length;
 const sideCount=quests.filter(q=>q.type==="side").length;
+const guideCount=Object.keys(allGuides).length;
+
+function t(k){
+return TXT[language][k]||k;
+}
 
 function save(){
 localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
 localStorage.setItem(MARKERS_KEY,JSON.stringify(markers));
-if(player)localStorage.setItem(POSITION_KEY,JSON.stringify(player));
-else localStorage.removeItem(POSITION_KEY);
-if(target)localStorage.setItem(TARGET_KEY,JSON.stringify(target));
-else localStorage.removeItem(TARGET_KEY);
+
+if(player){
+localStorage.setItem(POSITION_KEY,JSON.stringify(player));
+}else{
+localStorage.removeItem(POSITION_KEY);
 }
-function questDone(id){return progress["quest:"+id]===true}
-function stepDone(id,i){return progress["step:"+id+":"+i]===true}
-function doneCount(){return quests.filter(q=>questDone(q.id)).length}
+
+if(target){
+localStorage.setItem(TARGET_KEY,JSON.stringify(target));
+}else{
+localStorage.removeItem(TARGET_KEY);
+}
+}
+
+function questDone(id){
+return progress["quest:"+id]===true;
+}
+
+function stepDone(id,i){
+return progress["step:"+id+":"+i]===true;
+}
+
+function doneCount(){
+return quests.filter(q=>questDone(q.id)).length;
+}
+
 function meter(n,total){
-return `<div class="meter"><div style="width:${total?100*n/total:0}%"></div></div>`;
+const value=total?100*n/total:0;
+return `<div class="meter"><div style="width:${value}%"></div></div>`;
 }
+
 function chapterLabel(ch){
-const c=typeof ch==="object"?ch.chapter:ch;
+let c=typeof ch==="object"?ch.chapter:ch;
+
+if(typeof c==="string"&&/^\d+$/.test(c)){
+c=Number(c);
+}
+
 if(typeof c==="string")return c;
 if(c===0)return language==="de"?"Prolog":"Prologue";
 if(c===13)return language==="de"?"Epilog":"Epilogue";
+
 return t("chapter")+" "+c;
 }
+
 function navigate(next){
-page=next;selectedQuest=null;solutionVisible=false;
+page=next;
+selectedQuest=null;
+solutionVisible=false;
+
 if(next==="quests"){
-questView="chapters";activeGroup=null;questQuery="";questStatus="all";
+questView="chapters";
+activeGroup=null;
+questQuery="";
+questStatus="all";
 }
-mapMode="pan";render();window.scrollTo(0,0);
+
+mapMode="pan";
+render();
+window.scrollTo(0,0);
 }
+
+/* ==========================================
+   NAVIGATION
+   ========================================== */
+
 function renderNav(){
-document.getElementById("nav").innerHTML=sections.map(([id,icon])=>`
-<button data-go="${id}" class="${page===id?"active":""}">${icon} ${t(id)}</button>
-`).join("");
-document.getElementById("mobileNav").innerHTML=sections.slice(0,5).map(([id,icon])=>`
+document.getElementById("nav").innerHTML=
+sections.map(([id,icon])=>`
 <button data-go="${id}" class="${page===id?"active":""}">
-<span class="ico">${icon}</span><span>${t(id)}</span></button>
+${icon} ${t(id)}
+</button>
+`).join("");
+
+document.getElementById("mobileNav").innerHTML=
+sections.slice(0,5).map(([id,icon])=>`
+<button data-go="${id}" class="${page===id?"active":""}">
+<span class="ico">${icon}</span>
+<span>${t(id)}</span>
+</button>
 `).join("");
 }
+
+/* ==========================================
+   HOME
+   ========================================== */
+
 function homePage(){
 return `
 <div class="hero">
-<div class="eyebrow">CRIMSON DESERT COMPANION • 4.2</div>
+<div class="eyebrow">CRIMSON DESERT COMPANION • 4.3</div>
 <h1>${t("welcome")}</h1>
 <p>${t("intro")}</p>
-<button class="btn gold" data-go="quests">📜 ${t("quests")}</button>
+<button class="btn gold" data-go="quests">
+📜 ${t("quests")}
+</button>
 </div>
+
 <div class="grid">
-<div class="card"><span class="small">${t("main")}</span><h1>${mainCount}</h1></div>
-<div class="card"><span class="small">${t("side")}</span><h1>${sideCount}</h1></div>
+<div class="card">
+<span class="small">${t("main")}</span>
+<h1>${mainCount}</h1>
 </div>
+<div class="card">
+<span class="small">${t("side")}</span>
+<h1>${sideCount}</h1>
+</div>
+</div>
+
 <div class="card" style="margin-top:12px">
-<div class="between"><strong>${t("progress")}</strong>
-<span class="counter">${doneCount()}/${quests.length}</span></div>
-<div style="margin-top:12px">${meter(doneCount(),quests.length)}</div>
+<div class="between">
+<strong>${t("progress")}</strong>
+<span class="counter">${doneCount()}/${quests.length}</span>
 </div>
-<div class="notice">✨ ${t("chapter1Ready")}</div>
+<div style="margin-top:12px">
+${meter(doneCount(),quests.length)}
+</div>
+</div>
+
+<div class="card">
+<div class="between">
+<strong>📖 ${t("guideCoverage")}</strong>
+<span class="counter">${guideCount}/${mainCount}</span>
+</div>
+<div style="margin-top:12px">
+${meter(guideCount,mainCount)}
+</div>
+</div>
+
+<div class="notice">
+✨ ${t("newGuides")}
+</div>
+
 <div class="grid">
 ${sections.slice(1,5).map(([id,icon])=>`
 <div class="card" data-go="${id}" style="cursor:pointer">
-<h3>${icon} ${t(id)}</h3><p>→</p></div>
+<h3>${icon} ${t(id)}</h3>
+<p>→</p>
+</div>
 `).join("")}
-</div>`;
+</div>
+`;
 }
+
+/* ==========================================
+   CHAPTER CARDS
+   ========================================== */
+
 function groupCard(group){
 const list=quests.filter(q=>String(q.chapter)===String(group));
 const n=list.filter(q=>questDone(q.id)).length;
-const name=typeof group==="number"?chapterLabel(group):group;
-const subtitle=typeof group==="number"?chapterNames[group]:
-(language==="de"?"Nebenquests nach Region":"Side quests by region");
+const guides=list.filter(q=>allGuides[q.id]).length;
+
+const name=typeof group==="number"
+?chapterLabel(group):group;
+
+const subtitle=typeof group==="number"
+?chapterNames[group]
+:(language==="de"?"Nebenquests nach Region":"Side quests by region");
+
 return `
-<button class="chapterCard ${n===list.length?"complete":""}" data-group="${esc(group)}">
-<span class="chapterIcon">${typeof group==="number"?"⚔":"✧"}</span>
+<button class="chapterCard ${n===list.length?"complete":""}"
+data-group="${esc(group)}">
+<span class="chapterIcon">
+${typeof group==="number"?"⚔":"✧"}
+</span>
+
 <span class="chapterContent">
-<span class="chapterTop"><strong>${esc(name)}</strong>
-<span class="counter">${n}/${list.length}</span></span>
+<span class="chapterTop">
+<strong>${esc(name)}</strong>
+<span class="counter">${n}/${list.length}</span>
+</span>
+
 <span class="chapterSubtitle">${esc(subtitle)}</span>
+
 ${meter(n,list.length)}
-</span><span class="chapterArrow">›</span>
-</button>`;
+
+<span class="small">
+📖 ${guides}/${list.length} ${t("available")}
+</span>
+</span>
+
+<span class="chapterArrow">›</span>
+</button>
+`;
 }
+
+/* ==========================================
+   QUEST PAGES
+   ========================================== */
+
 function questPage(){
+
 if(selectedQuest){
+
 const q=quests.find(x=>x.id===selectedQuest);
-if(!q){selectedQuest=null;return questPage()}
-const guide=chapter1Guides[q.id];
+
+if(!q){
+selectedQuest=null;
+return questPage();
+}
+
+const guide=allGuides[q.id];
 const list=quests.filter(x=>String(x.chapter)===String(q.chapter));
 const n=list.filter(x=>questDone(x.id)).length;
+const langIndex=language==="de"?0:1;
+
 return `
 <div class="crumb">
-<button class="textbtn" id="backChapters">← ${t("chapters")}</button>
+<button class="textbtn" id="backChapters">
+← ${t("chapters")}
+</button>
 <span>›</span>
-<button class="textbtn" id="backQuest">${esc(chapterLabel(q))}</button>
-<span>›</span><span>${esc(q.name)}</span>
+<button class="textbtn" id="backQuest">
+${esc(chapterLabel(q))}
+</button>
+<span>›</span>
+<span>${esc(q.name)}</span>
 </div>
+
 <div class="hero">
-<div class="eyebrow">${q.type==="main"?t("main"):t("side")}</div>
+<div class="eyebrow">
+${q.type==="main"?t("main"):t("side")}
+</div>
+
 <h1>${esc(q.name)}</h1>
 <p>${esc(chapterLabel(q))}</p>
-<div class="between"><span>${t("chapterProgress")}</span>
-<strong class="counter">${n}/${list.length}</strong></div>
-<div style="margin-top:12px">${meter(n,list.length)}</div>
+
+<div class="between">
+<span>${t("chapterProgress")}</span>
+<strong class="counter">${n}/${list.length}</strong>
 </div>
+
+<div style="margin-top:12px">
+${meter(n,list.length)}
+</div>
+</div>
+
 <div class="card">
 <label class="completeLine">
-<input type="checkbox" data-quest="${esc(q.id)}" ${questDone(q.id)?"checked":""}>
+<input type="checkbox"
+data-quest="${esc(q.id)}"
+${questDone(q.id)?"checked":""}>
 <span>${t("finished")}</span>
 </label>
 </div>
+
 ${guide?`
 <div class="guideBox">
 <h3>📍 ${t("location")}</h3>
-<p>${esc(guide.location[language==="de"?0:1])}</p>
+<p>${esc(guide.location[langIndex])}</p>
 <span class="small">✓ ${t("partial")}</span>
 </div>
 `:`<div class="notice">${t("pending")}</div>`}
+
 <button class="btn gold" id="toggleSolution">
 ${solutionVisible?t("hide"):t("show")}
 </button>
-${solutionVisible?guide?`
+
+${solutionVisible?
+guide?`
 <h2>📜 ${t("steps")}</h2>
+
 ${guide.steps.map((step,i)=>`
 <label class="step ${stepDone(q.id,i)?"checked":""}">
-<input type="checkbox" data-step="${esc(q.id)}:${i}"
+<input type="checkbox"
+data-step="${esc(q.id)}:${i}"
 ${stepDone(q.id,i)?"checked":""}>
-<span><strong>${i+1}.</strong> ${esc(step[language==="de"?0:1])}</span>
+<span>
+<strong>${i+1}.</strong>
+${esc(step[langIndex])}
+</span>
 </label>
 `).join("")}
+
 <div class="guideBox">
 <h3>💡 ${t("tip")}</h3>
-<p>${esc(guide.tip[language==="de"?0:1])}</p>
+<p>${esc(guide.tip[langIndex])}</p>
 </div>
-<p><a class="btn alt" href="${esc(guide.url)}" target="_blank"
-rel="noopener noreferrer">↗ ${t("source")}</a></p>
-`:`<div class="empty">${t("noGuide")}</div>`:
-`<div class="empty" style="margin-top:13px">🔒 ${t("show")}</div>`}
+
+${guide.boss?`
+<div class="guideBox">
+<h3>🐉 ${t("bossTip")}</h3>
+<p>${esc(guide.boss[langIndex])}</p>
+</div>
+`:""}
+
+<p>
+<a class="btn alt"
+href="${esc(guide.url)}"
+target="_blank"
+rel="noopener noreferrer">
+↗ ${t("source")}
+</a>
+</p>
+`:
+`<div class="empty">${t("noGuide")}</div>`:
+`<div class="empty" style="margin-top:13px">
+🔒 ${t("show")}
+</div>`}
+
 ${!guide&&q.type==="main"?`
-<p><a href="${MAIN_GUIDE}" target="_blank" rel="noopener noreferrer">
-↗ ${t("source")}</a></p>`:""}
+<p>
+<a href="${MAIN_GUIDE}"
+target="_blank"
+rel="noopener noreferrer">
+↗ ${t("source")}
+</a>
+</p>
+`:""}
 `;
 }
+
+/* Chapter quest list */
+
 if(questView==="list"&&activeGroup!==null){
+
 const group=String(activeGroup);
 const list=quests.filter(q=>String(q.chapter)===group);
 const n=list.filter(q=>questDone(q.id)).length;
+
 const found=list.filter(q=>
-(questStatus==="all"||(questStatus==="done")===questDone(q.id))&&
+(questStatus==="all"||
+(questStatus==="done")===questDone(q.id))&&
 q.name.toLowerCase().includes(questQuery.toLowerCase())
 );
+
 return `
 <div class="crumb">
-<button class="textbtn" id="backChapters">← ${t("chapters")}</button>
-<span>›</span><span>${esc(chapterLabel(list[0]||group))}</span>
+<button class="textbtn" id="backChapters">
+← ${t("chapters")}
+</button>
+<span>›</span>
+<span>${esc(chapterLabel(list[0]||group))}</span>
 </div>
+
 <div class="hero">
-<div class="eyebrow">${list[0]?.type==="side"?t("side"):t("main")}</div>
-<h1>${esc(chapterLabel(list[0]||group))}</h1>
-<p>${esc(typeof activeGroup==="string"&&/^\d+$/.test(group)?
-chapterNames[Number(group)]||"": "")}</p>
-<div class="between"><strong>${t("chapterProgress")}</strong>
-<span class="counter">${n}/${list.length}</span></div>
-<div style="margin-top:12px">${meter(n,list.length)}</div>
+<div class="eyebrow">
+${list[0]?.type==="side"?t("side"):t("main")}
 </div>
+
+<h1>${esc(chapterLabel(list[0]||group))}</h1>
+
+<p>
+${/^\d+$/.test(group)?esc(chapterNames[Number(group)]||""):""}
+</p>
+
+<div class="between">
+<strong>${t("chapterProgress")}</strong>
+<span class="counter">${n}/${list.length}</span>
+</div>
+
+<div style="margin-top:12px">
+${meter(n,list.length)}
+</div>
+</div>
+
 <div class="toolbar">
-<input type="search" id="questSearch" placeholder="${t("search")}" value="${esc(questQuery)}">
+<input type="search" id="questSearch"
+placeholder="${t("search")}"
+value="${esc(questQuery)}">
+
 <select id="questStatus">
 <option value="all">${t("allStatus")}</option>
-<option value="open" ${questStatus==="open"?"selected":""}>${t("open")}</option>
-<option value="done" ${questStatus==="done"?"selected":""}>${t("done")}</option>
+<option value="open"
+${questStatus==="open"?"selected":""}>
+${t("open")}
+</option>
+<option value="done"
+${questStatus==="done"?"selected":""}>
+${t("done")}
+</option>
 </select>
 </div>
+
 <p class="small">${found.length}/${list.length} Quests</p>
-${found.length?found.map(q=>`
+
+${found.length?
+found.map(q=>`
 <div class="questrow ${questDone(q.id)?"completed":""}">
-<input type="checkbox" data-quest="${esc(q.id)}" ${questDone(q.id)?"checked":""}>
+<input type="checkbox"
+data-quest="${esc(q.id)}"
+${questDone(q.id)?"checked":""}>
+
 <button data-openquest="${esc(q.id)}">
-<small>${String(list.indexOf(q)+1).padStart(2,"0")} ·
-${chapter1Guides[q.id]?"✓ "+t("partial"):t("pending")}</small>
+<small>
+${String(list.indexOf(q)+1).padStart(2,"0")}
+·
+${allGuides[q.id]?"✓ "+t("partial"):t("pending")}
+</small>
 <strong>${esc(q.name)}</strong>
-</button><span class="chapterArrow">›</span>
-</div>`).join(""):`<div class="empty">${t("noResults")}</div>`}
+</button>
+
+<span class="chapterArrow">›</span>
+</div>
+`).join(""):
+`<div class="empty">${t("noResults")}</div>`}
 `;
 }
+
+/* Chapter selection */
+
 return `
 <div class="hero">
-<div class="eyebrow">CRIMSON GUIDE • CHAPTER EDITION</div>
-<h1>📜 ${t("chapters")}</h1>
-<p>${language==="de"?"Wähle ein Kapitel, dann eine Quest.":"Choose a chapter, then a quest."}</p>
-<div class="between"><strong>${t("total")}</strong>
-<span class="counter">${doneCount()}/${quests.length}</span></div>
-<div style="margin-top:12px">${meter(doneCount(),quests.length)}</div>
+<div class="eyebrow">
+CRIMSON GUIDE • CHAPTER EDITION 4.3
 </div>
+
+<h1>📜 ${t("chapters")}</h1>
+
+<p>
+${language==="de"
+?"Wähle ein Kapitel und anschließend eine Quest."
+:"Choose a chapter and then a quest."}
+</p>
+
+<div class="between">
+<strong>${t("total")}</strong>
+<span class="counter">
+${doneCount()}/${quests.length}
+</span>
+</div>
+
+<div style="margin-top:12px">
+${meter(doneCount(),quests.length)}
+</div>
+</div>
+
 <h2 class="sectionHeading">⚔ ${t("main")}</h2>
+
 <div class="chapterGrid">
 ${Array.from({length:14},(_,i)=>groupCard(i)).join("")}
 </div>
+
 <h2 class="sectionHeading">✧ ${t("side")}</h2>
-<div class="chapterGrid">${sideRegions.map(groupCard).join("")}</div>
+
+<div class="chapterGrid">
+${sideRegions.map(groupCard).join("")}
+</div>
 `;
 }
+
+/* ==========================================
+   MAP
+   ========================================== */
+
 function iconFor(type){
-return {quest:"📜",boss:"🐉",treasure:"💰",npc:"♟",material:"💎",other:"📍"}[type]||"📍";
+return {
+quest:"📜",
+boss:"🐉",
+treasure:"💰",
+npc:"♟",
+material:"💎",
+other:"📍"
+}[type]||"📍";
 }
+
 function mapPage(){
+
 const route=player&&target?`
-<svg class="route" viewBox="0 0 100 100" preserveAspectRatio="none">
-<line x1="${player.x}" y1="${player.y}" x2="${target.x}" y2="${target.y}"></line>
-</svg>`:"";
+<svg class="route"
+viewBox="0 0 100 100"
+preserveAspectRatio="none">
+<line x1="${player.x}" y1="${player.y}"
+x2="${target.x}" y2="${target.y}"></line>
+</svg>
+`:"";
+
 return `
-<div class="between"><h1>🗺 ${t("map")}</h1>
-<a class="btn alt sm" href="${MAP_URL}" target="_blank" rel="noopener noreferrer">
-↗ ${t("realMap")}</a></div>
-<p class="small">${t("mapNote")}</p>
-<div class="toolbar">
-<button class="btn ${mapMode==="player"?"":"alt"}" data-mode="player">🔵 ${t("player")}</button>
-<button class="btn ${mapMode==="target"?"":"alt"}" data-mode="target">🎯 ${t("target")}</button>
-<button class="btn ${mapMode==="marker"?"":"alt"}" data-mode="marker">＋ ${t("addMarker")}</button>
+<div class="between">
+<h1>🗺 ${t("map")}</h1>
+
+<a class="btn alt sm"
+href="${MAP_URL}"
+target="_blank"
+rel="noopener noreferrer">
+↗ ${t("realMap")}
+</a>
 </div>
-${mapMode!=="pan"?`<div class="notice">${language==="de"?"Tippe auf die Karte.":"Tap the map."}</div>`:""}
+
+<p class="small">${t("mapNote")}</p>
+
+<div class="toolbar">
+<button class="btn ${mapMode==="player"?"":"alt"}"
+data-mode="player">
+🔵 ${t("player")}
+</button>
+
+<button class="btn ${mapMode==="target"?"":"alt"}"
+data-mode="target">
+🎯 ${t("target")}
+</button>
+
+<button class="btn ${mapMode==="marker"?"":"alt"}"
+data-mode="marker">
+＋ ${t("addMarker")}
+</button>
+</div>
+
+${mapMode!=="pan"?`
+<div class="notice">
+${language==="de"?"Tippe auf die Karte.":"Tap the map."}
+</div>
+`:""}
+
 <div class="mapwrap" id="mapwrap">
 <div class="mapworld" id="mapworld">
-<div class="mapcenter">✦ PYWEL<small>PLANNING CANVAS</small></div>
+
+<div class="mapcenter">
+✦ PYWEL
+<small>PLANNING CANVAS</small>
+</div>
+
 ${route}
+
 ${markers.map(m=>`
-<button class="mapmarker ${m.completed?"completed":""}"
+<button
+class="mapmarker ${m.completed?"completed":""}"
 style="left:${m.x}%;top:${m.y}%"
-data-marker="${esc(m.id)}">${iconFor(m.type)}</button>`).join("")}
-${player?`<span class="mapmarker player" style="left:${player.x}%;top:${player.y}%">●</span>`:""}
-${target?`<span class="mapmarker target" style="left:${target.x}%;top:${target.y}%">★</span>`:""}
-</div></div>
+data-marker="${esc(m.id)}">
+${iconFor(m.type)}
+</button>
+`).join("")}
+
+${player?`
+<span class="mapmarker player"
+style="left:${player.x}%;top:${player.y}%">
+●
+</span>
+`:""}
+
+${target?`
+<span class="mapmarker target"
+style="left:${target.x}%;top:${target.y}%">
+★
+</span>
+`:""}
+
+</div>
+</div>
+
 <div class="toolbar">
 <button class="btn alt" id="zoomIn">＋</button>
 <button class="btn alt" id="zoomOut">－</button>
-<button class="btn alt" id="resetView">${t("resetView")}</button>
+<button class="btn alt" id="resetView">
+${t("resetView")}
+</button>
 </div>
+
 <div class="notice">${t("mapWarning")}</div>
-${player&&target?`<div class="card">🧭 ${t("routeHint")}</div>`:""}
-<div class="toolbar">
-${player?`<button class="btn alt sm" id="clearPlayer">${t("removePlayer")}</button>`:""}
-${target?`<button class="btn alt sm" id="clearTarget">${t("removeTarget")}</button>`:""}
+
+${player&&target?`
+<div class="card">
+🧭 ${t("routeHint")}
 </div>
+`:""}
+
+<div class="toolbar">
+${player?`
+<button class="btn alt sm" id="clearPlayer">
+${t("removePlayer")}
+</button>
+`:""}
+
+${target?`
+<button class="btn alt sm" id="clearTarget">
+${t("removeTarget")}
+</button>
+`:""}
+</div>
+
 <h2>${t("markerList")} (${markers.length})</h2>
-${markers.length?markers.map(m=>`
+
+${markers.length?
+markers.map(m=>`
 <div class="markerrow">
 <span>${iconFor(m.type)}</span>
-<div class="name"><strong>${esc(m.name)}</strong><small>${esc(m.type)} ${m.completed?"✓":""}</small></div>
-<button class="btn alt sm" data-targetmarker="${esc(m.id)}">🎯</button>
-<button class="btn alt sm" data-donemarker="${esc(m.id)}">${m.completed?"↩":"✓"}</button>
-<button class="btn alt sm" data-deletemarker="${esc(m.id)}">✕</button>
-</div>`).join(""):`<div class="empty">${t("noMarkers")}</div>`}
+
+<div class="name">
+<strong>${esc(m.name)}</strong>
+<small>
+${esc(m.type)} ${m.completed?"✓":""}
+</small>
+</div>
+
+<button class="btn alt sm"
+data-targetmarker="${esc(m.id)}">
+🎯
+</button>
+
+<button class="btn alt sm"
+data-donemarker="${esc(m.id)}">
+${m.completed?"↩":"✓"}
+</button>
+
+<button class="btn alt sm"
+data-deletemarker="${esc(m.id)}">
+✕
+</button>
+</div>
+`).join(""):
+`<div class="empty">${t("noMarkers")}</div>`}
 `;
 }
+
+/* ==========================================
+   COLLECTION
+   ========================================== */
+
 function collectionPage(){
 return `
-<h1>⚔ ${t("collection")}</h1><p>${t("collectionInfo")}</p>
+<h1>⚔ ${t("collection")}</h1>
+<p>${t("collectionInfo")}</p>
+
 <div class="grid">
-${[["items","⚔"],["bosses","🐉"],["npcs","♟"],["materials","💎"]]
-.map(([id,icon])=>`
-<button class="card" data-collection="${id}" style="text-align:left;color:white">
-<h3>${icon} ${t(id)}</h3></button>`).join("")}
+${[
+["items","⚔"],
+["bosses","🐉"],
+["npcs","♟"],
+["materials","💎"]
+].map(([id,icon])=>`
+<button class="card"
+data-collection="${id}"
+style="text-align:left;color:white">
+<h3>${icon} ${t(id)}</h3>
+</button>
+`).join("")}
 </div>
+
 <div class="card" style="margin-top:15px">
-<h2>${t(collectionTab)}</h2><div class="empty">${t("notReady")}</div>
-</div>`;
+<h2>${t(collectionTab)}</h2>
+<div class="empty">${t("notReady")}</div>
+</div>
+`;
 }
+
+/* ==========================================
+   PROGRESS
+   ========================================== */
+
 function progressPage(){
+
 const main=quests.filter(q=>q.type==="main");
 const side=quests.filter(q=>q.type==="side");
+
 return `
 <h1>✓ ${t("progress")}</h1>
-<div class="card"><div class="between"><strong>${t("total")}</strong>
-<span class="counter">${doneCount()}/${quests.length}</span></div>
-<div style="margin-top:12px">${meter(doneCount(),quests.length)}</div></div>
+
+<div class="card">
+<div class="between">
+<strong>${t("total")}</strong>
+<span class="counter">
+${doneCount()}/${quests.length}
+</span>
+</div>
+
+<div style="margin-top:12px">
+${meter(doneCount(),quests.length)}
+</div>
+</div>
+
 ${[["main",main],["side",side]].map(([key,list])=>{
 const n=list.filter(q=>questDone(q.id)).length;
-return `<div class="card"><div class="between"><strong>${t(key)}</strong>
-<span class="counter">${n}/${list.length}</span></div>
-<div style="margin-top:12px">${meter(n,list.length)}</div></div>`;
+
+return `
+<div class="card">
+<div class="between">
+<strong>${t(key)}</strong>
+<span class="counter">${n}/${list.length}</span>
+</div>
+
+<div style="margin-top:12px">
+${meter(n,list.length)}
+</div>
+</div>
+`;
 }).join("")}
+
 <h2>${t("main")}</h2>
+
 ${Array.from({length:14},(_,c)=>{
 const list=quests.filter(q=>q.chapter===c);
 const n=list.filter(q=>questDone(q.id)).length;
-return `<div class="card"><div class="between">
-<strong>${chapterLabel(c)}</strong><span class="counter">${n}/${list.length}</span>
-</div><div style="margin-top:12px">${meter(n,list.length)}</div></div>`;
+
+return `
+<div class="card">
+<div class="between">
+<strong>${chapterLabel(c)}</strong>
+<span class="counter">${n}/${list.length}</span>
+</div>
+
+<div style="margin-top:12px">
+${meter(n,list.length)}
+</div>
+</div>
+`;
 }).join("")}
+
 <h2>${t("side")}</h2>
+
 ${sideRegions.map(region=>{
 const list=quests.filter(q=>q.chapter===region);
 const n=list.filter(q=>questDone(q.id)).length;
-return `<div class="card"><div class="between"><strong>${region}</strong>
-<span class="counter">${n}/${list.length}</span></div>
-<div style="margin-top:12px">${meter(n,list.length)}</div></div>`;
+
+return `
+<div class="card">
+<div class="between">
+<strong>${region}</strong>
+<span class="counter">${n}/${list.length}</span>
+</div>
+
+<div style="margin-top:12px">
+${meter(n,list.length)}
+</div>
+</div>
+`;
 }).join("")}
 `;
 }
+
+/* ==========================================
+   SETTINGS
+   ========================================== */
+
 function settingsPage(){
 return `
 <h1>⚙ ${t("settings")}</h1>
+
 <div class="card">
 <p>${t("local")}</p>
+
 <div class="toolbar">
-<button class="btn" id="exportBtn">${t("export")}</button>
-<button class="btn alt" id="importBtn">${t("import")}</button>
-<button class="btn alt" id="resetBtn">${t("reset")}</button>
+<button class="btn" id="exportBtn">
+${t("export")}
+</button>
+
+<button class="btn alt" id="importBtn">
+${t("import")}
+</button>
+
+<button class="btn alt" id="resetBtn">
+${t("reset")}
+</button>
 </div>
-<input type="file" id="backupFile" accept=".json,application/json" hidden>
+
+<input type="file"
+id="backupFile"
+accept=".json,application/json"
+hidden>
 </div>
+
 <div class="card">
-<strong>Crimson Guide 4.2 – Chapter 1 Solutions</strong>
-<p class="small">${mainCount} ${t("main")} · ${sideCount} ${t("side")}</p>
-<p class="small">${t("chapter1Ready")}</p>
-</div>`;
+<strong>
+Crimson Guide 4.3 – Golden Greed
+</strong>
+
+<p class="small">
+${mainCount} ${t("main")} ·
+${sideCount} ${t("side")}
+</p>
+
+<p class="small">
+${guideCount} ${t("available")}
+</p>
+
+<p class="small">${t("newGuides")}</p>
+</div>
+`;
 }
+
+/* ==========================================
+   RENDER
+   ========================================== */
+
 function render(){
+
 document.documentElement.lang=language;
 document.getElementById("lang").value=language;
+
 renderNav();
+
 document.getElementById("app").innerHTML=
 page==="home"?homePage():
 page==="quests"?questPage():
 page==="map"?mapPage():
 page==="collection"?collectionPage():
-page==="progress"?progressPage():settingsPage();
+page==="progress"?progressPage():
+settingsPage();
+
+/* Navigation */
 
 document.querySelectorAll("[data-go]").forEach(b=>{
 b.onclick=()=>navigate(b.dataset.go);
 });
+
+/* Chapter selection */
+
 document.querySelectorAll("[data-group]").forEach(b=>{
 b.onclick=()=>{
-activeGroup=b.dataset.group;questView="list";
-questQuery="";questStatus="all";selectedQuest=null;
-render();window.scrollTo(0,0);
+activeGroup=b.dataset.group;
+questView="list";
+questQuery="";
+questStatus="all";
+selectedQuest=null;
+render();
+window.scrollTo(0,0);
 };
 });
+
+/* Quest selection */
+
 document.querySelectorAll("[data-openquest]").forEach(b=>{
 b.onclick=()=>{
-selectedQuest=b.dataset.openquest;solutionVisible=false;
-render();window.scrollTo(0,0);
+selectedQuest=b.dataset.openquest;
+solutionVisible=false;
+render();
+window.scrollTo(0,0);
 };
 });
-document.getElementById("backChapters")?.addEventListener("click",()=>{
-selectedQuest=null;questView="chapters";activeGroup=null;
-questQuery="";questStatus="all";solutionVisible=false;
-render();window.scrollTo(0,0);
+
+/* Back buttons */
+
+document.getElementById("backChapters")
+?.addEventListener("click",()=>{
+selectedQuest=null;
+questView="chapters";
+activeGroup=null;
+questQuery="";
+questStatus="all";
+solutionVisible=false;
+render();
+window.scrollTo(0,0);
 });
-document.getElementById("backQuest")?.addEventListener("click",()=>{
-selectedQuest=null;questView="list";solutionVisible=false;
-render();window.scrollTo(0,0);
+
+document.getElementById("backQuest")
+?.addEventListener("click",()=>{
+selectedQuest=null;
+questView="list";
+solutionVisible=false;
+render();
+window.scrollTo(0,0);
 });
+
+/* Quest progress */
+
 document.querySelectorAll("[data-quest]").forEach(b=>{
 b.onchange=()=>{
 progress["quest:"+b.dataset.quest]=b.checked;
-save();render();
+save();
+render();
 };
 });
+
+/* Step progress */
+
 document.querySelectorAll("[data-step]").forEach(b=>{
 b.onchange=()=>{
 const raw=b.dataset.step;
 const i=raw.lastIndexOf(":");
-progress["step:"+raw.slice(0,i)+":"+raw.slice(i+1)]=b.checked;
-save();render();
+
+progress[
+"step:"+raw.slice(0,i)+":"+raw.slice(i+1)
+]=b.checked;
+
+save();
+render();
 };
 });
-document.getElementById("toggleSolution")?.addEventListener("click",()=>{
-solutionVisible=!solutionVisible;render();
+
+/* Spoilers */
+
+document.getElementById("toggleSolution")
+?.addEventListener("click",()=>{
+solutionVisible=!solutionVisible;
+render();
 });
+
+/* Search */
+
 const search=document.getElementById("questSearch");
-if(search)search.oninput=e=>{
+
+if(search){
+search.oninput=e=>{
 questQuery=e.target.value;
 const pos=e.target.selectionStart;
 render();
 const next=document.getElementById("questSearch");
-next.focus();next.setSelectionRange(pos,pos);
+next.focus();
+next.setSelectionRange(pos,pos);
 };
-document.getElementById("questStatus")?.addEventListener("change",e=>{
-questStatus=e.target.value;render();
+}
+
+document.getElementById("questStatus")
+?.addEventListener("change",e=>{
+questStatus=e.target.value;
+render();
 });
+
+/* Collection */
+
 document.querySelectorAll("[data-collection]").forEach(b=>{
-b.onclick=()=>{collectionTab=b.dataset.collection;render()};
+b.onclick=()=>{
+collectionTab=b.dataset.collection;
+render();
+};
 });
+
 if(page==="map")setupMap();
 if(page==="settings")setupSettings();
 }
+
+/* ==========================================
+   MAP INTERACTION
+   ========================================== */
+
 function setupMap(){
+
 const wrap=document.getElementById("mapwrap");
 const world=document.getElementById("mapworld");
+
 function transform(){
-world.style.transform=`translate(${offsetX}px,${offsetY}px) scale(${zoom})`;
+world.style.transform=
+`translate(${offsetX}px,${offsetY}px) scale(${zoom})`;
 }
+
 document.getElementById("zoomIn").onclick=()=>{
-zoom=Math.min(4,zoom+.25);transform();
+zoom=Math.min(4,zoom+.25);
+transform();
 };
+
 document.getElementById("zoomOut").onclick=()=>{
-zoom=Math.max(.6,zoom-.25);transform();
+zoom=Math.max(.6,zoom-.25);
+transform();
 };
+
 document.getElementById("resetView").onclick=()=>{
-zoom=1;offsetX=0;offsetY=0;transform();
+zoom=1;
+offsetX=0;
+offsetY=0;
+transform();
 };
+
 document.querySelectorAll("[data-mode]").forEach(b=>{
 b.onclick=()=>{
-mapMode=mapMode===b.dataset.mode?"pan":b.dataset.mode;render();
+mapMode=mapMode===b.dataset.mode?"pan":b.dataset.mode;
+render();
 };
 });
-document.getElementById("clearPlayer")?.addEventListener("click",()=>{
-player=null;save();render();
+
+document.getElementById("clearPlayer")
+?.addEventListener("click",()=>{
+player=null;
+save();
+render();
 });
-document.getElementById("clearTarget")?.addEventListener("click",()=>{
-target=null;save();render();
+
+document.getElementById("clearTarget")
+?.addEventListener("click",()=>{
+target=null;
+save();
+render();
 });
+
 document.querySelectorAll("[data-targetmarker]").forEach(b=>{
 b.onclick=()=>{
-const m=markers.find(x=>String(x.id)===b.dataset.targetmarker);
-if(m){target={x:m.x,y:m.y};save();render()}
+const m=markers.find(
+x=>String(x.id)===b.dataset.targetmarker
+);
+
+if(m){
+target={x:m.x,y:m.y};
+save();
+render();
+}
 };
 });
+
 document.querySelectorAll("[data-donemarker]").forEach(b=>{
 b.onclick=()=>{
-const m=markers.find(x=>String(x.id)===b.dataset.donemarker);
-if(m){m.completed=!m.completed;save();render()}
+const m=markers.find(
+x=>String(x.id)===b.dataset.donemarker
+);
+
+if(m){
+m.completed=!m.completed;
+save();
+render();
+}
 };
 });
+
 document.querySelectorAll("[data-deletemarker]").forEach(b=>{
 b.onclick=()=>{
-markers=markers.filter(m=>String(m.id)!==b.dataset.deletemarker);
-save();render();
+markers=markers.filter(
+m=>String(m.id)!==b.dataset.deletemarker
+);
+save();
+render();
 };
 });
+
 document.querySelectorAll("[data-marker]").forEach(b=>{
 b.onclick=e=>{
 e.stopPropagation();
-const m=markers.find(x=>String(x.id)===b.dataset.marker);
+
+const m=markers.find(
+x=>String(x.id)===b.dataset.marker
+);
+
 if(m)alert(m.name+" · "+m.type);
 };
 });
-let dragging=false,moved=false,lastX=0,lastY=0,startX=0,startY=0;
+
+let dragging=false;
+let moved=false;
+let lastX=0,lastY=0;
+let startX=0,startY=0;
+
 wrap.addEventListener("pointerdown",e=>{
 if(e.target.closest("button"))return;
-dragging=true;moved=false;
-startX=lastX=e.clientX;startY=lastY=e.clientY;
+
+dragging=true;
+moved=false;
+startX=lastX=e.clientX;
+startY=lastY=e.clientY;
+
 wrap.setPointerCapture(e.pointerId);
 });
+
 wrap.addEventListener("pointermove",e=>{
 if(!dragging)return;
-if(Math.hypot(e.clientX-startX,e.clientY-startY)>7)moved=true;
+
+if(Math.hypot(
+e.clientX-startX,
+e.clientY-startY
+)>7){
+moved=true;
+}
+
 if(mapMode==="pan"){
-offsetX+=e.clientX-lastX;offsetY+=e.clientY-lastY;transform();
-}
-lastX=e.clientX;lastY=e.clientY;
-});
-wrap.addEventListener("pointerup",e=>{
-if(!dragging)return;
-dragging=false;
-if(moved||mapMode==="pan")return;
-const rect=wrap.getBoundingClientRect();
-const cx=rect.width/2,cy=rect.height/2;
-const px=(e.clientX-rect.left-cx-offsetX)/zoom+cx;
-const py=(e.clientY-rect.top-cy-offsetY)/zoom+cy;
-const x=px/rect.width*100,y=py/rect.height*100;
-if(x<0||x>100||y<0||y>100)return;
-if(mapMode==="player"){
-player={x,y};mapMode="pan";save();render();return;
-}
-if(mapMode==="target"){
-target={x,y};mapMode="pan";save();render();return;
-}
-if(mapMode==="marker"){
-const name=prompt(language==="de"?"Name des Fundorts:":"Location name:");
-if(!name?.trim())return;
-const raw=prompt("Category: quest, boss, treasure, npc, material, other","other");
-if(raw===null)return;
-const types=["quest","boss","treasure","npc","material","other"];
-const type=types.includes(raw.trim().toLowerCase())?raw.trim().toLowerCase():"other";
-markers.push({
-id:"m"+Date.now()+"-"+Math.random().toString(36).slice(2,8),
-name:name.trim().slice(0,100),type,x,y,completed:false
-});
-mapMode="pan";save();render();
-}
-});
-wrap.addEventListener("pointercancel",()=>{dragging=false});
+offsetX+=e.clientX-lastX;
+offsetY+=e.clientY-lastY;
 transform();
 }
+
+lastX=e.clientX;
+lastY=e.clientY;
+});
+
+wrap.addEventListener("pointerup",e=>{
+if(!dragging)return;
+
+dragging=false;
+
+if(moved||mapMode==="pan")return;
+
+const rect=wrap.getBoundingClientRect();
+const cx=rect.width/2;
+const cy=rect.height/2;
+
+const px=
+(e.clientX-rect.left-cx-offsetX)/zoom+cx;
+
+const py=
+(e.clientY-rect.top-cy-offsetY)/zoom+cy;
+
+const x=px/rect.width*100;
+const y=py/rect.height*100;
+
+if(x<0||x>100||y<0||y>100)return;
+
+if(mapMode==="player"){
+player={x,y};
+mapMode="pan";
+save();
+render();
+return;
+}
+
+if(mapMode==="target"){
+target={x,y};
+mapMode="pan";
+save();
+render();
+return;
+}
+
+if(mapMode==="marker"){
+
+const name=prompt(
+language==="de"?"Name des Fundorts:":"Location name:"
+);
+
+if(!name?.trim())return;
+
+const raw=prompt(
+"Category: quest, boss, treasure, npc, material, other",
+"other"
+);
+
+if(raw===null)return;
+
+const types=[
+"quest","boss","treasure","npc","material","other"
+];
+
+const type=types.includes(raw.trim().toLowerCase())
+?raw.trim().toLowerCase()
+:"other";
+
+markers.push({
+id:"m"+Date.now()+"-"+Math.random().toString(36).slice(2,8),
+name:name.trim().slice(0,100),
+type,x,y,
+completed:false
+});
+
+mapMode="pan";
+save();
+render();
+}
+});
+
+wrap.addEventListener("pointercancel",()=>{
+dragging=false;
+});
+
+transform();
+}
+
+/* ==========================================
+   BACKUP / IMPORT / RESET
+   ========================================== */
+
 function setupSettings(){
+
 document.getElementById("exportBtn").onclick=()=>{
+
 const backup={
-version:31,progress,markers,player,target,
+version:31,
+progress,
+markers,
+player,
+target,
 exportedAt:new Date().toISOString()
 };
-const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
+
+const blob=new Blob(
+[JSON.stringify(backup,null,2)],
+{type:"application/json"}
+);
+
 const url=URL.createObjectURL(blob);
 const a=document.createElement("a");
-a.href=url;a.download="crimson-guide-backup.json";a.click();
+
+a.href=url;
+a.download="crimson-guide-backup.json";
+a.click();
+
 setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
+
 document.getElementById("importBtn").onclick=()=>{
 document.getElementById("backupFile").click();
 };
+
 document.getElementById("backupFile").onchange=async e=>{
+
 try{
-const file=e.target.files[0];if(!file)return;
-if(file.size>1000000)throw Error("size");
+
+const file=e.target.files[0];
+if(!file)return;
+
+if(file.size>1000000){
+throw Error("size");
+}
+
 const data=JSON.parse(await file.text());
-if(![1,2,3,31].includes(data.version)||!data.progress||
-typeof data.progress!=="object"||Array.isArray(data.progress)){
+
+if(
+![1,2,3,31].includes(data.version)||
+!data.progress||
+typeof data.progress!=="object"||
+Array.isArray(data.progress)
+){
 throw Error("format");
 }
+
 const clean={};
+
 for(let [key,value] of Object.entries(data.progress)){
+
 if(key.length>160||typeof value!=="boolean")continue;
-if(data.version===1&&key.startsWith("quests:"))key="quest:"+key.slice(7);
+
+if(data.version===1&&key.startsWith("quests:")){
+key="quest:"+key.slice(7);
+}
+
 clean[key]=value;
 }
+
 progress=clean;
+
 if(Array.isArray(data.markers)){
-markers=data.markers.filter(m=>validPoint(m)&&typeof m.name==="string")
-.slice(0,500).map(m=>({
+
+markers=data.markers
+.filter(m=>validPoint(m)&&typeof m.name==="string")
+.slice(0,500)
+.map(m=>({
 id:String(m.id||"m"+Math.random()).slice(0,100),
 name:m.name.slice(0,100),
-type:["quest","boss","treasure","npc","material","other"].includes(m.type)?m.type:"other",
-x:m.x,y:m.y,completed:m.completed===true
+type:[
+"quest","boss","treasure","npc","material","other"
+].includes(m.type)?m.type:"other",
+x:m.x,
+y:m.y,
+completed:m.completed===true
 }));
 }
+
 if(data.version===31){
 player=validPoint(data.player)?data.player:null;
 target=validPoint(data.target)?data.target:null;
 }
-save();alert(t("imported"));render();
-}catch{alert(t("invalid"))}
+
+save();
+alert(t("imported"));
+render();
+
+}catch{
+alert(t("invalid"));
+}
 };
+
 document.getElementById("resetBtn").onclick=()=>{
+
 if(confirm(t("confirmReset"))){
-progress={};markers=[];player=null;target=null;save();render();
+progress={};
+markers=[];
+player=null;
+target=null;
+save();
+render();
 }
 };
 }
+
+/* ==========================================
+   LANGUAGE
+   ========================================== */
+
 document.getElementById("lang").onchange=e=>{
 language=e.target.value;
-localStorage.setItem("crimson-guide-language",language);
+localStorage.setItem(LANGUAGE_KEY,language);
 render();
 };
+
+/* ==========================================
+   START
+   ========================================== */
+
 render();
+
 if("serviceWorker" in navigator){
 window.addEventListener("load",()=>{
 navigator.serviceWorker.register("./sw.js").catch(()=>{});
 });
 }
+
 </script>
 </body>
 </html>
